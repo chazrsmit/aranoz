@@ -102,7 +102,7 @@ export default function NavFront({ auth }) {
           {/* Log in et register */}
           {/* Condition ternaire si le user est co ou pas */}
           {auth.user ?
-            (<li className="nav-item dropdown">
+            (<div className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
                 href="#"
@@ -119,12 +119,12 @@ export default function NavFront({ auth }) {
                   </Link>
                 </li>
                 <li>
-                  <Link href={route('dashboard')}>
+                  <Link href={route('dash')}>
                   Dashboard
                   </Link>
                 </li>
               </ul>
-            </li>
+            </div>
             ) : (
                 <>
                     <Link

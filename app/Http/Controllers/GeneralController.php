@@ -17,4 +17,10 @@ class GeneralController extends Controller
         // 'phpVersion' => PHP_VERSION
         ]);
     }
+
+    public function dash() {
+        return Inertia::render('Dash', [
+
+        ]);
+    }
 }

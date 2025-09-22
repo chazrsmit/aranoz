@@ -32,6 +32,9 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'pseudo' => 'required|string|max:255',
+            'image' => 'nullable|mimes:jpg,jpeg,png,webp|max:2048',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -46,6 +49,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('dash', absolute: false));
     }
 }
