@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
 
         $this->call(RoleSeeder::class);
+        $this->call(ColorSeeder::class);
 
         // On utilise createMany() au lieu de create() car on envoit plusieurs array dans une array
         User::factory()->createMany([
@@ -35,6 +36,6 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
-        $this->call([BillingSeeder::class, BlogCategorySeeder::class, BlogSeeder::class, ColorSeeder::class, CommentSeeder::class, ContactSeeder::class, CountrySeeder::class, MessageSeeder::class, ProductCategorySeeder::class, ProductSeeder::class]);
+        $this->call([BillingSeeder::class, BlogCategorySeeder::class, TagSeeder::class, BlogSeeder::class, CommentSeeder::class, ContactSeeder::class, CountrySeeder::class, MessageSeeder::class, ProductCategorySeeder::class, ProductSeeder::class, SpecificationSeeder::class]);
     }
 }
