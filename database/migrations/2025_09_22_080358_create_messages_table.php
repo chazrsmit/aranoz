@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
+            $table->string('email');
+            $table->string('subject');
+            $table->longText('message');
+            // le message a-t-il été lu ou non?
+            $table->boolean('status');
+            $table->boolean('archived');
             $table->timestamps();
         });
     }

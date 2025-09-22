@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Specification extends Model
 {
-    //
+    protected $fillable = ['width', 'height', 'depth', 'weight', 'quality_checking', 'product_id'];
+
+    public function product() {
+        return $this->belongsTo(Product::class);
+    }
 }
