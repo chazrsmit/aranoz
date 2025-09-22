@@ -4,8 +4,9 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
+import Nav from '../../Components/NavFront'
 
-export default function Register() {
+export default function Register({ auth }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
@@ -22,6 +23,8 @@ export default function Register() {
     };
 
     return (
+        <>
+        <Nav auth={auth} />
         <GuestLayout>
             <Head title="Register" />
 
@@ -116,5 +119,6 @@ export default function Register() {
                 </div>
             </form>
         </GuestLayout>
+    </>
     );
 }

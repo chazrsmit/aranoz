@@ -5,8 +5,9 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
+import Nav from '../../Components/NavFront'
 
-export default function Login({ status, canResetPassword }) {
+export default function Login({ status, canResetPassword, auth }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -22,6 +23,8 @@ export default function Login({ status, canResetPassword }) {
     };
 
     return (
+        <>
+        <Nav auth={auth} />
         <GuestLayout>
             <Head title="Log in" />
 
@@ -96,5 +99,6 @@ export default function Login({ status, canResetPassword }) {
                 </div>
             </form>
         </GuestLayout>
+        </>
     );
 }
