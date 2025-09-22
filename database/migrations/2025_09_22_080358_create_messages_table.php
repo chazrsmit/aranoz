@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('subject');
             $table->longText('message');
             // le message a-t-il été lu ou non?
-            $table->boolean('status');
-            $table->boolean('archived');
+            $table->boolean('status')->default(0);
+            $table->boolean('archived')->default(0);
             $table->timestamps();
         });
     }

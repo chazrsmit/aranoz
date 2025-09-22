@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('image');
-            $table->foreignId('blogcategory_id')->constrained('blog_categories')->nullOnDelete();
+            $table->foreignId('blogcategory_id')->constrained('blog_categories');
             $table->timestamps();
         });
     }

@@ -19,11 +19,11 @@ return new class extends Migration
             $table->integer('stock');
             $table->boolean('isPinned');
             $table->string('image_main');
-            $table->string('image_rear');
-            $table->string('image_left');
-            $table->string('image_right');
+            $table->string('image_rear')->nullable();
+            $table->string('image_left')->nullable();
+            $table->string('image_right')->nullable();
             $table->foreignId('color_id')->constrained('colors');
-            $table->foreignId('productcategory_id')->constrained('product_categories')->nullOnDelete();
+            $table->foreignId('productcategory_id')->constrained('product_categories');
             $table->foreignId('promotion_id')->nullable()->constrained('promotions');
             $table->timestamps();
         });
