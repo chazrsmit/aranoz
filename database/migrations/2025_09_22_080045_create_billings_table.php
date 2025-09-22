@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('billings', function (Blueprint $table) {
             $table->id();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('phone');
+            $table->string('address');
+            $table->unsignedInteger('number');
+            $table->string('city');
+            $table->unsignedInteger('zip');
+            $table->string('company')->nullable();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('country_id')->constrained('countries');
             $table->timestamps();
         });
     }

@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('product');
+            $table->text('description');
+            $table->decimal('price', 8, 2);
+            $table->integer('stock');
+            $table->boolean('isPinned');
+            $table->string('image_main');
+            $table->string('image_rear');
+            $table->string('image_left');
+            $table->string('image_right');
+            $table->foreignId('color_id')->constrained('colors');
+            $table->foreignId('productcategory_id')->constrained('product_categories')->nullOnDelete();
+            $table->foreignId('promotion_id')->nullable()->constrained('promotions');
             $table->timestamps();
         });
     }

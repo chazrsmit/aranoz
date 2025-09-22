@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('order_histories', function (Blueprint $table) {
             $table->id();
+            $table->integer('quantity');
+            $table->foreignId('order_id')->constrained('orders');
+            $table->foreignId('product_id')->nullable()->constrained('products');
             $table->timestamps();
         });
     }
