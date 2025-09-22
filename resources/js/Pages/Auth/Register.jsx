@@ -9,8 +9,11 @@ import Nav from '../../Components/NavFront'
 export default function Register({ auth }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
+        prenom: '',
+        pseudo: '',
         email: '',
         password: '',
+        image: null,
         password_confirmation: '',
     });
 
@@ -44,6 +47,44 @@ export default function Register({ auth }) {
                     />
 
                     <InputError message={errors.name} className="mt-2" />
+                </div>
+
+                {/* prenom */}
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="prenom" value="Prenom" />
+
+                    <TextInput
+                        id="prenom"
+                        name="prenom"
+                        value={data.prenom}
+                        className="mt-1 block w-full"
+                        autoComplete="prenom"
+                        isFocused={true}
+                        onChange={(e) => setData('prenom', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.prenom} className="mt-2" />
+                </div>
+
+                {/* pseudo */}
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="pseudo" value="Pseudo" />
+
+                    <TextInput
+                        id="pseudo"
+                        name="pseudo"
+                        value={data.pseudo}
+                        className="mt-1 block w-full"
+                        autoComplete="pseudo"
+                        isFocused={true}
+                        onChange={(e) => setData('pseudo', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.pseudo} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
@@ -103,6 +144,21 @@ export default function Register({ auth }) {
                         message={errors.password_confirmation}
                         className="mt-2"
                     />
+                </div>
+
+                {/* image */}
+                <div className="mt-4">
+                    <InputLabel htmlFor="image" value="Ajouter un avatar" />
+                    <input
+                        type="file"
+                        name="image"
+                        className={`form mb-1 ${errors.image ? 'is-invalid' : ''}`}
+                        // il faut bien mettre e.target.files au lieu de e.target.value sinon c'est un string et non un fichier qui est envoyé dans le backend.
+                        onChange={(e) => setData('image',  e.target.files[0])}
+                    />
+                    { 
+                        errors.image && <div className="invalid-feedback">{errors.image}</div>
+                    }
                 </div>
 
                 <div className="mt-4 flex items-center justify-end">
