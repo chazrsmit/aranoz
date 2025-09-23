@@ -58,6 +58,8 @@ Route::put('/admin/contact/update/{id}', [ContactController::class, 'update'])->
 // Users
 Route::post('/admin/users/update/{id}', [UsersController::class, 'update'])->name('update_user');
 Route::delete('/admin/users/delete/{id}', [UsersController::class, 'delete'])->name('delete_user');
+// Orders
+Route::put('/admin/orders/confirm/{id}', [OrderController::class, 'update'])->name('confirm_order');
 
 
 // Route::get('/dashboard', function () {
