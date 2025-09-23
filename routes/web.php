@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\ProductCategoriesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,11 @@ use Inertia\Inertia;
 Route::get('/', [GeneralController::class, 'index'])->name('home');
 Route::get('dash', [GeneralController::class, 'dash'])->name('dash');
 Route::get('/admin/categories', [GeneralController::class, 'categories'])->name('categories');
+Route::get('/admin/categories/product/create', [ProductCategoriesController::class, 'create'])->name('create_cat_prod');
+
+// CRUDS //
+// Categories
+Route::post('/admin/categories/product/store', [ProductCategoriesController::class, 'store'])->name('store_cat_prod');
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
