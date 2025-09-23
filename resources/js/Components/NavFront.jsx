@@ -110,7 +110,7 @@ export default function NavFront({ auth }) {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Name
+                {auth.user?.name}
               </a>
               <ul className="dropdown-menu">
                 <li>

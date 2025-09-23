@@ -156,7 +156,7 @@ export default function NavBack({ auth }) {
             </li>
         </ul>
           
-        <li className="nav-item dropdown">
+        <div className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
                 href="#"
@@ -164,7 +164,7 @@ export default function NavBack({ auth }) {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Name
+                {auth.user?.name}
               </a>
               <ul className="dropdown-menu">
                 <li>
@@ -178,7 +178,7 @@ export default function NavBack({ auth }) {
                   </Link>
                 </li>
               </ul>
-            </li>
+        </div>
          
         </div>
       </div>
