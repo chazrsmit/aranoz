@@ -138,8 +138,6 @@ export default function Orders({ auth, ordersPending, ordersConfirmed }) {
                             }
                         </tbody>
                     </table>
-
-
         </>
     )
 }
