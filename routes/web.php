@@ -17,6 +17,7 @@ use Inertia\Inertia;
 
 Route::get('/', [GeneralController::class, 'index'])->name('home');
 Route::get('dash', [GeneralController::class, 'dash'])->name('dash');
+Route::get('/admin/categories', [GeneralController::class, 'categories'])->name('categories');
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
