@@ -155,6 +155,18 @@ export default function NavBack({ auth }) {
               </ul>
             </li>
         </ul>
+
+        <div>
+          <img 
+              src={auth.user?.image?.startsWith('http') 
+                  ? auth.user.image 
+                  : `/storage/${auth.user?.image || 'default-avatar.png'}`
+              }
+              width="40px" 
+              height="40px"
+              style={{objectFit: 'cover', borderRadius: '50%'}}
+          />
+        </div>
           
         <div className="nav-item dropdown">
               <a

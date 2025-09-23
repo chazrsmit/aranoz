@@ -102,7 +102,20 @@ export default function NavFront({ auth }) {
           {/* Log in et register */}
           {/* Condition ternaire si le user est co ou pas */}
           {auth.user ?
-            (<div className="nav-item dropdown">
+            (
+            <>
+            <div>
+              <img 
+                  src={auth.user?.image?.startsWith('http') 
+                      ? auth.user.image 
+                      : `/storage/${auth.user?.image || 'default-avatar.png'}`
+                  }
+                  width="40px" 
+                  height="40px"
+                  style={{objectFit: 'cover', borderRadius: '50%'}}
+              />
+            </div>
+            <div className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
                 href="#"
@@ -125,6 +138,7 @@ export default function NavFront({ auth }) {
                 </li>
               </ul>
             </div>
+            </>
             ) : (
                 <>
                     <Link
