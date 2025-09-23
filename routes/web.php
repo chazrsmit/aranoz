@@ -6,6 +6,7 @@ use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\ProductCategoriesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,6 +33,8 @@ Route::get('/admin/categories/tag/create', [TagController::class, 'create'])->na
 Route::get('/admin/categories/tag/edit/{id}', [TagController::class, 'edit'])->name('edit_tag');
 // Contact
 Route::get('/admin/contact', [ContactController::class, 'contact'])->name('contact');
+// Users
+Route::get('/admin/users', [UsersController::class, 'users'])->name('users');
 
 
 // CRUDS //

@@ -26,6 +26,23 @@ export default function Contact({ auth, contact }) {
     // on encode l'adresse pour qu'elle soit transformée en URL:
     const addressURL = encodeURIComponent(address);
 
+    // flashs:
+    const page = usePage();
+    const flash = page.props?.flash;
+    const [showFlash, setShowFlash] = useState(true);
+
+        useEffect(() => {
+        if (flash?.success) {
+            setShowFlash(true);
+
+            const timer = setTimeout(() => {
+                setShowFlash(false);
+            }, 5000);
+
+            return () => clearTimeout(timer); 
+        }
+    }, [flash?.success]);
+
     return(
         <>
 
