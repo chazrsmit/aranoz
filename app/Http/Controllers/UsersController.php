@@ -61,11 +61,17 @@
             ]);
 
             // Upload d'image:
+            // si c'est un input file
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $image_name = time().'_'.$image->getClientOriginalName();
                 $path = $image->storeAs('avatars', $image_name, 'public');
                 $user->image = $path;
+                $user->save();
+            }
+            // si c'est une input text
+            elseif ($request->filled('image_url')) {
+                $user->image = $request->image_url;
                 $user->save();
             }
 

@@ -51,7 +51,16 @@ export default function Users({ auth, users }) {
                     users.map(user => (
                         <tr key={user.id}>
                             <th scope="row">
-                                <img src={`/storage/${user.image}`} alt="" width="50px" height="50px" />
+                            <img 
+                                src={user.image && (user.image.startsWith('http://') || user.image.startsWith('https://')) 
+                                    ? user.image 
+                                    : `/storage/${user.image || 'default-avatar.png'}`
+                                } 
+                                alt={`Avatar de ${user.pseudo}`} 
+                                width="50px" 
+                                height="50px"
+                                style={{objectFit: 'cover', borderRadius: '50%'}}
+                            />
                                 {user.pseudo}
                                 </th>
                             <td>{user.email}</td>

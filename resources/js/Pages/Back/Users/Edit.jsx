@@ -4,10 +4,15 @@ import { Head, Link, useForm, usePage } from '@inertiajs/react';
 
 export default function Show({ auth, user, roles } ) {
 
+    // pour changer le type d'input pour l'image:
+    const [imageInputType, setImageInputType] = useState('file');
+    // par défaut on dit file
+
     // infos à envoyer au back
     const {data, setData, post, errors} = useForm({
         //si l’utilisateur ne change pas l’image, Inertia n’envoie rien.
         image : null,
+        image_url : user.image || '',
         name : user.name,
         prenom : user.prenom,
         pseudo : user.pseudo,
@@ -30,6 +35,16 @@ export default function Show({ auth, user, roles } ) {
         });
     };
 
+    // fonction pour changer l'image (soit input file ou input text)
+    const handleImageChange = (type) => {
+        setImageInputType(type);
+        if (type === 'file') {
+            setData('image', null);
+        } else {
+            setData('image_url', user.image || '');
+        }
+    };
+
     return(
 
         <>
@@ -40,15 +55,35 @@ export default function Show({ auth, user, roles } ) {
             <a href={route('users')}>back to all users</a>
 
             <form onSubmit={handleSubmit}>
-                <img src={`/storage/${user.image}`} alt="" width="400px" />
+            <img 
+            // affiche conditionnel pour les image,s en fonction qu'on a une image via une url ou via un fichier
+                src={user.image && (user.image.startsWith('http://') || user.image.startsWith('https://')) 
+                    ? user.image 
+                    : `/storage/${user.image || 'face.png'}`
+                }  
+                width="300px" 
+                height="300px"
+                style={{objectFit: 'cover'}}
+            />
                 {/* Image */}
+                {/* via un input file */}
                 <input
                     type="file"
                     name="image"
                     className={`form-control mb-1 ${errors.image ? 'is-invalid' : ''}`}
                     onChange={(e) => setData('image', e.target.files[0])}
                 />
-                {errors.image1_path && <div className="invalid-feedback">{errors.image1_path}</div>}
+                    {errors.image && <div className="invalid-feedback">{errors.image}</div>}
+                {/* ou via un input text */}
+                <input
+                    type="text"
+                    name="image_url"
+                    value={data.image_url}
+                    className={`form-control mb-1 ${errors.image_url ? 'is-invalid' : ''}`}
+                    onChange={(e) => setData('image_url', e.target.value)}
+                />
+                    {errors.image_url && <div className="invalid-feedback">{errors.image_url}</div>}
+
                 {/* Name */}
                 <input type="text" name="name" value={data.name} onChange={(e) => setData('name', e.target.value)} id=""
                 className={`form-control ${errors.name ? 'is-invalid' : ''}`} />
