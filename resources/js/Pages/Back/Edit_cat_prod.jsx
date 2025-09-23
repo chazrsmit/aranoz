@@ -2,7 +2,7 @@
 import NavBack from '../../Components/NavBack.jsx';
 import { Head, Link, useForm } from '@inertiajs/react';
 
-export default function Create_cat_prod({ auth, prod_cat }) {
+export default function Edit_cat_prod({ auth, prod_cat }) {
 
     // infos à envoyer au back
     const {data, setData, put, errors} = useForm({

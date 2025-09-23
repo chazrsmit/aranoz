@@ -12,7 +12,7 @@ export default function Categories({ auth, blog_cats, prod_cats, tags }) {
 
     useEffect(() => {
         if (flash?.success) {
-            setTimeout(() => setShowFlash(false), 4000);
+            setTimeout(() => setShowFlash(false), 5000);
         }
     }, [flash?.success]);
 
@@ -30,6 +30,7 @@ export default function Categories({ auth, blog_cats, prod_cats, tags }) {
 
         <Link href={route('create_cat_prod')} className="btn btn-secondary">+ Add a product category</Link>
 
+        {/* Product categories */}
         <h2>All product categories</h2>
 
         <table className="table">
@@ -62,6 +63,7 @@ export default function Categories({ auth, blog_cats, prod_cats, tags }) {
 
         <Link href={route('create_cat_blog')} className="btn btn-secondary">+ Add a blog category</Link>
 
+        {/* Blog categories */}
         <h2>All blog categories</h2>
 
         <table className="table">
@@ -91,6 +93,40 @@ export default function Categories({ auth, blog_cats, prod_cats, tags }) {
                 }
             </tbody>
             </table>
+
+            {/* Tags */}
+            <Link href={route('create_tag')} className="btn btn-secondary">+ Add a new tag</Link>
+            <h2>All tags</h2>
+
+            <table className="table">
+            <thead>
+                <tr>
+                <th scope="col">id</th>
+                <th scope="col">Tag</th>
+                <th scope="col">Modification</th>
+                <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {
+                     tags.map(t => (
+                        <tr>
+                            <th scope="row">{t.id}</th>
+                            <td className="text-capitalize">{t.tag}</td>
+                            <td>
+                                <Link href={route('edit_tag', t.id)} className="btn btn-info">Edit</Link>
+                            </td>
+                            <td>
+                                <Link href={route('delete_tag', t.id)} method='delete' className="btn btn-danger">Delete</Link>
+                            </td>
+                        </tr>
+                    ))
+
+                }
+            </tbody>
+            </table>
+
+
         
         </>
     )

@@ -28,7 +28,7 @@ export default function Create_cat_prod({ auth }) {
         <form onSubmit={handleSubmit}>
             <label htmlFor="category" className="form-label">Category name</label>
             <input type="text" name="category" id="" value={data.category} onChange={(e) => setData('category', e.target.value,)}
-            className={`form-control w-25 ${errors.category ? 'is-invalid' : ''}`} />
+            className={`form-caontrol w-25 ${errors.category ? 'is-invalid' : ''}`} />
             {/* message d'erreur */}
             { errors.category &&
                 <div className="invalid-feedback">{errors.category}</div>

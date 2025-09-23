@@ -4,6 +4,7 @@ use App\Http\Controllers\BlogCategoriesController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\ProductCategoriesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TagController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -19,11 +20,15 @@ use Inertia\Inertia;
 
 Route::get('/', [GeneralController::class, 'index'])->name('home');
 Route::get('dash', [GeneralController::class, 'dash'])->name('dash');
+// Categories
 Route::get('/admin/categories', [GeneralController::class, 'categories'])->name('categories');
 Route::get('/admin/categories/product/create', [ProductCategoriesController::class, 'create'])->name('create_cat_prod');
 Route::get('/admin/categories/product/edit/{id}', [ProductCategoriesController::class, 'edit'])->name('edit_cat_prod');
 Route::get('/admin/categories/blog/create', [BlogCategoriesController::class, 'create'])->name('create_cat_blog');
 Route::get('/admin/categories/blog/edit/{id}', [BlogCategoriesController::class, 'edit'])->name('edit_cat_blog');
+Route::get('/admin/categories/tag/create', [TagController::class, 'create'])->name('create_tag');
+Route::get('/admin/categories/tag/edit/{id}', [TagController::class, 'edit'])->name('edit_tag');
+
 
 // CRUDS //
 // Categories
@@ -33,6 +38,9 @@ Route::delete('/admin/categories/product/delete/{id}', [ProductCategoriesControl
 Route::post('/admin/categories/blog/store', [BlogCategoriesController::class, 'store'])->name('store_cat_blog');
 Route::put('/admin/categories/blog/update/{id}', [BlogCategoriesController::class, 'update'])->name('update_cat_blog');
 Route::delete('/admin/categories/blog/delete/{id}', [BlogCategoriesController::class, 'delete'])->name('delete_cat_blog');
+Route::post('/admin/categories/tag/store', [TagController::class, 'store'])->name('store_tag');
+Route::put('/admin/categories/tag/update/{id}', [TagController::class, 'update'])->name('update_tag');
+Route::delete('/admin/categories/tag/delete/{id}', [TagController::class, 'delete'])->name('delete_tag');
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
