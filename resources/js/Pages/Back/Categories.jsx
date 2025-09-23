@@ -31,7 +31,7 @@ export default function Categories({ auth, blog_cats, prod_cats, tags }) {
                             <th scope="row">{p.id}</th>
                             <td className="text-capitalize">{p.category}</td>
                             <td>
-                                <Link className="btn btn-info">Edit</Link>
+                                <Link href={route('edit_cat_prod', p.id)} className="btn btn-info">Edit</Link>
                             </td>
                             <td>
                                 <Link className="btn btn-danger">Delete</Link>

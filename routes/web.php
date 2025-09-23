@@ -20,10 +20,12 @@ Route::get('/', [GeneralController::class, 'index'])->name('home');
 Route::get('dash', [GeneralController::class, 'dash'])->name('dash');
 Route::get('/admin/categories', [GeneralController::class, 'categories'])->name('categories');
 Route::get('/admin/categories/product/create', [ProductCategoriesController::class, 'create'])->name('create_cat_prod');
+Route::get('/admin/categories/product/edit/{id}', [ProductCategoriesController::class, 'edit'])->name('edit_cat_prod');
 
 // CRUDS //
 // Categories
 Route::post('/admin/categories/product/store', [ProductCategoriesController::class, 'store'])->name('store_cat_prod');
+Route::put('/admin/categories/product/update/{id}', [ProductCategoriesController::class, 'update'])->name('update_cat_prod');
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');

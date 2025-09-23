@@ -17,11 +17,41 @@ class ProductCategoriesController extends Controller
 
     public function store(Request $request) {
 
+        $request->validate([
+        'category' => 'required|string|max:255',
+        ]);
+
         $prod_cat = new ProductCategory();
 
         $prod_cat->category = $request->category;
         $prod_cat->save();
 
-        return redirect()->route('categories')->with('success', 'Nouvelle catégorie de produits ajoutée avec succès !');
+        return redirect()->route(route: 'categories')->with('success', 'Nouvelle catégorie de produits ajoutée avec succès !');
+    }
+
+    // Page pour modifier
+    public function edit($id) {
+        $prod_cat = ProductCategory::findOrFail($id);
+
+        return Inertia::render('Back/Edit_cat_prod', [
+            'prod_cat' => $prod_cat
+        ]);
+    }
+
+    // action de modifier
+    public function update($id, Request $request) {
+
+        $request->validate([
+            'category' => 'required|string|max:255',
+        ]);
+
+        $prod_cat = ProductCategory::findOrFail($id);
+
+        $prod_cat->update([
+            'category' => $request->category
+        ]);
+
+        return redirect()->route(route: 'categories')->with('success', 'Catégorie modifiée avec succès !');
+
     }
 }
