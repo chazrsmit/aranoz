@@ -16,4 +16,18 @@ class UsersController extends Controller
             'users' => $users
         ]);
     }
+
+    // Afficher la page d'un user
+
+    // Afficher la page d'un user pour l'edit
+
+    // Action d'edit un user
+
+    // Action de delete un user
+
+    public function delete($id) {
+        User::findOrFail($id)->delete();
+
+        return redirect()->route('users')->with('success', 'User supprimé-e avec succès !');
+    }
 }

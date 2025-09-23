@@ -50,6 +50,9 @@ Route::put('/admin/categories/tag/update/{id}', [TagController::class, 'update']
 Route::delete('/admin/categories/tag/delete/{id}', [TagController::class, 'delete'])->name('delete_tag');
 // Contact
 Route::put('/admin/contact/update/{id}', [ContactController::class, 'update'])->name('update_contact');
+// Users
+Route::delete('/admin/users/delete/{id}', [UsersController::class, 'delete'])->name('delete_user');
+
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');

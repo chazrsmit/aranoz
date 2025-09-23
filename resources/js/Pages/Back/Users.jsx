@@ -28,6 +28,11 @@ export default function Users({ auth, users }) {
 
         <NavBack auth={auth} />
 
+        {/* Flash message */}
+        {flash?.success && showFlash && (
+            <div className="alert alert-success">{flash.success}</div>
+        )}  
+
         {/* Table avec les users */}
 
         <table className="table">
@@ -55,7 +60,7 @@ export default function Users({ auth, users }) {
                                 {/* <Link href={route('edit_cat_prod', p.id)} className="btn btn-info">Edit</Link> */}
                             </td>
                             <td>
-                                {/* <Link href={route('delete_cat_prod', p.id)} method='delete' className="btn btn-danger">Delete</Link> */}
+                                <Link href={route('delete_user', user.id)} method='delete' className="btn btn-danger">Delete</Link>
                             </td>
                         </tr>
                     ))
