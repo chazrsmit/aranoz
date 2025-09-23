@@ -1,8 +1,20 @@
 
+import { useEffect, useState } from 'react';
 import NavBack from '../../Components/NavBack.jsx';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 
 export default function Categories({ auth, blog_cats, prod_cats, tags }) {
+
+    // Logique messages flash
+    const page = usePage();
+    const flash = page.props?.flash;
+    const [showFlash, setShowFlash] = useState(true);
+
+    useEffect(() => {
+        if (flash?.success) {
+            setTimeout(() => setShowFlash(false), 4000);
+        }
+    }, [flash?.success]);
 
     return (
         <>
@@ -10,6 +22,11 @@ export default function Categories({ auth, blog_cats, prod_cats, tags }) {
         <Head title="Aranoz Dashboard - Categories" />
 
         <NavBack auth={auth} />
+
+        {/* Flash message */}
+        {flash?.success && showFlash && (
+            <div className="alert alert-success">{flash.success}</div>
+        )}  
 
         <Link href={route('create_cat_prod')} className="btn btn-secondary">+ Add a category</Link>
 
