@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogCategoriesController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\OrderController;
@@ -41,6 +42,9 @@ Route::get('/admin/edit/{id}', [UsersController::class, 'edit'])->name('edit_use
 // Orders
 Route::get('/admin/orders', [OrderController::class, 'orders'])->name('orders');
 Route::get('/admin/orders/show/{id}', [OrderController::class, 'show'])->name('show_order');
+// Blog
+Route::get('/admin/blog', [BlogController::class, 'blog_back'])->name('blog_back');
+
 
 
 // CRUDS //

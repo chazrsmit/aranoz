@@ -6,7 +6,7 @@ import { Head, Link, useForm, usePage } from '@inertiajs/react';
 
 export default function Orders({ auth, ordersPending, ordersConfirmed }) {
 
-        // Logique messages flash
+    // Logique messages flash
     const page = usePage();
     const flash = page.props?.flash;
     const [showFlash, setShowFlash] = useState(true);

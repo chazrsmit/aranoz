@@ -17,20 +17,23 @@ class BlogSeeder extends Seeder
             [
                 'title'           => "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam, ea?",
                 'description'     => "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo ex enim nobis atque quia deleniti rerum consequuntur commodi, dolor error pariatur in repellat maxime impedit maiores ipsa architecto totam explicabo!",
-                'image'           => "blog1.jpg",
-                'blogcategory_id' => 1
+                'image'           => "blogs/blog1.jpg",
+                'blogcategory_id' => 1,
+                'user_id' => 1
             ],
             [
                 'title'           => "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam, ea?",
                 'description'     => "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo ex enim nobis atque quia deleniti rerum consequuntur commodi, dolor error pariatur in repellat maxime impedit maiores ipsa architecto totam explicabo!",
-                'image'           => "blog2.jpg",
-                'blogcategory_id' => 2
+                'image'           => "blogs/blog2.jpg",
+                'blogcategory_id' => 2,
+                'user_id' => 1
             ],
             [
                 'title'           => "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam, ea?",
                 'description'     => "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo ex enim nobis atque quia deleniti rerum consequuntur commodi, dolor error pariatur in repellat maxime impedit maiores ipsa architecto totam explicabo!",
-                'image'           => "blog3.jpg",
-                'blogcategory_id' => 5
+                'image'           => "blogs/blog3.jpg",
+                'blogcategory_id' => 5,
+                'user_id' => 1
             ],
         ]);
     }

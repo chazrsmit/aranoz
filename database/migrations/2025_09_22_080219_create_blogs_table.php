@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('image');
             $table->foreignId('blogcategory_id')->constrained('blog_categories');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }
