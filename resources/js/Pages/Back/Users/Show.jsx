@@ -10,6 +10,16 @@ export default function Show({ auth, user } ) {
             <Head title="Aranoz Dashboard - User details" />
     
             <NavBack auth={auth} />
+
+            <a href={route('users')}>back to all users</a>
+
+            <div>
+                <img src={`/storage/avatars/${user.image}`} alt="" />
+                <p>{user.name}</p>
+                <p>{user.prenom}</p>
+                <p>{user.pseudo}</p>
+                <p>{user.email}</p>
+            </div>
         </>
     )
 
