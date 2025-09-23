@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogCategoriesController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\ProductCategoriesController;
 use App\Http\Controllers\ProfileController;
@@ -18,6 +19,7 @@ use Inertia\Inertia;
 //     ]);
 // });
 
+// Hompages
 Route::get('/', [GeneralController::class, 'index'])->name('home');
 Route::get('dash', [GeneralController::class, 'dash'])->name('dash');
 // Categories
@@ -28,6 +30,8 @@ Route::get('/admin/categories/blog/create', [BlogCategoriesController::class, 'c
 Route::get('/admin/categories/blog/edit/{id}', [BlogCategoriesController::class, 'edit'])->name('edit_cat_blog');
 Route::get('/admin/categories/tag/create', [TagController::class, 'create'])->name('create_tag');
 Route::get('/admin/categories/tag/edit/{id}', [TagController::class, 'edit'])->name('edit_tag');
+// Contact
+Route::get('/admin/contact', [ContactController::class, 'contact'])->name('contact');
 
 
 // CRUDS //
@@ -41,6 +45,8 @@ Route::delete('/admin/categories/blog/delete/{id}', [BlogCategoriesController::c
 Route::post('/admin/categories/tag/store', [TagController::class, 'store'])->name('store_tag');
 Route::put('/admin/categories/tag/update/{id}', [TagController::class, 'update'])->name('update_tag');
 Route::delete('/admin/categories/tag/delete/{id}', [TagController::class, 'delete'])->name('delete_tag');
+// Contact
+Route::put('/admin/contact/update/{id}', [ContactController::class, 'update'])->name('update_contact');
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
