@@ -10,11 +10,27 @@ export default function Categories({ auth, blog_cats, prod_cats, tags }) {
     const flash = page.props?.flash;
     const [showFlash, setShowFlash] = useState(true);
 
+    // on utilise un useEffect
     useEffect(() => {
         if (flash?.success) {
-            setTimeout(() => setShowFlash(false), 5000);
+            // en mettant setShowFlash à true, on est sûr de lancer un message
+            setShowFlash(true);
+
+            const timer = setTimeout(() => {
+                setShowFlash(false);
+            }, 5000);
+
+            // grâce au clearTimeOut, on fait en sorte que le timer est reset à chaque fois pour qu'il n'y ait pas d'overlap entre les messages.
+            return () => clearTimeout(timer); 
         }
     }, [flash?.success]);
+    // Etape 1: Un nouveau flash.success arrive //
+    //// setShowFlash(true) -> le message s’affiche
+    //// setTimeout démarre un compte à rebours de 5s
+    // Etape 2: SI un nouveau flash message arrive avant la fin du précécent : //
+    //// le useEffect se relance,
+    //// clearTimeOut supprime l'ancien compte à rebours
+    //// le compte à rebours est remis à zéro, le setTimeOut est relancé
 
     return (
         <>
