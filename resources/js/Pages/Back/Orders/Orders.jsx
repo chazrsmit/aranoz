@@ -48,96 +48,95 @@ export default function Orders({ auth, ordersPending, ordersConfirmed }) {
 
             {/* pending orders */}
             <h2>Pending orders</h2>
-                    <table className="table">
-                        <thead>
-                            <tr>
-                            <th scope="col">User</th>
-                            <th scope="col">Company</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Order n°</th>
-                            <th scope="col">Date</th>
-                            <th scope="col"></th>
-                            <th scope="col">Pending?</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {ordersPending.length > 0 ? (
-                            ordersPending.map(order => (
-                            <tr key={order.id}>
-                                <td>{order.user?.pseudo || 'Utilisateur inconnu'}</td>
-                                <td>{order.user?.company || 'Pas de compagnie'}</td>
-                                <td>{order.user?.email || '-'}</td>
-                                <td>{order.items.reduce((sum, item) => sum + item.quantity, 0)}</td>
-                                <td>{order.items.reduce((sum, item) => sum + item.price * item.quantity, 0)} €</td>
-                                <td>{order.order_number}</td>
-                                <td>{new Date(order.created_at).toLocaleDateString()}</td>
-                                <td>
-                                    <Link href={route('show_order', order.id)}>Show more</Link>
-                                </td>
-                                <td>
-                                <form onSubmit={(e) => orderConfirm(e, order.id)}>
-                                    <button type="submit">Confirm?</button>
-                                </form>
-                                </td>
-                            </tr>
-                            ))
-                        ) : (
-                            <tr>
-                            <td colSpan="9">Pas de commande en attente de confirmation</td>
-                            </tr>
-                        )}
-                        </tbody>
-                    </table>
-
+            <table className="table">
+                <thead>
+                    <tr>
+                    <th scope="col">User</th>
+                    <th scope="col">Company</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Order n°</th>
+                    <th scope="col">Date</th>
+                    <th scope="col"></th>
+                    <th scope="col">Pending?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {ordersPending.length > 0 ? (
+                    ordersPending.map(order => (
+                    <tr key={order.id}>
+                        <td>{order.user?.pseudo || 'Utilisateur inconnu'}</td>
+                        <td>{order.user?.company || 'Pas de compagnie'}</td>
+                        <td>{order.user?.email || '-'}</td>
+                        <td>{order.items.reduce((sum, item) => sum + item.quantity, 0)}</td>
+                        <td>{order.items.reduce((sum, item) => sum + item.price * item.quantity, 0)} €</td>
+                        <td>{order.order_number}</td>
+                        <td>{new Date(order.created_at).toLocaleDateString()}</td>
+                        <td>
+                            <Link href={route('show_order', order.id)}>Show more</Link>
+                        </td>
+                        <td>
+                        <form onSubmit={(e) => orderConfirm(e, order.id)}>
+                            <button type="submit">Confirm?</button>
+                        </form>
+                        </td>
+                    </tr>
+                    ))
+                ) : (
+                    <tr>
+                    <td colSpan="9">Pas de commande en attente de confirmation</td>
+                    </tr>
+                )}
+                </tbody>
+            </table>
 
             {/* Confirmed orders */}
             <h2>Confirmed orders</h2>
-                    <table className="table">
-                        <thead>
-                            <tr>
-                            <th scope="col">User</th>
-                            <th scope="col">Company</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Order n°</th>
-                            <th scope="col">Date</th>
-                            <th scope="col"></th>
-                            <th scope="col">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            { ordersConfirmed.length > 0 ?
-                            (
-                            ordersConfirmed.map(order => (
-                                    <tr key={order.id}>
-                                        <td>{order.user?.pseudo || 'Utilisateur inconnu'}</td>
-                                        <td>{order.user?.company || 'Pas de compagnie'}</td>
-                                        <td>{order.user?.email || '-'}</td>
-                                        <td>{order.items.reduce((sum, item) => sum + item.quantity, 0)}</td>
-                                        <td>{order.items.reduce((sum, item) => sum + item.price * item.quantity, 0)} €</td>
-                                        <td>{order.order_number}</td>
-                                        <td>{new Date(order.created_at).toLocaleDateString()}</td>
-                                        <td>
-                                            <Link href={route('show_order', order.id)}>Show more</Link>
-                                        </td>
-                                        <td>
-                                            <p className="">Confirmed!</p>
-                                        </td>
-                                    </tr>
-                                ))
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th scope="col">User</th>
+                        <th scope="col">Company</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Order n°</th>
+                        <th scope="col">Date</th>
+                        <th scope="col"></th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    { ordersConfirmed.length > 0 ?
+                    (
+                    ordersConfirmed.map(order => (
+                        <tr key={order.id}>
+                            <td>{order.user?.pseudo || 'Utilisateur inconnu'}</td>
+                            <td>{order.user?.company || 'Pas de compagnie'}</td>
+                            <td>{order.user?.email || '-'}</td>
+                            <td>{order.items.reduce((sum, item) => sum + item.quantity, 0)}</td>
+                            <td>{order.items.reduce((sum, item) => sum + item.price * item.quantity, 0)} €</td>
+                            <td>{order.order_number}</td>
+                            <td>{new Date(order.created_at).toLocaleDateString()}</td>
+                            <td>
+                                <Link href={route('show_order', order.id)}>Show more</Link>
+                            </td>
+                            <td>
+                                <p className="">Confirmed!</p>
+                            </td>
+                        </tr>
+                        ))
 
-                            ) :
-                            (
-                                <tr>
-                                    <td colSpan="9">Pas de commande en attente de confirmation</td>
-                                </tr>
-                            )
-                            }
-                        </tbody>
-                    </table>
+                    ) :
+                    (
+                        <tr>
+                            <td colSpan="9">Pas de commande en attente de confirmation</td>
+                        </tr>
+                    )
+                    }
+                </tbody>
+            </table>
         </>
     )
 }
