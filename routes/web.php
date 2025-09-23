@@ -44,6 +44,7 @@ Route::get('/admin/orders', [OrderController::class, 'orders'])->name('orders');
 Route::get('/admin/orders/show/{id}', [OrderController::class, 'show'])->name('show_order');
 // Blog
 Route::get('/admin/blog', [BlogController::class, 'blog_back'])->name('blog_back');
+Route::get('/admin/blog/show/{id}', [BlogController::class, 'show'])->name('show_blog');
 
 
 

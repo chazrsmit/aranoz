@@ -58,7 +58,7 @@ export default function Blog({ auth, blogs }) {
                         <td>{blog.blog_category?.category}</td>
                         <td>{blog.user.role.role}</td>
                         <td>
-                            <button>Show</button>
+                            <Link href={route('show_blog', blog.id)}>Show more</Link>
                         </td>
                         <td>
                             <button>Edit</button>

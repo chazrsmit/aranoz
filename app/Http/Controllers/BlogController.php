@@ -17,4 +17,13 @@ class BlogController extends Controller
             'blogs' => $blogs
         ]);
     }
+
+    // page pour afficher chaque post
+    public function show($id) {
+        $blog = Blog::with('blog_category', 'user', 'tags')->findOrFail($id);
+
+        return Inertia::render('Back/Blog/Show', [
+            'blog' => $blog
+        ]);
+    }
 }
