@@ -59,6 +59,6 @@ class ProductCategoriesController extends Controller
     public function delete ($id) {
         ProductCategory::findOrFail($id)->delete();
 
-        return redirect()->route('categories')->with('success', 'Catégorie supprimée avce succès !');
+        return redirect()->route('categories')->with('success', 'Catégorie supprimée avec succès !');
     }
 }

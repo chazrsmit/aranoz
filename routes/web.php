@@ -26,6 +26,7 @@ Route::get('/admin/categories/product/edit/{id}', [ProductCategoriesController::
 // Categories
 Route::post('/admin/categories/product/store', [ProductCategoriesController::class, 'store'])->name('store_cat_prod');
 Route::put('/admin/categories/product/update/{id}', [ProductCategoriesController::class, 'update'])->name('update_cat_prod');
+Route::delete('/admin/categories/product/delete/{id}', [ProductCategoriesController::class, 'delete'])->name('delete_cat_prod');
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');

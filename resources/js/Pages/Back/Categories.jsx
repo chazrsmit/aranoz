@@ -51,7 +51,7 @@ export default function Categories({ auth, blog_cats, prod_cats, tags }) {
                                 <Link href={route('edit_cat_prod', p.id)} className="btn btn-info">Edit</Link>
                             </td>
                             <td>
-                                <Link className="btn btn-danger">Delete</Link>
+                                <Link href={route('delete_cat_prod', p.id)} method='delete' className="btn btn-danger">Delete</Link>
                             </td>
                         </tr>
                     ))
