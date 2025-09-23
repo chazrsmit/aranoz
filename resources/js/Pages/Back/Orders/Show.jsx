@@ -1,8 +1,5 @@
-
-
-import { useEffect, useState } from 'react';
 import NavBack from '../../../Components/NavBack.jsx';
-import { Head, Link, useForm, usePage } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 
 export default function Show({ auth, order }) {
 
@@ -30,12 +27,6 @@ export default function Show({ auth, order }) {
                         </li>
                     ))
                 }
-                {/* nom du produit */}
-                <p></p>
-                {/* quantité du produit */}
-                <p></p>
-                {/* prix unitaire du produit */}
-                <p></p>
             </div>
         </>
     )

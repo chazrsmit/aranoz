@@ -4,7 +4,7 @@ import NavBack from '../../../Components/NavBack.jsx';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
 
 
-export default function Orders({ auth, orderPending, ordersPending, ordersConfirmed }) {
+export default function Orders({ auth, ordersPending, ordersConfirmed }) {
 
         // Logique messages flash
     const page = usePage();
@@ -109,8 +109,9 @@ export default function Orders({ auth, orderPending, ordersPending, ordersConfir
                             </tr>
                         </thead>
                         <tbody>
-                            {
-                                ordersConfirmed.map(order => (
+                            { ordersConfirmed.length > 0 ?
+                            (
+                            ordersConfirmed.map(order => (
                                     <tr key={order.id}>
                                         <td>{order.user?.pseudo || 'Utilisateur inconnu'}</td>
                                         <td>{order.user?.company || 'Pas de compagnie'}</td>
@@ -125,18 +126,15 @@ export default function Orders({ auth, orderPending, ordersPending, ordersConfir
                                         <td>
                                             <p className="">Confirmed!</p>
                                         </td>
-                                        {/* <td>
-                                            <Link href={route('show_users', user.id)} className="btn btn-info">Show</Link>
-                                        </td>
-                                        <td>
-                                            <Link href={route('edit_users', user.id)} className="btn btn-info">Edit</Link>
-                                        </td>
-                                        <td>
-                                            <Link href={route('delete_user', user.id)} method='delete' disabled={user.role_id == 2} className="btn btn-danger">Delete</Link>
-                                        </td> */}
                                     </tr>
                                 ))
 
+                            ) :
+                            (
+                                <tr>
+                                    <td colSpan="9">Pas de commande en attente de confirmation</td>
+                                </tr>
+                            )
                             }
                         </tbody>
                     </table>
