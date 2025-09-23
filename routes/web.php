@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogCategoriesController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\ProductCategoriesController;
 use App\Http\Controllers\ProfileController;
@@ -21,12 +22,17 @@ Route::get('dash', [GeneralController::class, 'dash'])->name('dash');
 Route::get('/admin/categories', [GeneralController::class, 'categories'])->name('categories');
 Route::get('/admin/categories/product/create', [ProductCategoriesController::class, 'create'])->name('create_cat_prod');
 Route::get('/admin/categories/product/edit/{id}', [ProductCategoriesController::class, 'edit'])->name('edit_cat_prod');
+Route::get('/admin/categories/blog/create', [BlogCategoriesController::class, 'create'])->name('create_cat_blog');
+Route::get('/admin/categories/blog/edit/{id}', [BlogCategoriesController::class, 'edit'])->name('edit_cat_blog');
 
 // CRUDS //
 // Categories
 Route::post('/admin/categories/product/store', [ProductCategoriesController::class, 'store'])->name('store_cat_prod');
 Route::put('/admin/categories/product/update/{id}', [ProductCategoriesController::class, 'update'])->name('update_cat_prod');
 Route::delete('/admin/categories/product/delete/{id}', [ProductCategoriesController::class, 'delete'])->name('delete_cat_prod');
+Route::post('/admin/categories/blog/store', [BlogCategoriesController::class, 'store'])->name('store_cat_blog');
+Route::put('/admin/categories/blog/update/{id}', [BlogCategoriesController::class, 'update'])->name('update_cat_blog');
+Route::delete('/admin/categories/blog/delete/{id}', [BlogCategoriesController::class, 'delete'])->name('delete_cat_blog');
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');

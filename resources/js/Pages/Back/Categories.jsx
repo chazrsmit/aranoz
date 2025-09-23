@@ -28,11 +28,11 @@ export default function Categories({ auth, blog_cats, prod_cats, tags }) {
             <div className="alert alert-success">{flash.success}</div>
         )}  
 
-        <Link href={route('create_cat_prod')} className="btn btn-secondary">+ Add a category</Link>
+        <Link href={route('create_cat_prod')} className="btn btn-secondary">+ Add a product category</Link>
 
-        <h2>All categories</h2>
+        <h2>All product categories</h2>
 
-        <table class="table">
+        <table className="table">
             <thead>
                 <tr>
                 <th scope="col">id</th>
@@ -52,6 +52,38 @@ export default function Categories({ auth, blog_cats, prod_cats, tags }) {
                             </td>
                             <td>
                                 <Link href={route('delete_cat_prod', p.id)} method='delete' className="btn btn-danger">Delete</Link>
+                            </td>
+                        </tr>
+                    ))
+
+                }
+            </tbody>
+            </table>
+
+        <Link href={route('create_cat_blog')} className="btn btn-secondary">+ Add a blog category</Link>
+
+        <h2>All blog categories</h2>
+
+        <table className="table">
+            <thead>
+                <tr>
+                <th scope="col">id</th>
+                <th scope="col">Category</th>
+                <th scope="col">Modification</th>
+                <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    blog_cats.map(b => (
+                        <tr>
+                            <th scope="row">{b.id}</th>
+                            <td className="text-capitalize">{b.category}</td>
+                            <td>
+                                <Link href={route('edit_cat_blog', b.id)} className="btn btn-info">Edit</Link>
+                            </td>
+                            <td>
+                                <Link href={route('delete_cat_blog', b.id)} method='delete' className="btn btn-danger">Delete</Link>
                             </td>
                         </tr>
                     ))
