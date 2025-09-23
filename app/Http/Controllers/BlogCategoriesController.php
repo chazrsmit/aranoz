@@ -26,7 +26,7 @@ class BlogCategoriesController extends Controller
         $blog_cat->category = $request->category;
         $blog_cat->save();
 
-        return redirect()->route(route: 'categories')->with('success', 'Nouvelle catégorie de blogs ajoutée avec succès !');
+        return redirect()->route(route: 'categories')->with('success', 'A new blog category has been created.');
     }
 
     // Page pour modifier
@@ -51,7 +51,7 @@ class BlogCategoriesController extends Controller
             'category' => $request->category
         ]);
 
-        return redirect()->route(route: 'categories')->with('success', 'Catégorie modifiée avec succès !');
+        return redirect()->route(route: 'categories')->with('success', 'Category successfully updated.');
 
     }
 
@@ -59,6 +59,6 @@ class BlogCategoriesController extends Controller
     public function delete ($id) {
         BlogCategory::findOrFail($id)->delete();
 
-        return redirect()->route('categories')->with('success', 'Catégorie supprimée avec succès !');
+        return redirect()->route('categories')->with('success', 'Category successfully deleted.');
     }
 }

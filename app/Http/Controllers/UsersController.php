@@ -77,6 +77,6 @@
         public function delete($id) {
             User::findOrFail($id)->delete();
 
-            return redirect()->route('users')->with('success', 'User supprimé-e avec succès !');
+            return redirect()->route('users')->with('success', 'User successfully deleted.');
         }
     }

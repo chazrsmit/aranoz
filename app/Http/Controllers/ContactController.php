@@ -42,7 +42,7 @@ class ContactController extends Controller
         $contact->phone = $request->phone;
         $contact->save();
 
-        return redirect()->route('contact')->with('success', 'Infos contact modifiées avec succès !');
+        return redirect()->route('contact')->with('success', 'Contact infos successfully updated.');
 
     }
 }
