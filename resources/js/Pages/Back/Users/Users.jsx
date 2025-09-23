@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import NavBack from '../../Components/NavBack.jsx';
+import NavBack from '../../../Components/NavBack.jsx';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
 
 export default function Users({ auth, users }) {
@@ -49,18 +49,21 @@ export default function Users({ auth, users }) {
             <tbody>
                 {
                     users.map(user => (
-                        <tr>
-                            <th scope="row">{user.pseudo}</th>
+                        <tr key={user.id}>
+                            <th scope="row">
+                                <img src={`/storage/avatars/${user.image}`} alt="" width="50px" height="50px" />
+                                {user.pseudo}
+                                </th>
                             <td>{user.email}</td>
                             <td>{user.role.role}</td>
                             <td>
-                                {/* <Link href={route('edit_cat_prod', p.id)} className="btn btn-info">Edit</Link> */}
+                                <Link href={route('show_users', user.id)} className="btn btn-info">Show</Link>
                             </td>
                             <td>
                                 {/* <Link href={route('edit_cat_prod', p.id)} className="btn btn-info">Edit</Link> */}
                             </td>
                             <td>
-                                <Link href={route('delete_user', user.id)} method='delete' className="btn btn-danger">Delete</Link>
+                                <Link href={route('delete_user', user.id)} method='delete' disabled={user.role_id == 2} className="btn btn-danger">Delete</Link>
                             </td>
                         </tr>
                     ))

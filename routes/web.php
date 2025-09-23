@@ -35,6 +35,7 @@ Route::get('/admin/categories/tag/edit/{id}', [TagController::class, 'edit'])->n
 Route::get('/admin/contact', [ContactController::class, 'contact'])->name('contact');
 // Users
 Route::get('/admin/users', [UsersController::class, 'users'])->name('users');
+Route::get('/admin/show/{id}', [UsersController::class, 'show'])->name('show_users');
 
 
 // CRUDS //

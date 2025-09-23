@@ -61,7 +61,7 @@ export default function Categories({ auth, blog_cats, prod_cats, tags }) {
             <tbody>
                 {
                     prod_cats.map(p => (
-                        <tr>
+                        <tr key={p.id}>
                             <th scope="row">{p.id}</th>
                             <td className="text-capitalize">{p.category}</td>
                             <td>
@@ -94,7 +94,7 @@ export default function Categories({ auth, blog_cats, prod_cats, tags }) {
             <tbody>
                 {
                     blog_cats.map(b => (
-                        <tr>
+                        <tr key={b.id}>
                             <th scope="row">{b.id}</th>
                             <td className="text-capitalize">{b.category}</td>
                             <td>
@@ -126,7 +126,7 @@ export default function Categories({ auth, blog_cats, prod_cats, tags }) {
             <tbody>
                 {
                      tags.map(t => (
-                        <tr>
+                        <tr key={t.id}>
                             <th scope="row">{t.id}</th>
                             <td className="text-capitalize">{t.tag}</td>
                             <td>
