@@ -15,8 +15,8 @@ class ProductSeeder extends Seeder
     {
         Product::insert([
             [
-                'product' => 'Chaise verte',
-                'description' => 'Une chaise verte en velours.',
+                'product' => 'Green chair',
+                'description' => 'A perfect green chair.',
                 'price' => 30.99,
                 'stock' => 5,
                 'isPinned' => 0,
@@ -29,8 +29,8 @@ class ProductSeeder extends Seeder
                 'promotion_id' => null
             ],
             [
-                'product' => 'Chaise orange',
-                'description' => 'Une chaise orange pour le jardin.',
+                'product' => 'Orange chair',
+                'description' => 'An orange chair to spend summer days in the garden.',
                 'price' => 28.99,
                 'stock' => 5,
                 'isPinned' => 0,

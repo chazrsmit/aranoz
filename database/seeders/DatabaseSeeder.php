@@ -36,6 +36,20 @@ class DatabaseSeeder extends Seeder
             ]
         ]);
 
-        $this->call([BillingSeeder::class, BlogCategorySeeder::class, TagSeeder::class, BlogSeeder::class, CommentSeeder::class, ContactSeeder::class, CountrySeeder::class, MessageSeeder::class, ProductCategorySeeder::class, ProductSeeder::class, SpecificationSeeder::class]);
+        $this->call([
+            BillingSeeder::class,
+            BlogCategorySeeder::class,
+            TagSeeder::class,
+            BlogSeeder::class,
+            CommentSeeder::class,
+            ContactSeeder::class,
+            CountrySeeder::class,
+            MessageSeeder::class,
+            ProductCategorySeeder::class,
+            ProductSeeder::class,
+            SpecificationSeeder::class,
+            OrderSeeder::class,
+            OrderItemSeeder::class
+        ]);
     }
 }

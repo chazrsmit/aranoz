@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\OrderItem;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,31 @@ class OrderItemSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        OrderItem::insert([
+            [
+                'quantity' => 2,
+                'price' => 30.99,
+                'order_id' => 1,
+                'product_id' => 1
+            ],
+            [
+                'quantity' => 1,
+                'price' => 30.99,
+                'order_id' => 2,
+                'product_id' => 1
+            ],
+            [
+                'quantity' => 1,
+                'price' => 30.99,
+                'order_id' => 3,
+                'product_id' => 1
+            ],
+            [
+                'quantity' => 2,
+                'price' => 28.99,
+                'order_id' => 3,
+                'product_id' => 2
+            ]
+        ]);
     }
 }

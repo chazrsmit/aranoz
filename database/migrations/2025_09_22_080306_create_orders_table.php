@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('order_number')->unique();
-            // prix total de tous les items commandés
-            $table->decimal('total_price', 8, 2);
             $table->enum('status', ['pending', 'confirmed', 'archived']);
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();

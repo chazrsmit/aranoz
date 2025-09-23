@@ -3,6 +3,7 @@
 use App\Http\Controllers\BlogCategoriesController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCategoriesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagController;
@@ -37,6 +38,8 @@ Route::get('/admin/contact', [ContactController::class, 'contact'])->name('conta
 Route::get('/admin/users', [UsersController::class, 'users'])->name('users');
 Route::get('/admin/show/{id}', [UsersController::class, 'show'])->name('show_users');
 Route::get('/admin/edit/{id}', [UsersController::class, 'edit'])->name('edit_users');
+// Orders
+Route::get('/admin/orders', [OrderController::class, 'orders'])->name('orders');
 
 
 // CRUDS //
