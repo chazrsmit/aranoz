@@ -21,6 +21,11 @@ export default function Contact({ auth, contact }) {
         put(route('update_contact', contact.id));
     }
 
+    // pour le google maps iframe:
+    const address = `${contact.street}, ${contact.city}, ${contact.country}`;
+    // on encode l'adresse pour qu'elle soit transformée en URL:
+    const addressURL = encodeURIComponent(address);
+
     return(
         <>
 
@@ -29,6 +34,17 @@ export default function Contact({ auth, contact }) {
             <NavBack auth={auth} />
 
             {/* Google iFrame dynamique */}
+            <div style={{ width: '100%', height: '400px' }}>
+            <iframe
+                title="Google Maps"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                style={{ border: 0 }}
+                src={`https://www.google.com/maps?q=${addressURL}&output=embed`}
+                allowFullScreen
+            ></iframe>
+        </div>
 
             <h2>Update your contact data</h2>
 
