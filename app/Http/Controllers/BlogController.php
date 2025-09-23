@@ -26,4 +26,12 @@ class BlogController extends Controller
             'blog' => $blog
         ]);
     }
+
+    // Page pour ajouter un article
+    public function create() {
+
+        return Inertia::render('Back/Blog/Create', [
+
+        ]);
+    }
 }

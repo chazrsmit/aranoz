@@ -33,6 +33,8 @@ export default function Blog({ auth, blogs }) {
             <div className="alert alert-success">{flash.success}</div>
         )}  
 
+        <Link href={route('create_blog')} className="btn btn-secondary">Add a new blog post</Link>
+
         <h2>All blogs</h2>
 
         <table className="table">
