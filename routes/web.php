@@ -36,6 +36,7 @@ Route::get('/admin/contact', [ContactController::class, 'contact'])->name('conta
 // Users
 Route::get('/admin/users', [UsersController::class, 'users'])->name('users');
 Route::get('/admin/show/{id}', [UsersController::class, 'show'])->name('show_users');
+Route::get('/admin/edit/{id}', [UsersController::class, 'edit'])->name('edit_users');
 
 
 // CRUDS //
@@ -52,6 +53,7 @@ Route::delete('/admin/categories/tag/delete/{id}', [TagController::class, 'delet
 // Contact
 Route::put('/admin/contact/update/{id}', [ContactController::class, 'update'])->name('update_contact');
 // Users
+Route::post('/admin/users/update/{id}', [UsersController::class, 'update'])->name('update_user');
 Route::delete('/admin/users/delete/{id}', [UsersController::class, 'delete'])->name('delete_user');
 
 

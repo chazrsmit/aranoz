@@ -38,7 +38,7 @@ export default function Users({ auth, users }) {
         <table className="table">
             <thead>
                 <tr>
-                <th scope="col">Pseudo</th>
+                <th scope="col">Username</th>
                 <th scope="col">Email</th>
                 <th scope="col">Role</th>
                 <th scope="col"></th>
@@ -51,7 +51,7 @@ export default function Users({ auth, users }) {
                     users.map(user => (
                         <tr key={user.id}>
                             <th scope="row">
-                                <img src={`/storage/avatars/${user.image}`} alt="" width="50px" height="50px" />
+                                <img src={`/storage/${user.image}`} alt="" width="50px" height="50px" />
                                 {user.pseudo}
                                 </th>
                             <td>{user.email}</td>
@@ -60,7 +60,7 @@ export default function Users({ auth, users }) {
                                 <Link href={route('show_users', user.id)} className="btn btn-info">Show</Link>
                             </td>
                             <td>
-                                {/* <Link href={route('edit_cat_prod', p.id)} className="btn btn-info">Edit</Link> */}
+                                <Link href={route('edit_users', user.id)} className="btn btn-info">Edit</Link>
                             </td>
                             <td>
                                 <Link href={route('delete_user', user.id)} method='delete' disabled={user.role_id == 2} className="btn btn-danger">Delete</Link>

@@ -14,7 +14,7 @@ export default function Show({ auth, user } ) {
             <a href={route('users')}>back to all users</a>
 
             <div>
-                <img src={`/storage/avatars/${user.image}`} alt="" />
+                <img src={`/storage/${user.image}`} alt="" width="400px" />
                 <p>{user.name}</p>
                 <p>{user.prenom}</p>
                 <p>{user.pseudo}</p>

@@ -1,0 +1,104 @@
+import { useEffect, useState } from 'react';
+import NavBack from '../../../Components/NavBack.jsx';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
+
+export default function Show({ auth, user, roles } ) {
+
+    // infos à envoyer au back
+    const {data, setData, post, errors} = useForm({
+        //si l’utilisateur ne change pas l’image, Inertia n’envoie rien.
+        image : null,
+        name : user.name,
+        prenom : user.prenom,
+        pseudo : user.pseudo,
+        email : user.email,
+        role_id : user.role_id
+    });
+
+
+    // fonction qui passe par une route pour envoyer les infos dans le back (lorsqu'on clique sur submit)
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // mettre le put ici:  
+        post(route('update_user', user.id), {
+            forceFormData: true,
+            // on utilise ça pour forcer à utiliser formData
+            _method: 'PUT'
+            // lorsque l'on veut envoyer un fichier de type file avec Inertia, il faut faire 'post' avec method 'put' ; faire directement put ne va pas fonctionner
+            // OU alors, dans le useForm, on met directement "_method:'put'""
+            // en effet, la méthode put() d'Inertia ne supporte pas bien les input:file
+        });
+    };
+
+    return(
+
+        <>
+            <Head title="Aranoz Dashboard - Edit user" />
+    
+            <NavBack auth={auth} />
+
+            <a href={route('users')}>back to all users</a>
+
+            <form onSubmit={handleSubmit}>
+                <img src={`/storage/${user.image}`} alt="" width="400px" />
+                {/* Image */}
+                <input
+                    type="file"
+                    name="image"
+                    className={`form-control mb-1 ${errors.image ? 'is-invalid' : ''}`}
+                    onChange={(e) => setData('image', e.target.files[0])}
+                />
+                {errors.image1_path && <div className="invalid-feedback">{errors.image1_path}</div>}
+                {/* Name */}
+                <input type="text" name="name" value={data.name} onChange={(e) => setData('name', e.target.value)} id=""
+                className={`form-control ${errors.name ? 'is-invalid' : ''}`} />
+                    {/* message d'erreur */}
+                    { errors.name &&
+                        <div className="invalid-feedback">{errors.name}</div>
+                    }
+
+                {/* Prenom */}
+                <input type="text" name="prenom" value={data.prenom} onChange={(e) => setData('prenom', e.target.value)} id=""
+                className={`form-control ${errors.prenom ? 'is-invalid' : ''}`} />
+                    {/* message d'erreur */}
+                    { errors.prenom &&
+                        <div className="invalid-feedback">{errors.prenom}</div>
+                    }
+
+                {/* Pseudo */}
+                <input type="text" name="pseudo" value={data.pseudo} onChange={(e) => setData('pseudo', e.target.value)} id=""
+                className={`form-control ${errors.pseudo ? 'is-invalid' : ''}`} />
+                    {/* message d'erreur */}
+                    { errors.pseudo &&
+                        <div className="invalid-feedback">{errors.pseudo}</div>
+                    }
+
+                {/* Email */}
+                <input type="email" name="email" value={data.email} onChange={(e) => setData('email', e.target.value)} id=""
+                className={`form-control ${errors.email ? 'is-invalid' : ''}`} />
+                    {/* message d'erreur */}
+                    { errors.email &&
+                        <div className="invalid-feedback">{errors.email}</div>
+                    }
+
+                {/* Role */}
+                <select
+                    name="role_id"
+                    id=""
+                    className="form-select"
+                    onChange={(e)=> setData('role_id', e.target.value)}
+                    value={data.role_id}
+                >
+                    {roles.map(role => (
+                        <option key={role.id} value={role.id} selected={role.id == user.role_id}>
+                            {role.role}
+                        </option>
+                    ))}
+                </select>
+
+                <button type="submit">Edit user</button>
+            </form>
+        </>
+    )
+
+}
