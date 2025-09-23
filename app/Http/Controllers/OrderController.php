@@ -27,6 +27,7 @@ class OrderController extends Controller
 
     // logique pour faire passer une commande de pending à confirmée
     public function update($id){
+
         // ajouter la logique pour l'email !!
 
         $orderPending = Order::findOrFail($id);
@@ -37,6 +38,16 @@ class OrderController extends Controller
 
         return redirect()->route('orders')->with('success', 'Order confirmed!');
         
+    }
+
+    // montrer les détails d'une commande
+    public function show($id) {
+
+        $order = Order::with('user', 'items.product')->findOrFail($id);
+
+        return Inertia::render('Back/Orders/Show', [
+            'order' => $order
+        ]);
     }
 
 }

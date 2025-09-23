@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import NavBack from '../../../Components/NavBack.jsx';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
 
-export default function Show({ auth, user, roles } ) {
+export default function Edit({ auth, user, roles } ) {
 
     // pour changer le type d'input pour l'image:
     const [imageInputType, setImageInputType] = useState('file');

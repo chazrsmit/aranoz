@@ -40,6 +40,7 @@ Route::get('/admin/show/{id}', [UsersController::class, 'show'])->name('show_use
 Route::get('/admin/edit/{id}', [UsersController::class, 'edit'])->name('edit_users');
 // Orders
 Route::get('/admin/orders', [OrderController::class, 'orders'])->name('orders');
+Route::get('/admin/orders/show/{id}', [OrderController::class, 'show'])->name('show_order');
 
 
 // CRUDS //

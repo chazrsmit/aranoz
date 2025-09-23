@@ -74,7 +74,7 @@ export default function Orders({ auth, orderPending, ordersPending, ordersConfir
                                 <td>{order.order_number}</td>
                                 <td>{new Date(order.created_at).toLocaleDateString()}</td>
                                 <td>
-                                <button>Show more</button>
+                                    <Link href={route('show_order', order.id)}>Show more</Link>
                                 </td>
                                 <td>
                                 <form onSubmit={(e) => orderConfirm(e, order.id)}>
@@ -120,7 +120,7 @@ export default function Orders({ auth, orderPending, ordersPending, ordersConfir
                                         <td>{order.order_number}</td>
                                         <td>{new Date(order.created_at).toLocaleDateString()}</td>
                                         <td>
-                                            <button>Show more</button>
+                                            <Link href={route('show_order', order.id)}>Show more</Link>
                                         </td>
                                         <td>
                                             <p className="">Confirmed!</p>
