@@ -6,6 +6,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCategoriesController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UsersController;
@@ -47,6 +48,9 @@ Route::get('/admin/blog', [BlogController::class, 'blog_back'])->name('blog_back
 Route::get('/admin/blog/show/{id}', [BlogController::class, 'show'])->name('show_blog');
 Route::get('/admin/blog/create', [BlogController::class, 'create'])->name('create_blog');
 Route::get('/admin/blog/edit/{id}', [BlogController::class, 'edit'])->name('edit_blog');
+// Products
+Route::get('/admin/products', [ProductController::class, 'products'])->name('products_back');
+
 
 
 // CRUDS //

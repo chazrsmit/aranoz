@@ -5,7 +5,7 @@ export default function NavBack({ auth }) {
     return (
      <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" href={route('dash')}>
           Admin
         </a>
         <button
@@ -25,7 +25,7 @@ export default function NavBack({ auth }) {
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
-                href="#"
+                href=""
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -67,7 +67,7 @@ export default function NavBack({ auth }) {
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle"
-                href="#"
+                href=""
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -76,21 +76,13 @@ export default function NavBack({ auth }) {
               </a>
               <ul className="dropdown-menu">
                 <li>
-                  <a className="dropdown-item" href="#">
-                    Action
+                  <a className="dropdown-item" href={route('products_back')}>
+                    All Products
                   </a>
                 </li>
                 <li>
                   <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <hr className="dropdown-divider" />
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    Something else here
+                    Liked Products
                   </a>
                 </li>
               </ul>

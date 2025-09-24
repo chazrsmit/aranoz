@@ -45,6 +45,7 @@ class DatabaseSeeder extends Seeder
             ContactSeeder::class,
             CountrySeeder::class,
             MessageSeeder::class,
+            PromotionSeeder::class,
             ProductCategorySeeder::class,
             ProductSeeder::class,
             SpecificationSeeder::class,
