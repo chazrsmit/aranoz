@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('price', 8, 2);
             $table->integer('stock');
             $table->boolean('isPinned');
-            $table->string('image_main');
+            $table->string('image_main')->nullable();
             $table->string('image_rear')->nullable();
             $table->string('image_left')->nullable();
             $table->string('image_right')->nullable();

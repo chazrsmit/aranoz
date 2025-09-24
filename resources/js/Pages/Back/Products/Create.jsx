@@ -34,6 +34,10 @@ export default function Create({ auth, promotions, prod_cats, colors }) {
         });
     };
 
+    const handleFileChange = (e, field) => {
+        setData(field, e.target.files[0]);
+    };
+
 
 
     return (
@@ -87,6 +91,7 @@ export default function Create({ auth, promotions, prod_cats, colors }) {
             <div className="mb-3">
                 <fieldset>
                     {/* fieldset permet de regoruper plusieurs attributs d'un même gorupe au sein d'un form */}
+                    <label htmlFor="isPinned">Feature on the homepage?</label>
                     <input
                         type="radio"
                         name="isPinned"
@@ -153,7 +158,7 @@ export default function Create({ auth, promotions, prod_cats, colors }) {
         >
             <option value="">Choose a color</option>
             {colors.map(c => (
-                <option key={c.id} value={c.id}>
+                <option key={c.id} value={c.id} style={{ backgroundColor: c.color, color: '#fff' }}>
                     {c.color}
                 </option>
             ))}
@@ -196,7 +201,62 @@ export default function Create({ auth, promotions, prod_cats, colors }) {
             </select>
             {errors.productcategory_id && <div className="invalid-feedback">{errors.productcategory_id}</div>}
 
+            {/* Quality checking */}
+            <div className="mb-3">
+                <fieldset>
+                    <label htmlFor="quality_checking">Quality checking required?</label>
+                    <input
+                        type="radio"
+                        name="quality_checking"
+                        value={1}
+                        onChange={() => setData('quality_checking', 1)}
+                        className="me-1"
+                    /> Oui
+                    <input
+                        type="radio"
+                        name="quality_checking"
+                        value={0}
+                        onChange={() => setData('quality_checking', 0)}
+                        className="ms-3 me-1"
+                    /> Non
+                </fieldset>
+                {errors.quality_checking && <div className="text-danger small">{errors.quality_checking}</div>}
+            </div>
+
             {/* images */}
+            <div className="mb-3">
+                <input
+                    type="file"
+                    name="image_main"
+                    className={`form-control mb-1 ${errors.image_main ? 'is-invalid' : ''}`}
+                    onChange={e => handleFileChange(e, 'image_main')}
+                />
+                {errors.image_main && <div className="invalid-feedback">{errors.image_main}</div>}
+
+                <input
+                    type="file"
+                    name="image_rear"
+                    className={`form-control mb-1 ${errors.image_rear ? 'is-invalid' : ''}`}
+                    onChange={e => handleFileChange(e, 'image_rear')}
+                />
+                {errors.image_rear && <div className="invalid-feedback">{errors.image_rear}</div>}
+
+                <input
+                    type="file"
+                    name="image_left"
+                    className={`form-control mb-1 ${errors.image_left ? 'is-invalid' : ''}`}
+                    onChange={e => handleFileChange(e, 'image_left')}
+                />
+                {errors.image_left && <div className="invalid-feedback">{errors.image_left}</div>}
+
+                <input
+                    type="file"
+                    name="image_right"
+                    className={`form-control mb-1 ${errors.image_right ? 'is-invalid' : ''}`}
+                    onChange={e => handleFileChange(e, 'image_right')}
+                />
+                {errors.image_right && <div className="invalid-feedback">{errors.image_right}</div>}
+            </div>
 
             <button className="btn btn-outline-secondary" type="submit">Ajouter</button>
         </form>

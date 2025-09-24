@@ -15,11 +15,11 @@ class PromotionSeeder extends Seeder
     {
         Promotion::insert([
             [
-                'promo' => 'Promo 10',
+                'promo' => 'Promo 10%',
                 'pourcentage' => 10
             ],
             [
-                'promo' => 'Promo 20',
+                'promo' => 'Promo 20%',
                 'pourcentage' => 20
             ],
         ]);

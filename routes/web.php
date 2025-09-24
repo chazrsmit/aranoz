@@ -74,6 +74,9 @@ Route::put('/admin/orders/confirm/{id}', [OrderController::class, 'update'])->na
 Route::post('/admin/blog/store', [BlogController::class, 'store'])->name('store_blog');
 Route::delete('/admin/blog/delete/{id}', [BlogController::class, 'delete'])->name('delete_blog');
 Route::post('/admin/blog/update/{id}', [BlogController::class, 'update'])->name('update_blog');
+// Products
+Route::post('/admin/products/store', [ProductController::class, 'store'])->name('store_product');
+
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');

@@ -13,7 +13,7 @@ class ColorSeeder extends Seeder
      */
     public function run(): void
     {
-        Color::factory()->count(20)->create();
+        Color::factory()->count(50)->create();
 
         Color::insert([
             [
@@ -21,6 +21,12 @@ class ColorSeeder extends Seeder
             ],
             [
                 'color' => '#FF8000'
+            ],
+            [
+                'color' => '#FFFFFF'
+            ],
+            [
+                'color' => '#000000'
             ]
         ]);
     }
