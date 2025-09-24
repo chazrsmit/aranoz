@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\BlogCategory;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -30,8 +32,65 @@ class BlogController extends Controller
     // Page pour ajouter un article
     public function create() {
 
-        return Inertia::render('Back/Blog/Create', [
+        $blog_cats = BlogCategory::all();
+        $tags = Tag::all();
 
+        return Inertia::render('Back/Blog/Create', [
+            'blog_cats' => $blog_cats,
+            'tags' => $tags
         ]);
+    }
+
+    // action d'ajouter un article
+    //  'image', 'blogcategory_id', 'user_id'
+    public function store(Request $request){
+        $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required|string|max:255',
+        'image' => 'required|image',
+        'blogcategory_id' => 'required|exists:blog_categories,id',
+        'tags' => 'array'
+        // ça déclare que les tags sont envoyés sous forme d'array (car il peut en avoir plusieurs)
+        ]);
+
+        $blog = new Blog();
+
+        $blog->title = $request->title;
+        $blog->description = $request->description;
+        $blog->blogcategory_id = $request->blogcategory_id;
+        $blog->user_id = auth()->id();
+        $blog->save();
+
+        // Upload d'image:
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $image_name = time().'_'.$image->getClientOriginalName();
+            $path = $image->storeAs('blogs', $image_name, 'public');
+            $blog->image = $path;
+            $blog->save();
+        }
+
+        // Attacher les tags sélectionnés
+        if ($request->filled('tags')) {
+            $blog->tags()->attach($request->tags);
+        }
+
+        return redirect()->route('blog_back')->with('success', 'Blog post successfully created.');
+
+
+    }
+
+
+    // page pour edit un article
+
+
+    // action de modifier un article
+
+    // supprimer un article
+
+    public function delete($id){
+        Blog::findOrFail($id)->delete();
+
+        return redirect()->route('blog_back')->with('success', 'Blog post successfully deleted.');
     }
 }

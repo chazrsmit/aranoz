@@ -67,6 +67,9 @@ Route::post('/admin/users/update/{id}', [UsersController::class, 'update'])->nam
 Route::delete('/admin/users/delete/{id}', [UsersController::class, 'delete'])->name('delete_user');
 // Orders
 Route::put('/admin/orders/confirm/{id}', [OrderController::class, 'update'])->name('confirm_order');
+// Blogs
+Route::post('/admin/blog/store', [BlogController::class, 'store'])->name('store_blog');
+Route::delete('/admin/blog/delete/{id}', [BlogController::class, 'delete'])->name('delete_blog');
 
 
 // Route::get('/dashboard', function () {
