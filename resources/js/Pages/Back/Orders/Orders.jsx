@@ -66,8 +66,8 @@ export default function Orders({ auth, ordersPending, ordersConfirmed }) {
                 {ordersPending.length > 0 ? (
                     ordersPending.map(order => (
                     <tr key={order.id}>
-                        <td>{order.user?.pseudo || 'Utilisateur inconnu'}</td>
-                        <td>{order.user?.company || 'Pas de compagnie'}</td>
+                        <td>{order.user?.pseudo || 'Unknown user'}</td>
+                        <td>{order.user?.company || 'No company'}</td>
                         <td>{order.user?.email || '-'}</td>
                         <td>{order.items.reduce((sum, item) => sum + item.quantity, 0)}</td>
                         <td>{order.items.reduce((sum, item) => sum + item.price * item.quantity, 0)} €</td>
@@ -85,7 +85,7 @@ export default function Orders({ auth, ordersPending, ordersConfirmed }) {
                     ))
                 ) : (
                     <tr>
-                    <td colSpan="9">Pas de commande en attente de confirmation</td>
+                    <td colSpan="9">No pending orders.</td>
                     </tr>
                 )}
                 </tbody>
@@ -112,8 +112,8 @@ export default function Orders({ auth, ordersPending, ordersConfirmed }) {
                     (
                     ordersConfirmed.map(order => (
                         <tr key={order.id}>
-                            <td>{order.user?.pseudo || 'Utilisateur inconnu'}</td>
-                            <td>{order.user?.company || 'Pas de compagnie'}</td>
+                            <td>{order.user?.pseudo || 'Unknown user'}</td>
+                            <td>{order.user?.company || 'No company'}</td>
                             <td>{order.user?.email || '-'}</td>
                             <td>{order.items.reduce((sum, item) => sum + item.quantity, 0)}</td>
                             <td>{order.items.reduce((sum, item) => sum + item.price * item.quantity, 0)} €</td>
@@ -131,7 +131,7 @@ export default function Orders({ auth, ordersPending, ordersConfirmed }) {
                     ) :
                     (
                         <tr>
-                            <td colSpan="9">Pas de commande en attente de confirmation</td>
+                            <td colSpan="9">No confirmed orders.</td>
                         </tr>
                     )
                     }
