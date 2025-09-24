@@ -35,7 +35,7 @@ export default function Products({ auth, products }) {
                 <div className="alert alert-success">{flash.success}</div>
             )}  
 
-                    <Link href={route('create_cat_prod')} className="btn btn-secondary">Add a new product</Link>
+                    <Link href={route('create_product')} className="btn btn-secondary">Add a new product</Link>
 
         {/* Products */}
         <h2>All products</h2>

@@ -50,8 +50,7 @@ Route::get('/admin/blog/create', [BlogController::class, 'create'])->name('creat
 Route::get('/admin/blog/edit/{id}', [BlogController::class, 'edit'])->name('edit_blog');
 // Products
 Route::get('/admin/products', [ProductController::class, 'products'])->name('products_back');
-
-
+Route::get('/admin/products/create', [ProductController::class, 'create'])->name('create_product');
 
 // CRUDS //
 // Categories
