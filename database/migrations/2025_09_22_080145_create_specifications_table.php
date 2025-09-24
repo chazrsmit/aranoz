@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('specifications', function (Blueprint $table) {
             $table->id();
-            $table->integer('width');
-            $table->integer('height');
+            $table->integer('width')->nullable();
+            $table->integer('height')->nullable();
             $table->integer('depth')->nullable();
-            $table->integer('weight');
+            $table->integer('weight')->nullable();
             $table->boolean('quality_checking');
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
             $table->timestamps();

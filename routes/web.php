@@ -51,6 +51,7 @@ Route::get('/admin/blog/edit/{id}', [BlogController::class, 'edit'])->name('edit
 // Products
 Route::get('/admin/products', [ProductController::class, 'products'])->name('products_back');
 Route::get('/admin/products/create', [ProductController::class, 'create'])->name('create_product');
+Route::get('/admin/products/edit/{id}', [ProductController::class, 'edit'])->name('edit_product');
 
 // CRUDS //
 // Categories
@@ -76,6 +77,7 @@ Route::delete('/admin/blog/delete/{id}', [BlogController::class, 'delete'])->nam
 Route::post('/admin/blog/update/{id}', [BlogController::class, 'update'])->name('update_blog');
 // Products
 Route::post('/admin/products/store', [ProductController::class, 'store'])->name('store_product');
+Route::post('/admin/products/update/{id}', [ProductController::class, 'update'])->name('update_product');
 
 
 // Route::get('/dashboard', function () {

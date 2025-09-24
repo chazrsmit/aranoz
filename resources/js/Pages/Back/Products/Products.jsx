@@ -67,8 +67,12 @@ export default function Products({ auth, products }) {
                             <td>
                                 Show
                             </td>
-                            <td>Edit</td>
-                            <td>Delete</td>
+                            <td>
+                                <Link href={route('edit_product', p.id)}>Edit</Link>
+                            </td>
+                            <td>
+                                <Link>Delete</Link>
+                            </td>
                         </tr>
                     ))
 

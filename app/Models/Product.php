@@ -29,6 +29,6 @@ class Product extends Model
     }
 
     public function specifications() {
-        return $this->hasMany(Specification::class);
+        return $this->hasOne(Specification::class);
     }
 }

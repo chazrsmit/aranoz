@@ -1,54 +1,59 @@
-
 import NavBack from '../../../Components/NavBack.jsx';
 import { Head, Link, useForm } from '@inertiajs/react';
 
-export default function Create({ auth, promotions, prod_cats, colors }) {
+export default function Edit({ auth, product, prod_cats, colors, promotions }) {
 
-    // infos à envoyer au back
+    // infos à modifier et à envoyer au back
     const {data, setData, post, errors} = useForm({
-        product : "",
-        description : "",
-        price: "",
-        stock: "",
-        isPinned: null,
+        product : product.product,
+        description : product.description,
+        price: product.price,
+        stock: product.stock,
+        isPinned: product.isPinned,
         image_main: null,
         image_rear: null,
         image_left: null,
         image_right: null,
-        color_id: "",
-        productcategory_id: "",
-        promotion_id: "",
-        width: "",
-        height: "",
-        depth: "",
-        weight: "",
-        quality_checking: ""
+        color_id: product.color_id,
+        productcategory_id: product.productcategory_id,
+        promotion_id: product.promotion_id,
+        width: product.specifications?.width,
+        height: product.specifications?.height,
+        depth: product.specifications?.depth,
+        weight: product.specifications?.weight,
+        quality_checking: product.specifications?.quality_checking
     });
 
-    // fonction qui passe par une route pour envoyer les infos dans le back (lorsqu'on clique sur submit)
+    // fonction submit
     const handleSubmit = (e) => {
         e.preventDefault();
         // mettre le post ici:
-        post(route('store_product'), {
-            forceFormData: true
+        post(route('update_product', product.id), {
+            forceFormData: true,
+            _method: 'PUT'
         });
     };
 
-    // pour gérer les 4 images regroupées en une variable 'field'
+    // variable 'field' qui réunit les 4 images
     const handleFileChange = (e, field) => {
         setData(field, e.target.files[0]);
     };
 
-
-
-    return (
+    return(
         <>
 
-        <Head title="Aranoz Dashboard - Create a new product" />
+        <Head title="Aranoz Dashboard - edit product" />
 
         <NavBack auth={auth} />
 
+        <Link href={route('products_back')}>back to all products</Link>
+
         <h2>Create a new product</h2>
+
+        <img src={`/storage/${product.image_main}`} alt="" width="300px" />
+        <img src={`/storage/${product.image_rear}`} alt="" width="300px" />
+        <img src={`/storage/${product.image_left}`} alt="" width="300px" />
+        <img src={`/storage/${product.image_right}`} alt="" width="300px" />
 
         <form onSubmit={handleSubmit}>
             {/* Name */}
@@ -97,6 +102,7 @@ export default function Create({ auth, promotions, prod_cats, colors }) {
                         type="radio"
                         name="isPinned"
                         value={1}
+                        checked={data.isPinned == 1}
                         onChange={() => setData('isPinned', 1)}
                         className="me-1"
                     /> Oui
@@ -104,6 +110,7 @@ export default function Create({ auth, promotions, prod_cats, colors }) {
                         type="radio"
                         name="isPinned"
                         value={0}
+                        checked={data.isPinned == 0}
                         onChange={() => setData('isPinned', 0)}
                         className="ms-3 me-1"
                     /> Non
@@ -210,6 +217,7 @@ export default function Create({ auth, promotions, prod_cats, colors }) {
                         type="radio"
                         name="quality_checking"
                         value={1}
+                        checked={data.quality_checking == 1}
                         onChange={() => setData('quality_checking', 1)}
                         className="me-1"
                     /> Oui
@@ -217,6 +225,7 @@ export default function Create({ auth, promotions, prod_cats, colors }) {
                         type="radio"
                         name="quality_checking"
                         value={0}
+                        checked={data.quality_checking == 0}
                         onChange={() => setData('quality_checking', 0)}
                         className="ms-3 me-1"
                     /> Non
@@ -261,7 +270,7 @@ export default function Create({ auth, promotions, prod_cats, colors }) {
 
             <button className="btn btn-outline-secondary" type="submit">Ajouter</button>
         </form>
-        
+
         </>
     )
 }
