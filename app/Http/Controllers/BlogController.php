@@ -83,8 +83,56 @@ class BlogController extends Controller
 
     // page pour edit un article
 
+    public function edit($id){
+
+        $blog = Blog::with('tags', 'blog_category')->findOrFail($id);
+        $blog_cats = BlogCategory::all();
+        $tags = Tag::all();
+
+        return Inertia::render('Back/Blog/Edit', [
+            'blog' => $blog,
+            'blog_cats' => $blog_cats,
+            'tags' => $tags
+        ]);
+    }
+
 
     // action de modifier un article
+    public function update($id, Request $request) {
+        $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required|string|max:255',
+        'image' => 'nullable|image',
+        'blogcategory_id' => 'required|exists:blog_categories,id',
+        'tags' => 'array'
+        // ça déclare que les tags sont envoyés sous forme d'array (car il peut en avoir plusieurs)
+        ]);
+
+        $blog = Blog::findOrFail($id);
+
+        $blog->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'blogcategory_id' => $request->blogcategory_id,
+        ]);
+
+        // Upload d'image:
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $image_name = time().'_'.$image->getClientOriginalName();
+            $path = $image->storeAs('blogs', $image_name, 'public');
+            $blog->image = $path;
+            $blog->save();
+        }
+
+        // changer les tags
+        if ($request->filled('tags')) {
+            $blog->tags()->sync($request->tags);
+        }
+
+        return redirect()->route('blog_back')->with('success', 'Blog post successfully edited.');
+
+    }
 
     // supprimer un article
 

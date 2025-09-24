@@ -63,7 +63,7 @@ export default function Blog({ auth, blogs }) {
                             <Link href={route('show_blog', blog.id)}>Show more</Link>
                         </td>
                         <td>
-                            <button>Edit</button>
+                            <Link href={route('edit_blog', blog.id)}>Edit</Link>
                         </td>
                         <td>
                             <Link href={route('delete_blog', blog.id)} method="delete">Delete</Link>

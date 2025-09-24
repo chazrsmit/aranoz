@@ -46,7 +46,7 @@ Route::get('/admin/orders/show/{id}', [OrderController::class, 'show'])->name('s
 Route::get('/admin/blog', [BlogController::class, 'blog_back'])->name('blog_back');
 Route::get('/admin/blog/show/{id}', [BlogController::class, 'show'])->name('show_blog');
 Route::get('/admin/blog/create', [BlogController::class, 'create'])->name('create_blog');
-
+Route::get('/admin/blog/edit/{id}', [BlogController::class, 'edit'])->name('edit_blog');
 
 
 // CRUDS //
@@ -70,7 +70,7 @@ Route::put('/admin/orders/confirm/{id}', [OrderController::class, 'update'])->na
 // Blogs
 Route::post('/admin/blog/store', [BlogController::class, 'store'])->name('store_blog');
 Route::delete('/admin/blog/delete/{id}', [BlogController::class, 'delete'])->name('delete_blog');
-
+Route::post('/admin/blog/update/{id}', [BlogController::class, 'update'])->name('update_blog');
 
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
