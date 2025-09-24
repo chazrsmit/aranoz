@@ -52,10 +52,10 @@ class ProductController extends Controller
             'productcategory_id'  => 'required|exists:product_categories,id',
             'promotion_id'        => 'nullable|exists:promotions,id',
             // specifications
-            'width'               => 'required|integer|min:0',
-            'height'              => 'required|integer|min:0',
+            'width'               => 'nullable|integer|min:0',
+            'height'              => 'nullable|integer|min:0',
             'depth'               => 'nullable|integer|min:0',
-            'weight'              => 'required|integer|min:0',
+            'weight'              => 'nullable|integer|min:0',
             'quality_checking'    => 'required|boolean',
         ]);
 
@@ -121,7 +121,7 @@ class ProductController extends Controller
             'price'               => 'required|numeric|min:0|max:999.99',
             'stock'               => 'required|integer|min:0',
             'isPinned'            => 'required|boolean',
-            'image_main'          => 'required|image',
+            'image_main'          => 'nullable|image',
             'image_rear'          => 'nullable|image',
             'image_left'          => 'nullable|image',
             'image_right'         => 'nullable|image',
@@ -129,10 +129,10 @@ class ProductController extends Controller
             'productcategory_id'  => 'required|exists:product_categories,id',
             'promotion_id'        => 'nullable|exists:promotions,id',
             // specifications
-            'width'               => 'required|integer|min:0',
-            'height'              => 'required|integer|min:0',
+            'width'               => 'nullable|integer|min:0',
+            'height'              => 'nullable|integer|min:0',
             'depth'               => 'nullable|integer|min:0',
-            'weight'              => 'required|integer|min:0',
+            'weight'              => 'nullable|integer|min:0',
             'quality_checking'    => 'required|boolean',
         ]);
 
