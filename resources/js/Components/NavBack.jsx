@@ -81,7 +81,7 @@ export default function NavBack({ auth }) {
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <a className="dropdown-item" href={route('products_liked')}>
                     Liked Products
                   </a>
                 </li>

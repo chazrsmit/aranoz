@@ -195,7 +195,7 @@ class ProductController extends Controller
         // page pour afficher les produits likés
         $products = Product::with('users')->whereHas('users')->get();
 
-        return Inertia::render('', [
+        return Inertia::render('Back/Products/Liked', [
             'products' => $products
         ]);
 
