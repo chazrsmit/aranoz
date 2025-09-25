@@ -11,10 +11,12 @@ class MessageController extends Controller
 {
     public function mailbox(){
 
-        $messages = Message::all();
+        $messages = Message::where('archived', 0)->get();
+        $messageArchived = Message::where('archived', 1)->get();
 
         return Inertia::render('Back/Mailbox/Mailbox', [
-            'messages' => $messages
+            'messages' => $messages,
+            'messagesArchived' => $messageArchived
         ]);
     }
 
@@ -36,5 +38,20 @@ class MessageController extends Controller
             'message' => $message,
             'contact' => $contact
         ]);
+    }
+
+    // pour répondre à un email : est-ce qu'on store aussi en même temps qu'envoyer un email?
+    // public function store(Request $request) {}
+    // }
+
+    public function archive($id) {
+
+        $message = Message::findOrFail($id);
+
+        $message->archived = 1;
+        $message->status = 1;
+        $message->save();
+
+        return redirect()->route('mailbox')->with('success', 'Message successfully archived.');
     }
 }
