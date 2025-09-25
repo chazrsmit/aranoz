@@ -117,7 +117,7 @@ export default function Mailbox({ auth, messages, messagesArchived, message }) {
                                 <Link href={route('reply_message', m.id)} className="btn btn-info">Reply</Link>
                             </td>
                             <td>
-                                <Link className="btn btn-warning">Delete</Link>
+                                <Link href={route('delete_message', m.id)} method="DELETE" className="btn btn-danger">Delete</Link>
                             </td>
                             <td>
                                 {m.status == 0 ? 'New mail' : 'Read'}

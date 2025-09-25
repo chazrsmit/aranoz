@@ -54,4 +54,13 @@ class MessageController extends Controller
 
         return redirect()->route('mailbox')->with('success', 'Message successfully archived.');
     }
+
+    // Supprimer un message
+    public function delete($id){
+
+        Message::findOrFail($id)->delete();
+
+        return redirect()->route('mailbox')->with('success', 'Message successfully deleted.');
+
+    }
 }

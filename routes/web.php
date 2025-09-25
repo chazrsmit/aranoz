@@ -91,7 +91,7 @@
 
     // Mailbox
     Route::put('/admin/mailbox/archive/{id}', [MessageController::class, 'archive'])->name('archive_message');
-
+    Route::delete('/admin/mailbox/delete/{id}', [MessageController::class, 'delete'])->name('delete_message');
 
     // Route::get('/dashboard', function () {
     //     return Inertia::render('Dashboard');
