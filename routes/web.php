@@ -4,6 +4,7 @@ use App\Http\Controllers\BlogCategoriesController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCategoriesController;
 use App\Http\Controllers\ProductController;
@@ -55,7 +56,10 @@ Route::get('/admin/products/edit/{id}', [ProductController::class, 'edit'])->nam
 Route::get('/admin/products/show/{id}', [ProductController::class, 'show'])->name('show_product');
 // Liked products
 Route::get('/admin/liked-products', [ProductController::class, 'liked'])->name('products_liked');
-
+// Mailbox
+Route::get('/admin/mailbox', [MessageController::class, 'mailbox'])->name('mailbox');
+Route::get('/admin/mailbox/show/{id}', [MessageController::class, 'show'])->name('show_message');
+Route::get('/admin/mailbox/reply/{id}', [MessageController::class, 'reply'])->name('reply_message');
 
 // CRUDS //
 // Categories
