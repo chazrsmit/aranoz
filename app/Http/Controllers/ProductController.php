@@ -173,4 +173,15 @@ class ProductController extends Controller
 
         return redirect()->route('products_back')->with('success', 'Product sucessfully updated.');
     }
+
+    // page show pour afficher les détails du produit
+    public function show($id) {
+
+        $product = Product::with('specifications', 'color', 'product_category', 'promotion')->findOrFail($id);
+
+        return Inertia::render('Back/Products/Show', [
+            'product' => $product
+        ]);
+
+    }
 }

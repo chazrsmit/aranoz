@@ -52,6 +52,7 @@ Route::get('/admin/blog/edit/{id}', [BlogController::class, 'edit'])->name('edit
 Route::get('/admin/products', [ProductController::class, 'products'])->name('products_back');
 Route::get('/admin/products/create', [ProductController::class, 'create'])->name('create_product');
 Route::get('/admin/products/edit/{id}', [ProductController::class, 'edit'])->name('edit_product');
+Route::get('/admin/products/show/{id}', [ProductController::class, 'show'])->name('show_product');
 
 // CRUDS //
 // Categories
