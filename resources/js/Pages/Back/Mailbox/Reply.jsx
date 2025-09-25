@@ -16,7 +16,7 @@ export default function Show({ auth, message, contact }) {
     
             <NavBack auth={auth} />
     
-            <Link href={route('show_message', message.id)}>back to message</Link>
+            <Link href={route('mailbox')}>back to mailbox</Link>
 
             <form>
                 <p>From: {contact.email}</p>
