@@ -16,7 +16,8 @@ return new class extends Migration
             $table->integer('quantity');
             $table->decimal('price', 8, 2);
             $table->foreignId('cart_id')->constrained('carts');
-            $table->foreignId('product_id')->constrained('products');
+            // si un produit est dans le cart de quelqu'un, on empêche la suppression
+            $table->foreignId('product_id')->constrained('products')->onDelete('restrict');;
             $table->timestamps();
         });
     }

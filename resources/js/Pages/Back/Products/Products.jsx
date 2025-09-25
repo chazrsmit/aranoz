@@ -26,16 +26,17 @@ export default function Products({ auth, products }) {
 
     return(
         <>
-            <Head title="Aranoz Dashboard - Products" />
-    
-            <NavBack auth={auth} />
-    
-            {/* Flash message */}
-            {flash?.success && showFlash && (
-                <div className="alert alert-success">{flash.success}</div>
-            )}  
+        
+        <Head title="Aranoz Dashboard - Products" />
 
-                    <Link href={route('create_product')} className="btn btn-secondary">Add a new product</Link>
+        <NavBack auth={auth} />
+
+        {/* Flash message */}
+        {flash?.success && showFlash && (
+            <div className="alert alert-success">{flash.success}</div>
+        )}  
+
+        <Link href={route('create_product')} className="btn btn-secondary">Add a new product</Link>
 
         {/* Products */}
         <h2>All products</h2>
@@ -71,7 +72,7 @@ export default function Products({ auth, products }) {
                                 <Link href={route('edit_product', p.id)}>Edit</Link>
                             </td>
                             <td>
-                                <Link>Delete</Link>
+                                <Link href={route('delete_product', p.id)} method='DELETE'>Delete</Link>
                             </td>
                         </tr>
                     ))

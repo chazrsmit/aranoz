@@ -17,7 +17,7 @@ return new class extends Migration
             // prix d'un single item (au moment de la commande)
             $table->decimal('price', 8, 2);
             $table->foreignId('order_id')->constrained('orders');
-            $table->foreignId('product_id')->nullable()->constrained('products');
+            $table->foreignId('product_id')->nullable()->constrained('products')->nullOnDelete();
             $table->timestamps();
         });
     }

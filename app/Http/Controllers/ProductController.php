@@ -182,6 +182,12 @@ class ProductController extends Controller
         return Inertia::render('Back/Products/Show', [
             'product' => $product
         ]);
+    }
 
+    // action de delete
+    public function delete($id){
+        Product::findOrFail($id)->delete();
+
+        return redirect()->route('products_back')->with('success', 'Product successfully deleted.');
     }
 }

@@ -79,6 +79,7 @@ Route::post('/admin/blog/update/{id}', [BlogController::class, 'update'])->name(
 // Products
 Route::post('/admin/products/store', [ProductController::class, 'store'])->name('store_product');
 Route::post('/admin/products/update/{id}', [ProductController::class, 'update'])->name('update_product');
+Route::delete('/admin/products/delete/{id}', [ProductController::class, 'delete'])->name('delete_product');
 
 
 // Route::get('/dashboard', function () {
