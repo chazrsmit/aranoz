@@ -2,10 +2,12 @@
 
     namespace App\Http\Controllers;
 
+    use App\Models\Product;
     use App\Models\Role;
     use App\Models\User;
     use Illuminate\Http\Request;
     use Inertia\Inertia;
+    use Illuminate\Support\Facades\Auth;
 
     class UsersController extends Controller
     {
@@ -84,5 +86,25 @@
             User::findOrFail($id)->delete();
 
             return redirect()->route('users')->with('success', 'User successfully deleted.');
+        }
+
+        // Action d'ajouter un produit aux favoris
+        public function likes($id){
+            // on récupère depuis le front l'id du produit
+            $product = Product::findOrFail($id);
+            $user = Auth::user();
+
+            // fonction pour ajouter le produit aux likes
+            $user->products()->syncWithoutDetaching([$product->id]);
+
+            return back()->with('success', 'Product added to favourites!');
+        }
+
+        public function unlikes($id) {
+            $user = Auth::user();
+            //on utilise la fonction detach() pour retirer le produit de la liste des favoris via son id
+            $user->products()->detach($id);
+
+            return back()->with('success', 'Product removed from favourites!');
         }
     }

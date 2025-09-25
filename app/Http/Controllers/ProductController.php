@@ -190,4 +190,15 @@ class ProductController extends Controller
 
         return redirect()->route('products_back')->with('success', 'Product successfully deleted.');
     }
+
+    public function liked(){
+        // page pour afficher les produits likés
+        $products = Product::with('users')->whereHas('users')->get();
+
+        return Inertia::render('', [
+            'products' => $products
+        ]);
+
+    }
+        
 }

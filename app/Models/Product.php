@@ -31,4 +31,8 @@ class Product extends Model
     public function specifications() {
         return $this->hasOne(Specification::class);
     }
+
+    public function users(){
+        return $this->belongsToMany(User::class);
+    }
 }
