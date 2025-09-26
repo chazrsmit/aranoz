@@ -14,5 +14,13 @@ class MessageSeeder extends Seeder
     public function run(): void
     {
         Message::factory()->count(4)->create();
+
+        Message::create([
+            'email' => 'smit-charlotte@outlook.com', 
+            'subject' => 'Voici un email test.', 
+            'message'=> "Ceci est le corps d'email de mon email TEST.", 
+            'status' => 0, 
+            'archived' => 0,
+        ]);
     }
 }
