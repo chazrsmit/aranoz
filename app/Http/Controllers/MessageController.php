@@ -40,10 +40,6 @@ class MessageController extends Controller
         ]);
     }
 
-    // pour répondre à un email : est-ce qu'on store aussi en même temps qu'envoyer un email?
-    // public function store(Request $request) {}
-    // }
-
     public function archive($id) {
 
         $message = Message::findOrFail($id);

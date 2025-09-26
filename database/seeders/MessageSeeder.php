@@ -22,5 +22,13 @@ class MessageSeeder extends Seeder
             'status' => 0, 
             'archived' => 0,
         ]);
+
+        Message::create([
+            'email' => 'gary@molengeek.com', 
+            'subject' => 'Voici un email test.', 
+            'message'=> "Ceci est le corps d'email de mon email TEST.", 
+            'status' => 0, 
+            'archived' => 0,
+        ]);
     }
 }

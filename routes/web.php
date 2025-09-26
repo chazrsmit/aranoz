@@ -4,6 +4,7 @@
     use App\Http\Controllers\BlogController;
     use App\Http\Controllers\ContactController;
     use App\Http\Controllers\GeneralController;
+    use App\Http\Controllers\MailController;
     use App\Http\Controllers\MessageController;
     use App\Http\Controllers\OrderController;
     use App\Http\Controllers\ProductCategoriesController;
@@ -14,6 +15,8 @@
     use Illuminate\Foundation\Application;
     use Illuminate\Support\Facades\Route;
     use Inertia\Inertia;
+    use Illuminate\Support\Facades\Mail;
+    use App\Mail\DemoMail;
 
     // Route::get('/', function () {
     //     return Inertia::render('Welcome', [
@@ -24,6 +27,7 @@
     //     ]);
     // });
 
+    // GET //
     // Hompages
     Route::get('/', [GeneralController::class, 'index'])->name('home');
     Route::get('dash', [GeneralController::class, 'dash'])->name('dash');
@@ -88,7 +92,6 @@
     Route::post('/admin/products/update/{id}', [ProductController::class, 'update'])->name('update_product');
     Route::delete('/admin/products/delete/{id}', [ProductController::class, 'delete'])->name('delete_product');
     // Liked Products
-
     // Mailbox
     Route::put('/admin/mailbox/archive/{id}', [MessageController::class, 'archive'])->name('archive_message');
     Route::delete('/admin/mailbox/delete/{id}', [MessageController::class, 'delete'])->name('delete_message');
@@ -96,6 +99,10 @@
     // Route::get('/dashboard', function () {
     //     return Inertia::render('Dashboard');
     // })->middleware(['auth', 'verified'])->name('dashboard');
+
+    // EMAILS //
+    Route::post('/messages/{id}/reply', [MailController::class, 'sendReply'])
+    ->name('send_message');
 
     Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
