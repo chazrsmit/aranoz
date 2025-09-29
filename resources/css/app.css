@@ -890,3 +890,85 @@ border-radius: 0px;
     }
 }
 /* end Navbar front */
+
+/* Footer Styles */
+.footer-section {
+  background-color: #f8f9fa;
+  padding: 60px 0 20px;
+}
+
+.footer-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #2a2a2a;
+}
+
+.footer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-list li {
+  margin-bottom: 8px;
+}
+
+.footer-list a {
+  color: #000000;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.footer-list a:hover {
+  color: #fa2d5b;
+}
+
+.newsletter-text {
+  color: #6c757d;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.newsletter-input {
+  padding: 10px 15px;
+  border: 1px solid #e9ecef;
+  border-radius: 4px 0 0 4px;
+  font-size: 14px;
+  flex: 1;
+  outline: none;
+}
+
+.newsletter-btn {
+  background-color: #fa2d5b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 0 4px 4px 0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.newsletter-btn:hover {
+  background-color: #ff6b81;
+}
+
+.copyright {
+  color: #6c757d;
+  font-size: 14px;
+  margin: 0;
+}
+
+.heart {
+  color: #fa2d5b;
+}
+
+.copyright-border {
+  border-top: 1px solid #e9ecef;
+}
+
+/* End footer */

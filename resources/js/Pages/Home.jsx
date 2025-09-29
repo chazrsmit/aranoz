@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import NavFront from '../Components/NavFront.jsx';
 import { Head, Link } from '@inertiajs/react';
+import Footer from '@/Components/Footer.jsx';
 
 export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_best, prod_cat }) {
 
@@ -410,6 +411,8 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
                 </div>
             </div>
             </section>
+
+        <Footer />
 
         </>
     )
