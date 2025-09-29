@@ -66,22 +66,7 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
                                     <p className="text-secondary my-4" style={{ fontSize: '1.1rem' }}>
                                         {p.description?.substring(0, 150)}...
                                     </p>
-                                    <a 
-                                        href={`/product/${p.id}`} 
-                                        className="btn btn-dark px-5 py-3 rounded-0"
-                                        style={{ 
-                                            fontSize: '1rem', 
-                                            fontWeight: '500',
-                                            textDecoration: 'none',
-                                            display: 'inline-block',
-                                            backgroundColor: '#000',
-                                            color: '#fff',
-                                            border: 'none',
-                                            cursor: 'pointer'
-                                        }}
-                                    >
-                                        Shop Now
-                                    </a>
+
                                 </div>
                                 
                                 {/* RIGHT: IMAGE */}
@@ -91,7 +76,7 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
                                         alt={p.product} 
                                         className="img-fluid" 
                                         style={{ 
-                                            maxHeight: '400px', 
+                                            maxHeight: '200px', 
                                             objectFit: 'contain',
                                             filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))'
                                         }} 
