@@ -215,6 +215,7 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
                             src={`/storage/${product.image_main}`} 
                             alt={product.product}
                             className="product-image"
+                            style={{ objectFit: 'contain' }}
                         />
                         <div className="product-info">
                             <h4 className="product-title">{product.product}</h4>
@@ -234,25 +235,6 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
                     </div>
                     );
                 })}
-                </div>
-
-                {/* Carousel Navigation */}
-                <div className="carousel-controls">
-                <div className="carousel-nav-box">
-                    <button 
-                    onClick={() => setCurrentPage(prev => Math.max(0, prev - 1))}
-                    disabled={currentPage === 0}
-                    >
-                    Previous
-                    </button>
-                    <span className="divider">|</span>
-                    <button 
-                    onClick={() => setCurrentPage(prev => prev + 1)}
-                    disabled={(currentPage + 1) * 8 >= prod_awe.length}
-                    >
-                    Next
-                    </button>
-                </div>
                 </div>
             </div>
             </section>
