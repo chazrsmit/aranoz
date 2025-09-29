@@ -11,6 +11,9 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
     const [activeSlide, setActiveSlide] = useState(0);
     const totalSlides = prod_car.length;
 
+    // Carousel awesome
+    const [currentPage, setCurrentPage] = useState(0);
+
     useEffect(() => {
         const interval = setInterval(() => {
             setTimeLeft(prev => (prev <= 0 ? 5 * 24 * 60 * 60 : prev - 1));
@@ -105,11 +108,11 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
 
                 </div>
 
-                                {/* btns */}
+                {/* btns */}
                 <div className="carousel-nav-box">
-                    <button onClick={goToNextSlide}>Next</button>
-                <span className="divider">|</span>
                     <button onClick={goToPrevSlide}>Previous</button>
+                <span className="divider">|</span>
+                    <button onClick={goToNextSlide}>Next</button>
                 </div>  
 
             </div>
@@ -128,7 +131,11 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
                 {/* Category fauteuils -> productcategory_id = 7 */}
                 {/* image to use : '/storage/featured/feature_3.png' */}
 
-                <div className="container my-5 featured-section">
+                <div className="d-flex justify-content-center">
+                    <h2>Featured categories</h2>
+                </div>
+
+                <div className="container mb-5 featured-section">
                 {/* First Row */}
                 <div className="row g-4 mb-4">
                     {[
@@ -175,11 +182,80 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
 
             {/* Awesome section  : Displays 2 pages of 8 random products (carousel-like navigation). Clicking a product redirects the user to the product detail page.*/}
 
-            {
+            {/* {
                 prod_awe.map(p => (
                     <div key={p.id}></div>
                 ))
-            }
+            } */}
+
+            {/* Awesome Products Section with Pagination */}
+            {/* Awesome Products Section with Pagination */}
+            <section className="awesome-section">
+            <div className="container">
+                {/* Section Header */}
+                <div className="section-header">
+                <h2 className="section-title">Awesome</h2>
+                <a href="#" className="shop-link">Shop</a>
+                </div>
+
+                {/* Products Grid - Show 8 products per page */}
+                <div className="products-grid">
+                {prod_awe.slice(currentPage * 8, (currentPage + 1) * 8).map((product) => {
+                    // Calculate discounted price if promotion exists
+                    const originalPrice = product.price;
+                    const discountPercentage = product.promotion?.pourcentage || 0;
+                    const discountedPrice = discountPercentage > 0 
+                    ? (originalPrice * (1 - discountPercentage / 100)).toFixed(2)
+                    : originalPrice;
+
+                    return (
+                    <div key={product.id} className="product-card">
+                        {/* <Link href={route('product.show', product.id)}> */}
+                        <img 
+                            src={`/storage/${product.image_main}`} 
+                            alt={product.product}
+                            className="product-image"
+                        />
+                        <div className="product-info">
+                            <h4 className="product-title">{product.product}</h4>
+                            <div className="product-price">
+                            {discountPercentage > 0 ? (
+                                <>
+                                <span className="current-price">${discountedPrice}</span>
+                                <span className="original-price">${originalPrice}</span>
+                                <span className="discount-badge">-{discountPercentage}%</span>
+                                </>
+                            ) : (
+                                <span className="current-price">${originalPrice}</span>
+                            )}
+                            </div>
+                        </div>
+                        {/* </Link> */}
+                    </div>
+                    );
+                })}
+                </div>
+
+                {/* Carousel Navigation */}
+                <div className="carousel-controls">
+                <div className="carousel-nav-box">
+                    <button 
+                    onClick={() => setCurrentPage(prev => Math.max(0, prev - 1))}
+                    disabled={currentPage === 0}
+                    >
+                    Previous
+                    </button>
+                    <span className="divider">|</span>
+                    <button 
+                    onClick={() => setCurrentPage(prev => prev + 1)}
+                    disabled={(currentPage + 1) * 8 >= prod_awe.length}
+                    >
+                    Next
+                    </button>
+                </div>
+                </div>
+            </div>
+            </section>
 
             {/* Weekly sale section:
             - Displays a 5-day countdown timer that resets to 5 days automatically when it reaches zero.

@@ -25,7 +25,7 @@ class GeneralController extends Controller
         $prod_cat = ProductCategory::where('id', [1, 6, 7])->get();
 
         // ALL products selected randomly for the awesome section
-        $prod_awe = Product::inRandomOrder()->limit(8)->get();
+        $prod_awe = Product::with('promotion')->inRandomOrder()->limit(8)->get();
 
         return Inertia::render('Home', [
         // 'canLogin' => Route::has('login'),
