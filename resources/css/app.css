@@ -334,6 +334,192 @@
 
 /* End awesome section */
 
+/* Weekly sale section */
+
+.weekly-sale-section {
+  padding: 80px 0;
+  background: #ecfdff;
+  color: white;
+}
+
+.sale-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* Swap the order - image on left, content on right */
+.sale-product {
+  text-align: center;
+}
+
+.product-image-container {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 50px 30px;
+}
+
+.sale-product-image {
+  max-height: 280px;
+  width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.3));
+}
+
+.sale-info {
+  text-align: left;
+}
+
+.sale-info h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.sale-discount {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 40px;
+  opacity: 0.9;
+}
+
+.countdown-timer {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 40px;
+  max-width: 500px;
+}
+
+.time-unit {
+  text-align: center;
+  flex: 1;
+}
+
+.time-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 20px 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  min-width: 80px;
+}
+
+.time-label {
+  font-size: 1rem;
+  text-transform: uppercase;
+  opacity: 0.9;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.email-form {
+  display: flex;
+  gap: 15px;
+  max-width: 500px;
+}
+
+.email-input {
+  flex: 1;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  background: white;
+  min-width: 250px;
+}
+
+.email-input::placeholder {
+  color: #6c757d;
+  opacity: 0.8;
+}
+
+.book-now-btn {
+  background: #fa2d5b;
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  white-space: nowrap;
+}
+
+.book-now-btn:hover {
+  background: #ff6b81;
+}
+
+.product-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  margin-top: 20px;
+}
+
+.product-price {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.current-price {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #fa2d5b;
+}
+
+.original-price {
+  font-size: 1.25rem;
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sale-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+  
+  .sale-info {
+    text-align: center;
+  }
+  
+  .sale-info h2 {
+    font-size: 2rem;
+  }
+  
+  .countdown-timer {
+    gap: 15px;
+    margin: 0 auto 40px;
+  }
+  
+  .time-value {
+    font-size: 2rem;
+    padding: 15px 8px;
+    min-width: 60px;
+  }
+  
+  .email-form {
+    flex-direction: column;
+    margin: 0 auto;
+  }
+  
+  .product-image-container {
+    padding: 30px 20px;
+  }
+}
+
+/* End Weekly sale section */
+
+
 /* Navbar front */
 
 .aranoz-navbar {

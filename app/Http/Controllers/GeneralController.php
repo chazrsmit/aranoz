@@ -20,7 +20,7 @@ class GeneralController extends Controller
         $prod_pinned = Product::where('isPinned', 1)->get();
         $prod_random = Product::where('isPinned', 0)->inRandomOrder()->limit(4)->get();
         $prod_car = $prod_pinned->merge($prod_random);
-        $prod_discount = Product::where('promotion_id', 2)->inRandomOrder()->limit(1)->get();
+        $prod_discount = Product::with('promotion')->where('promotion_id', 2)->inRandomOrder()->limit(1)->first();
         $prod_best = Product::inRandomOrder()->limit(4)->get();
         $prod_cat = ProductCategory::where('id', [1, 6, 7])->get();
 

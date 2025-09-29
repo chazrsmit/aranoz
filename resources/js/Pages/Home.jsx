@@ -244,8 +244,87 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
             - Highlights one discounted product at random (works only with products already on discount) > so products that had a promotion
             - The title reflects the discount, '<Weekly Sale 4 Up to 20%'> the displayed product already has that discount applied
             -Includes an email input to send a 10% coupon to the submitted address (always sends a simple coupon email when a valid email is provided).*/}
-            <img src={prod_discount.image} alt="" />
-            <p>{prod_discount.product}</p>
+            {/* Right side: Featured discounted product */}
+            {/* Weekly Sale Section */}
+<section className="weekly-sale-section">
+  <div className="container">
+    <div className="sale-content">
+      {/* Left side: Product image */}
+      {prod_discount && (
+        <div className="sale-product">
+          <div className="product-image-container">
+            <img 
+              src={`/storage/${prod_discount.image_main}`} 
+              alt={prod_discount.product}
+              className="sale-product-image"
+            />
+          </div>
+          {/* <h3 className="product-name">{prod_discount.product}</h3> */}
+          {/* <div className="product-price">
+            {prod_discount.promotion ? (
+              <>
+                <span className="current-price">
+                  ${(prod_discount.price * (1 - prod_discount.promotion.pourcentage / 100)).toFixed(2)}
+                </span>
+                <span className="original-price">
+                  ${prod_discount.price}
+                </span>
+              </>
+            ) : (
+              <span className="current-price">
+                ${prod_discount.price}
+              </span>
+            )}
+          </div> */}
+        </div>
+      )}
+      
+      {/* Right side: Sale info, countdown, and email form */}
+      <div className="sale-info">
+        <h2 className="text-dark">Weekly Sale on {prod_discount?.promotion?.pourcentage || '20'}% Off</h2>
+        {/* <div className="sale-discount">
+          All Products
+        </div> */}
+        
+        {/* Countdown Timer */}
+        <div className="countdown-timer">
+          <div className="time-unit">
+            <div className="time-value text-dark">{String(Math.abs(days)).padStart(2, '0')}</div>
+            <div className="time-label text-dark">Days</div>
+          </div>
+          <div className="time-unit">
+            <div className="time-value text-dark">{String(Math.abs(hours)).padStart(2, '0')}</div>
+            <div className="time-label text-dark">Hours</div>
+          </div>
+          <div className="time-unit">
+            <div className="time-value text-dark">{String(Math.abs(minutes)).padStart(2, '0')}</div>
+            <div className="time-label text-dark">Minutes</div>
+          </div>
+          <div className="time-unit">
+            <div className="time-value text-dark">{String(Math.abs(seconds)).padStart(2, '0')}</div>
+            <div className="time-label text-dark">Seconds</div>
+          </div>
+        </div>
+        
+        {/* Email Form */}
+        <form className="email-form">
+          <input 
+            type="email" 
+            placeholder="Enter Email Address" 
+            className="email-input"
+            required
+          />
+          <button type="submit" className="book-now-btn">
+            BOOK NOW
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+            
+            {/* <img src={prod_discount.image} alt="" />
+            <p>{prod_discount.product}</p> */}
             {/* <form onSubmit={onSubmit}>
                 <input type="email_promo" />
                 <button type="submit"></button>
