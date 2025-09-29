@@ -344,13 +344,13 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
 
                 {/* Products Grid - 4 products */}
                 <div className="best-sellers-grid">
-                {prod_best.slice(0, 4).map((product) => {
-                    // Calculate discounted price if promotion exists
-                    const originalPrice = product.price;
+                {prod_best.map((product) => {
+                    const originalPrice = Number(product.price);
                     const discountPercentage = product.promotion?.pourcentage || 0;
-                    const discountedPrice = discountPercentage > 0 
+                    const discountedPrice = discountPercentage > 0
                     ? (originalPrice * (1 - discountPercentage / 100)).toFixed(2)
-                    : originalPrice;
+                    : originalPrice.toFixed(2);
+
 
                     return (
                     <div key={product.id} className="product-card">
@@ -366,12 +366,12 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
                             <div className="product-price">
                             {discountPercentage > 0 ? (
                                 <>
+                                <span className="original-price">${originalPrice.toFixed(2)}</span>
                                 <span className="current-price">${discountedPrice}</span>
-                                <span className="original-price">${originalPrice}</span>
                                 <span className="discount-badge">-{discountPercentage}%</span>
                                 </>
                             ) : (
-                                <span className="current-price">${originalPrice}</span>
+                                <span className="current-price">${originalPrice.toFixed(2)}</span>
                             )}
                             </div>
                         </div>
@@ -385,6 +385,8 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
             </section>
 
             {/* Newsletter section - an input field where the person can enter their email adress > the logic will be added later */}
+
+
 
             {/*  */}
 
