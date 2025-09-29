@@ -207,7 +207,7 @@
 
 .product-card {
   background: white;
-  border-radius: 8px;
+  border-radius: 0px;
   overflow: hidden;
   transition: all 0.3s ease;
   position: relative;
@@ -546,7 +546,7 @@
 /* Best seller section */
 .best-sellers-section {
   padding: 80px 0;
-  background: #f8f9fa;
+
 }
 
 .best-sellers-grid {
@@ -558,7 +558,7 @@
 
 .best-sellers-section .product-card {
   background: white;
-  border-radius: 8px;
+border-radius: 0px;
   overflow: hidden;
   transition: all 0.3s ease;
   position: relative;
@@ -630,6 +630,98 @@
 }
 
 /* End best seller section */
+
+
+/* Newsletter */
+
+/* Newsletter Section */
+.newsletter-section {
+  padding: 80px 0;
+  background: #F4F9FF;
+  text-align: center;
+}
+
+.newsletter-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.newsletter-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2a2a2a;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.newsletter-subtitle {
+  font-size: 1.125rem;
+  color: #6c757d;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 15px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.newsletter-input {
+  flex: 1;
+  padding: 15px 20px;
+  border: 2px solid #e9ecef;
+  border-radius: 4px;
+  font-size: 1rem;
+  background: white;
+  transition: border-color 0.3s ease;
+}
+
+.newsletter-input:focus {
+  outline: none;
+  border-color: #fa2d5b;
+}
+
+.newsletter-input::placeholder {
+  color: #6c757d;
+  opacity: 0.8;
+}
+
+.subscribe-btn {
+  background: #fa2d5b;
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  white-space: nowrap;
+}
+
+.subscribe-btn:hover {
+  background: #ff6b81;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .newsletter-title {
+    font-size: 2rem;
+  }
+  
+  .newsletter-form {
+    flex-direction: column;
+  }
+  
+  .newsletter-input {
+    margin-bottom: 10px;
+  }
+}
+
+/* End newsletter */
 
 
 /* Navbar front */

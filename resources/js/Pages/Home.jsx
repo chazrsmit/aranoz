@@ -386,9 +386,30 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
 
             {/* Newsletter section - an input field where the person can enter their email adress > the logic will be added later */}
 
-
-
-            {/*  */}
+            <section className="newsletter-section">
+            <div className="container">
+                <div className="newsletter-content">
+                <h1 className="newsletter-title">
+                    Subscribe to get Updated with new offers
+                </h1>
+                <p className="newsletter-subtitle">
+                    Stay informed about our latest products, exclusive deals, and special promotions
+                </p>
+                
+                <form className="newsletter-form">
+                    <input 
+                    type="email" 
+                    placeholder="Enter Email Address" 
+                    className="newsletter-input"
+                    required
+                    />
+                    <button type="submit" className="subscribe-btn">
+                    SUBSCRIBE NOW
+                    </button>
+                </form>
+                </div>
+            </div>
+            </section>
 
         </>
     )
