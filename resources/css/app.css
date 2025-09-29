@@ -21,6 +21,43 @@
     text-decoration: none;
 }
 
+/* btns carousel */
+
+.carousel-nav-box {
+    position: absolute;
+    bottom: 0; 
+    right: 0;  
+    background: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 10;
+    font-family: 'Arial', sans-serif;
+}
+
+.carousel-nav-box button {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: #2a2a2a;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 0;
+}
+
+.carousel-nav-box button:hover {
+    color: #ff6b81;
+}
+
+.carousel-nav-box .divider {
+    color: #2a2a2a;
+    font-weight: 600;
+}
+
+/* end btns carousel */
+
 /* Navbar front */
 
 .aranoz-navbar {
@@ -162,37 +199,6 @@
     box-shadow: none;
 }
 
-.slider-controls {
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
-    display: flex;
-    gap: 0;
-    z-index: 100;
-    font-family: 'Arial', sans-serif;
-}
-
-.slider-controls button {
-    background: transparent;
-    border: none;
-    font-size: 16px;
-    font-weight: 700;
-    color: #2a2a2a;
-    padding: 0;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    text-transform: capitalize;
-}
-
-.slider-controls button:hover {
-    color: #ff6b81;
-}
-
-.slider-controls .divider {
-    margin: 0 15px;
-    color: #2a2a2a;
-    font-weight: 700;
-}
 
 @media (max-width: 991px) {
     .aranoz-navbar .navbar-nav {

@@ -31,6 +31,13 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
     const minutes = Math.floor((timeLeft % 3600) / 60);
     const seconds = timeLeft % 60;
 
+    const goToPrevSlide = () => {
+        setActiveSlide(prev => (prev - 1 + totalSlides) % totalSlides);
+    };
+
+    const goToNextSlide = () => {
+        setActiveSlide(prev => (prev + 1) % totalSlides);
+    };
 
     return(
         <>
@@ -41,6 +48,7 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
             {/* Hero with carousel featuring products */}
             
             <div className="position-relative mb-5 hero-section" style={{ minHeight: '600px' }}>
+
                 <div className="container py-5">
                     {prod_car.map((p, index) => (
                         <div 
@@ -109,7 +117,16 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
                             </div>
                         </div>
                     ))}
+
                 </div>
+
+                                {/* btns */}
+                <div className="carousel-nav-box">
+                    <button onClick={goToNextSlide}>Next</button>
+                <span className="divider">|</span>
+                    <button onClick={goToPrevSlide}>Previous</button>
+                </div>  
+
             </div>
         
 
