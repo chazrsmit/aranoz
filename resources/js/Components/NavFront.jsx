@@ -6,7 +6,7 @@ export default function NavFront({ auth }) {
 
 <nav className="navbar navbar-expand-lg aranoz-navbar">
         <div className="container ">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand" href={route('home')}>
             Aranoz.
           </a>
           <button

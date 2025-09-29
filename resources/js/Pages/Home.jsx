@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import NavFront from '../Components/NavFront.jsx';
 import { Head, Link } from '@inertiajs/react';
 
-export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_best }) {
+export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_best, prod_cat }) {
 
     // Countdown Timer (5 days reset)
     const [timeLeft, setTimeLeft] = useState(5 * 24 * 60 * 60);
@@ -76,7 +76,7 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
                                         alt={p.product} 
                                         className="img-fluid" 
                                         style={{ 
-                                            maxHeight: '200px', 
+                                            maxHeight: '220px', 
                                             objectFit: 'contain',
                                             filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))'
                                         }} 
@@ -89,7 +89,7 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
                                             top: '50%',
                                             right: '-50px',
                                             transform: 'translateY(-50%)',
-                                            fontSize: '120px',
+                                            fontSize: '90px',
                                             fontWeight: '700',
                                             color: 'rgba(209, 241, 244, 0.8)',
                                             lineHeight: '1',
@@ -127,6 +127,50 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
 
                 {/* Category fauteuils -> productcategory_id = 7 */}
                 {/* image to use : '/storage/featured/feature_3.png' */}
+
+                <div className="container my-5 featured-section">
+                {/* First Row */}
+                <div className="row g-4 mb-4">
+                    {[
+                    { id: 7, image: "/storage/featured/offer_img.png", title: "Fauteuils" },
+                    { id: 6, image: "/storage/featured/feature_4.png", title: "Canapés" },
+                    ].map((cat, index) => (
+                    <div key={index} className="col-md-6 col-sm-6">
+                        <div className="card featured-card p-4 h-100">
+                        <img
+                            src={cat.image}
+                            alt={cat.title}
+                            className="img-fluid featured-image"
+                        />
+                        <small className="featured-category">Premium Quality</small>
+                        <h5 className="featured-title">{cat.title}</h5>
+                        <a href="#" className="explore-btn">EXPLORE NOW</a>
+                        </div>
+                    </div>
+                    ))}
+                </div>
+                
+                {/* Second Row */}
+                <div className="row g-4">
+                    {[
+                    { id: 1, image: "/storage/featured/feature_2.png", title: "Chaises" },
+                    { id: 7, image: "/storage/featured/feature_3.png", title: "Fauteuils" },
+                    ].map((cat, index) => (
+                    <div key={index + 2} className="col-md-6 col-sm-6">
+                        <div className="card featured-card p-4 h-100">
+                        <img
+                            src={cat.image}
+                            alt={cat.title}
+                            className="img-fluid featured-image"
+                        />
+                        <small className="featured-category">Premium Quality</small>
+                        <h5 className="featured-title">{cat.title}</h5>
+                        <a href="#" className="explore-btn">EXPLORE NOW</a>
+                        </div>
+                    </div>
+                    ))}
+                </div>
+                </div>
 
 
             {/* Awesome section  : Displays 2 pages of 8 random products (carousel-like navigation). Clicking a product redirects the user to the product detail page.*/}
