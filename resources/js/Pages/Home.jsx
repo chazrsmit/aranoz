@@ -326,7 +326,6 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
                 </div>
             </div>
             </section>
-            
             {/* <img src={prod_discount.image} alt="" />
             <p>{prod_discount.product}</p> */}
             {/* <form onSubmit={onSubmit}>
@@ -335,11 +334,55 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
             </form> */}
 
             {/* Best seller section : 4 random produits */}
-            {prod_best.map(p => (
+            <section className="best-sellers-section">
+            <div className="container">
+                {/* Section Header */}
+                <div className="section-header">
+                <h2 className="section-title">Best Sellers</h2>
+                <a href="#" className="shop-link">Shop</a>
+                </div>
 
-                <div key={p.key}></div>
+                {/* Products Grid - 4 products */}
+                <div className="best-sellers-grid">
+                {prod_best.slice(0, 4).map((product) => {
+                    // Calculate discounted price if promotion exists
+                    const originalPrice = product.price;
+                    const discountPercentage = product.promotion?.pourcentage || 0;
+                    const discountedPrice = discountPercentage > 0 
+                    ? (originalPrice * (1 - discountPercentage / 100)).toFixed(2)
+                    : originalPrice;
 
-            ))}
+                    return (
+                    <div key={product.id} className="product-card">
+                        {/* <Link href={route('product.show', product.id)}> */}
+                        <img 
+                            src={`/storage/${product.image_main}`} 
+                            alt={product.product}
+                            className="product-image"
+                            style={{ objectFit: 'contain' }}
+                        />
+                        <div className="product-info">
+                            <h4 className="product-title">{product.product}</h4>
+                            <div className="product-price">
+                            {discountPercentage > 0 ? (
+                                <>
+                                <span className="current-price">${discountedPrice}</span>
+                                <span className="original-price">${originalPrice}</span>
+                                <span className="discount-badge">-{discountPercentage}%</span>
+                                </>
+                            ) : (
+                                <span className="current-price">${originalPrice}</span>
+                            )}
+                            </div>
+                        </div>
+                        {/* </Link> */}
+                    </div>
+                    );
+                })}
+                </div>
+
+            </div>
+            </section>
 
             {/* Newsletter section - an input field where the person can enter their email adress > the logic will be added later */}
 

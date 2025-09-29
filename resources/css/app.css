@@ -543,6 +543,94 @@
 
 /* End Weekly sale section */
 
+/* Best seller section */
+.best-sellers-section {
+  padding: 80px 0;
+  background: #f8f9fa;
+}
+
+.best-sellers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.best-sellers-section .product-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.best-sellers-section .product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.best-sellers-section .product-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: #f7f9fd;
+}
+
+.best-sellers-section .product-info {
+  padding: 20px;
+}
+
+.best-sellers-section .product-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2a2a2a;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.best-sellers-section .product-price {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0;
+}
+
+.best-sellers-section .current-price {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #fa2d5b;
+}
+
+.best-sellers-section .original-price {
+  font-size: 0.875rem;
+  color: #6c757d;
+  text-decoration: line-through;
+}
+
+.best-sellers-section .discount-badge {
+  background: #fa2d5b;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .best-sellers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .best-sellers-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* End best seller section */
+
 
 /* Navbar front */
 
