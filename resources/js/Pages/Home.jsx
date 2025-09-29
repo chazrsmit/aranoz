@@ -1,7 +1,36 @@
+import { useEffect, useState } from 'react';
 import NavFront from '../Components/NavFront.jsx';
 import { Head, Link } from '@inertiajs/react';
 
 export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_best }) {
+
+    // Countdown Timer (5 days reset)
+    const [timeLeft, setTimeLeft] = useState(5 * 24 * 60 * 60);
+    
+    // Carousel state
+    const [activeSlide, setActiveSlide] = useState(0);
+    const totalSlides = prod_car.length;
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTimeLeft(prev => (prev <= 0 ? 5 * 24 * 60 * 60 : prev - 1));
+        }, 1000);
+        return () => clearInterval(interval);
+    }, []);
+
+    // Auto-advance carousel every 5 seconds
+    useEffect(() => {
+        const carouselInterval = setInterval(() => {
+            setActiveSlide(prev => (prev + 1) % totalSlides);
+        }, 5000);
+        return () => clearInterval(carouselInterval);
+    }, [totalSlides]);
+
+    const days = Math.floor(timeLeft / (24 * 60 * 60));
+    const hours = Math.floor((timeLeft % (24 * 60 * 60)) / 3600);
+    const minutes = Math.floor((timeLeft % 3600) / 60);
+    const seconds = timeLeft % 60;
+
 
     return(
         <>
@@ -9,10 +38,80 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
 
             <NavFront auth={auth} />
 
-            {/* Hero with caorusel featuring products */}
-            {prod_car.map(p => (
-                <div key={p.id}></div>
-            ))}
+            {/* Hero with carousel featuring products */}
+            
+            <div className="position-relative mb-5 hero-section" style={{ minHeight: '600px' }}>
+                <div className="container py-5">
+                    {prod_car.map((p, index) => (
+                        <div 
+                            key={p.id} 
+                            className={`carousel-slide ${index === activeSlide ? 'active' : ''}`}
+                            style={{
+                                display: index === activeSlide ? 'block' : 'none',
+                                animation: index === activeSlide ? 'fadeIn 0.5s ease-in' : 'none'
+                            }}
+                        >
+                            <div className="row align-items-center" style={{ minHeight: '500px' }}>
+                                {/* LEFT: TEXT */}
+                                <div className="col-md-6 text-center text-md-start">
+                                    <h1 className="display-4 fw-bold text-dark mb-3">{p.product}</h1>
+                                    <p className="text-secondary my-4" style={{ fontSize: '1.1rem' }}>
+                                        {p.description?.substring(0, 150)}...
+                                    </p>
+                                    <a 
+                                        href={`/product/${p.id}`} 
+                                        className="btn btn-dark px-5 py-3 rounded-0"
+                                        style={{ 
+                                            fontSize: '1rem', 
+                                            fontWeight: '500',
+                                            textDecoration: 'none',
+                                            display: 'inline-block',
+                                            backgroundColor: '#000',
+                                            color: '#fff',
+                                            border: 'none',
+                                            cursor: 'pointer'
+                                        }}
+                                    >
+                                        Shop Now
+                                    </a>
+                                </div>
+                                
+                                {/* RIGHT: IMAGE */}
+                                <div className="col-md-6 text-center position-relative">
+                                    <img 
+                                        src={`/storage/${p.image_main}`} 
+                                        alt={p.product} 
+                                        className="img-fluid" 
+                                        style={{ 
+                                            maxHeight: '400px', 
+                                            objectFit: 'contain',
+                                            filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))'
+                                        }} 
+                                    />
+                                    
+                                    {/* Slide Number - Large on the right */}
+                                    <div 
+                                        className="position-absolute" 
+                                        style={{ 
+                                            top: '50%',
+                                            right: '-50px',
+                                            transform: 'translateY(-50%)',
+                                            fontSize: '120px',
+                                            fontWeight: '700',
+                                            color: 'rgba(209, 241, 244, 0.8)',
+                                            lineHeight: '1',
+                                            zIndex: 0
+                                        }}
+                                    >
+                                        {String(index + 1).padStart(2, '0')}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        
 
             {/* Categories */}
                 {/* Category fauteuils -> productcategory_id = 7 */}
@@ -57,7 +156,7 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
 
             {/* Newsletter section - an input field where the person can enter their email adress > the logic will be added later */}
 
-            
+            {/*  */}
 
         </>
     )

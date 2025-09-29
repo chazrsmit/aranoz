@@ -1,1 +1,220 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+
+.hero-section {
+    background: #e8fcfc;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+}
+
+.btn-shop-now {
+    background-color: #ff6b6b; 
+    border: none;
+    color: white;
+    font-weight: 500;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.btn-shop-now:hover {
+    background-color: #ff4c4c;
+    text-decoration: none;
+}
+
+/* Navbar front */
+
+.aranoz-navbar {
+    background: #e8fcfc!important;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+
+.aranoz-navbar .navbar-brand {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2a2a2a !important;
+    font-family: 'Arial', sans-serif;
+    letter-spacing: -0.5px;
+}
+
+.aranoz-navbar .navbar-nav {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.aranoz-navbar .nav-link {
+    color: #2a2a2a !important;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 8px 20px !important;
+    transition: color 0.3s ease;
+    text-transform: capitalize;
+}
+
+.aranoz-navbar .nav-link:hover,
+.aranoz-navbar .nav-link.active {
+    color: #ff6b81 !important;
+}
+
+.aranoz-navbar .dropdown-menu {
+    border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-radius: 0;
+    margin-top: 0;
+}
+
+.aranoz-navbar .dropdown-item {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #2a2a2a;
+    transition: all 0.3s ease;
+}
+
+.aranoz-navbar .dropdown-item:hover {
+    background-color: #ff6b81;
+    color: #fff;
+}
+
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #f0f0f0;
+}
+
+.user-dropdown .nav-link {
+    padding: 8px 10px !important;
+}
+
+.user-dropdown .dropdown-menu {
+    right: 0;
+    left: auto;
+    min-width: 150px;
+}
+
+.user-dropdown .dropdown-menu li a {
+    display: block;
+    padding: 10px 20px;
+    color: #2a2a2a;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.user-dropdown .dropdown-menu li a:hover {
+    background-color: #ff6b81;
+    color: #fff;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.auth-buttons .btn {
+    padding: 8px 25px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.auth-buttons .btn:first-child {
+    background: transparent;
+    color: #2a2a2a;
+    border: 2px solid #2a2a2a;
+}
+
+.auth-buttons .btn:first-child:hover {
+    background: #2a2a2a;
+    color: #fff;
+}
+
+.auth-buttons .btn:last-child {
+    background: #ff6b81;
+    color: #fff;
+    border: 2px solid #ff6b81;
+}
+
+.auth-buttons .btn:last-child:hover {
+    background: #ff5570;
+    border-color: #ff5570;
+}
+
+.navbar-toggler {
+    border: none;
+    padding: 5px 10px;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.slider-controls {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    display: flex;
+    gap: 0;
+    z-index: 100;
+    font-family: 'Arial', sans-serif;
+}
+
+.slider-controls button {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    color: #2a2a2a;
+    padding: 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    text-transform: capitalize;
+}
+
+.slider-controls button:hover {
+    color: #ff6b81;
+}
+
+.slider-controls .divider {
+    margin: 0 15px;
+    color: #2a2a2a;
+    font-weight: 700;
+}
+
+@media (max-width: 991px) {
+    .aranoz-navbar .navbar-nav {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 15px;
+    }
+    
+    .user-section {
+    margin-left: 0;
+    margin-top: 15px;
+    }
+    
+    .auth-buttons {
+    margin-left: 0;
+    margin-top: 15px;
+    flex-direction: column;
+    }
+    
+    .slider-controls {
+    bottom: 20px;
+    right: 20px;
+    }
+}
+/* end Navbar front */
