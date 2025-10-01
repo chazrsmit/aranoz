@@ -5,6 +5,26 @@ import Footer from '@/Components/Footer.jsx';
 
 export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_best, prod_cat, prod }) {
 
+    // Logique flash messages
+    const page = usePage();
+    const flash = page.props?.flash;
+    const [showFlash, setShowFlash] = useState(true);
+
+    // on utilise un useEffect
+    useEffect(() => {
+        if (flash?.success) {
+            // en mettant setShowFlash à true, on est sûr de lancer un message
+            setShowFlash(true);
+
+            const timer = setTimeout(() => {
+                setShowFlash(false);
+            }, 5000);
+
+            // grâce au clearTimeOut, on fait en sorte que le timer est reset à chaque fois pour qu'il n'y ait pas d'overlap entre les messages.
+            return () => clearTimeout(timer); 
+        }
+    }, [flash?.success]);
+
     // Countdown Timer (5 days reset)
     const [timeLeft, setTimeLeft] = useState(5 * 24 * 60 * 60);
     
@@ -399,6 +419,11 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
             <section className="newsletter-section">
             <div className="container">
                 <div className="newsletter-content">
+                {/* Flash message */}
+                {flash?.success && showFlash && (
+                    <div className="alert alert-success">{flash.success}</div>
+                )}  
+
                 <h1 className="newsletter-title">
                     Subscribe to get Updated with new offers
                 </h1>
@@ -414,6 +439,7 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
                     onChange={(e) => setData('email', e.target.value)}
                     required
                     />
+                    {/* Add error logic */}
                     <button type="submit" className="subscribe-btn">
                     SUBSCRIBE NOW
                     </button>
