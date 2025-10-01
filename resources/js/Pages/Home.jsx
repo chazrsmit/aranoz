@@ -63,6 +63,7 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
         setActiveSlide(prev => (prev + 1) % totalSlides);
     };
 
+    // newsletter
     const { data, setData, errors } = useForm({
         email : "",
     });
@@ -433,13 +434,17 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
                 
                 <form className="newsletter-form" onSubmit={submitNewsletter}>
                     <input 
-                    type="email" 
-                    placeholder="Enter Email Address" 
-                    className="newsletter-input"
-                    onChange={(e) => setData('email', e.target.value)}
-                    required
+                        type="email"
+                        name="email"
+                        value={data.email} 
+                        placeholder="Enter Email Address" 
+                        className="newsletter-input"
+                        onChange={(e) => setData('email', e.target.value)}
+                        required
                     />
                     {/* Add error logic */}
+                    {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+                    
                     <button type="submit" className="subscribe-btn">
                     SUBSCRIBE NOW
                     </button>
