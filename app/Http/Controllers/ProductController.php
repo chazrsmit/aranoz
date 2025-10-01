@@ -37,7 +37,7 @@ class ProductController extends Controller
     // page front pour voir les détails d'un produit
     public function front_produit($id) {
 
-        $product = Product::findOrFail($id);
+        $product = Product::with('promotion', 'specifications', 'color', 'product_category')->findOrFail($id);
 
         return Inertia::render('Front/ProductShow', [
             'product' => $product
