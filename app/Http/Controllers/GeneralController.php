@@ -13,7 +13,7 @@ use Inertia\Inertia;
 
 class GeneralController extends Controller
 {
-    public function index() {
+    public function index($id) {
         
         // products featured in the carousel in the hero
         // random products ET products where isPinned == 1
@@ -36,8 +36,7 @@ class GeneralController extends Controller
             'prod_awe' => $prod_awe,
             'prod_discount' => $prod_discount,
             'prod_best' => $prod_best,
-            'prod_cat' => $prod_cat
-        ]);
+            'prod_cat' => $prod_cat        ]);
     }
 
     public function dash() {

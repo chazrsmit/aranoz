@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import NavFront from '../Components/NavFront.jsx';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import Footer from '@/Components/Footer.jsx';
 
-export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_best, prod_cat }) {
+export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_best, prod_cat, prod }) {
 
     // Countdown Timer (5 days reset)
     const [timeLeft, setTimeLeft] = useState(5 * 24 * 60 * 60);
@@ -42,6 +42,15 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
     const goToNextSlide = () => {
         setActiveSlide(prev => (prev + 1) % totalSlides);
     };
+
+    const { data, setData, errors } = useForm({
+        email : "",
+    });
+
+    const submitNewsletter = (e) => {
+        e.preventDefault();
+        route(post('store_newsletter'));
+    }
 
     return(
         <>
@@ -211,7 +220,7 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
 
                     return (
                     <div key={product.id} className="product-card">
-                        {/* <Link href={route('product.show', product.id)}> */}
+                        <Link href={route('front_product', product.id)}>
                         <img 
                             src={`/storage/${product.image_main}`} 
                             alt={product.product}
@@ -232,7 +241,7 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
                             )}
                             </div>
                         </div>
-                        {/* </Link> */}
+                        </Link>
                     </div>
                     );
                 })}
@@ -355,7 +364,7 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
 
                     return (
                     <div key={product.id} className="product-card">
-                        {/* <Link href={route('product.show', product.id)}> */}
+                        <Link href={route('front_product', product.id)}>
                         <img 
                             src={`/storage/${product.image_main}`} 
                             alt={product.product}
@@ -376,7 +385,7 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
                             )}
                             </div>
                         </div>
-                        {/* </Link> */}
+                        </Link>
                     </div>
                     );
                 })}
@@ -397,11 +406,12 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
                     Stay informed about our latest products, exclusive deals, and special promotions
                 </p>
                 
-                <form className="newsletter-form">
+                <form className="newsletter-form" onSubmit={submitNewsletter}>
                     <input 
                     type="email" 
                     placeholder="Enter Email Address" 
                     className="newsletter-input"
+                    onChange={(e) => setData('email', e.target.value)}
                     required
                     />
                     <button type="submit" className="subscribe-btn">

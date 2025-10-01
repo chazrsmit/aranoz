@@ -34,6 +34,16 @@ class ProductController extends Controller
         ]);
     }
 
+    // page front pour voir les détails d'un produit
+    public function front_produit($id) {
+
+        $product = Product::findOrFail($id);
+
+        return Inertia::render('Front/ProductShow', [
+            'product' => $product
+        ]);
+    }
+
     // action de store un produit
     public function store(Request $request){
 

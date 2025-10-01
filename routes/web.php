@@ -6,6 +6,7 @@
     use App\Http\Controllers\GeneralController;
     use App\Http\Controllers\MailController;
     use App\Http\Controllers\MessageController;
+    use App\Http\Controllers\NewsletterController;
     use App\Http\Controllers\OrderController;
     use App\Http\Controllers\ProductCategoriesController;
     use App\Http\Controllers\ProductController;
@@ -64,6 +65,8 @@
     Route::get('/admin/mailbox', [MessageController::class, 'mailbox'])->name('mailbox');
     Route::get('/admin/mailbox/show/{id}', [MessageController::class, 'show'])->name('show_message');
     Route::get('/admin/mailbox/reply/{id}', [MessageController::class, 'reply'])->name('reply_message');
+    // Front - product
+    Route::get('/product-details/{id}', [ProductController::class, 'front_product'])->name('front_product');
 
     // CRUDS //
     // Categories
@@ -95,6 +98,8 @@
     // Mailbox
     Route::put('/admin/mailbox/archive/{id}', [MessageController::class, 'archive'])->name('archive_message');
     Route::delete('/admin/mailbox/delete/{id}', [MessageController::class, 'delete'])->name('delete_message');
+    // Newsletter
+    Route::post('/newsletter/store', [NewsletterController::class, 'store'])->name('store_newsletter');
 
     // Route::get('/dashboard', function () {
     //     return Inertia::render('Dashboard');
