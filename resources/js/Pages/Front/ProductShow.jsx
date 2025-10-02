@@ -13,11 +13,14 @@ export default function ProductShow({ auth, product }) {
     : originalPrice;
 
     return(
-        <>
 
+        <>
         <Head title="Aranoz - Product details" />
         
-        <Nav auth={auth} />
+        <NavFront auth={auth} />
+
+        {/* Hero - Title: 'shop single products' */}
+        {/* use image '/storage/banner/feature_3.png' */}
 
         <div className="card">
             {/* Carousel with the 4 images */}
@@ -25,12 +28,16 @@ export default function ProductShow({ auth, product }) {
             <img src={`/storage/${product.image_rear}`} alt="" />
             <img src={`/storage/${product.image_left}`} alt="" />
             <img src={`/storage/${product.image_right}`} alt="" />
-            
+
             <h4>{product.product}</h4>
             <p>{product.description}</p>
             {/* Link vers la page catégorie correspondante */}
             <p>{product.product_category.category}</p>
-            <p>{product.stock}</p>
+            <p>Availability:
+                {product.stock > 0 ?
+                    'In stock' : 'Sold out'
+                }
+            </p>
             {/* afficher la couleur */}
             <p>{product.color.color}</p>
             {/* prix */}
