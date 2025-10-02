@@ -1,9 +1,24 @@
 import { useEffect, useState } from 'react';
-import NavFront from '../Components/NavFront.jsx';
-import { Head, Link } from '@inertiajs/react';
+import NavFront from '../../Components/NavFront.jsx';
+import { Head, Link, useForm } from '@inertiajs/react';
 import Footer from '@/Components/Footer.jsx';
 
 export default function ProductShow({ auth, product }) {
+
+    const [quantity, setQuantity] = useState(1);
+
+    const { data, setData, post, processing } = useForm({
+        product_id: product.id,
+        quantity: 1,
+    });
+
+    // Handle submit
+    const handleAddToCart = (e) => {
+        e.preventDefault();
+        post(route('cart.add'), {
+            preserveScroll: true,
+        });
+    };
 
     // Calculate discounted price if promotion exists
     const originalPrice = product.price;
@@ -59,8 +74,16 @@ export default function ProductShow({ auth, product }) {
             <p>{product.specifications?.weight}</p>
 
             {/* Bouton add to cart */}
-            <form>
-                <button type="submit">Add to cart</button>
+            <form onSubmit={handleAddToCart}>
+                <input
+                type="number"
+                min="1"
+                value={data.quantity}
+                onChange={(e) => setData('quantity', e.target.value)}
+                />
+                <button type="submit" disabled={processing}>
+                    {processing ? 'Adding...' : 'Add to cart'}
+                </button>
             </form>
         </div>
 

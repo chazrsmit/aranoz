@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import NavFront from '../Components/NavFront.jsx';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import Footer from '@/Components/Footer.jsx';
 
 export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_best, prod_cat }) {

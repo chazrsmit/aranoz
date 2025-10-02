@@ -35,7 +35,7 @@ class ProductController extends Controller
     }
 
     // page front pour voir les détails d'un produit
-    public function front_produit($id) {
+    public function front_product($id) {
 
         $product = Product::with('promotion', 'specifications', 'color', 'product_category')->findOrFail($id);
 

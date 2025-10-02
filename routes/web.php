@@ -2,6 +2,7 @@
 
     use App\Http\Controllers\BlogCategoriesController;
     use App\Http\Controllers\BlogController;
+    use App\Http\Controllers\CartController;
     use App\Http\Controllers\ContactController;
     use App\Http\Controllers\GeneralController;
     use App\Http\Controllers\MailController;
@@ -100,6 +101,8 @@
     Route::delete('/admin/mailbox/delete/{id}', [MessageController::class, 'delete'])->name('delete_message');
     // Newsletter
     Route::post('/newsletter/store', [NewsletterController::class, 'store'])->name('store_newsletter');
+    // Cart
+    Route::post('/cart/add', [CartController::class, 'add_to_cart'])->name('cart_add');
 
     // Route::get('/dashboard', function () {
     //     return Inertia::render('Dashboard');
