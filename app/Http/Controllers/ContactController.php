@@ -45,4 +45,12 @@ class ContactController extends Controller
         return redirect()->route('contact')->with('success', 'Contact infos successfully updated.');
 
     }
+
+    public function front_contact() {
+            $contact = Contact::first();
+
+    return Inertia::render('Front/Contact', [
+        'contact' => $contact,
+    ]);
+    }
 }

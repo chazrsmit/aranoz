@@ -76,10 +76,7 @@ class BlogController extends Controller
         }
 
         return redirect()->route('blog_back')->with('success', 'Blog post successfully created.');
-
-
     }
-
 
     // page pour edit un article
 

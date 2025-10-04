@@ -59,7 +59,7 @@ export default function NavFront({ auth }) {
               </li>
 
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link" href={route('front_contact')}>
                   Contact
                 </a>
               </li>
