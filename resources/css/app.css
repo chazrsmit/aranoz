@@ -971,3 +971,37 @@ border-radius: 0px;
 }
 
 /* End footer */
+
+/* All products page */
+
+.hero-section {
+  position: relative;
+}
+.hero-section .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+}
+.hero-section .content {
+  position: relative;
+  z-index: 2;
+}
+
+.filter-section select {
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.product-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+
+/* End all products */

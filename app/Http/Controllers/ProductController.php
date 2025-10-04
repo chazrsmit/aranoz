@@ -210,5 +210,42 @@ class ProductController extends Controller
         ]);
 
     }
-        
+
+    // page qui affiche TOUS les produits et qui filtre par product catégorie et/ou coleur
+    public function all_products(Request $request)
+    {
+        // Get filter inputs from query parameters
+        $categoryId = $request->query('category');
+        $colorId = $request->query('color');
+
+        // Build base query
+        $query = Product::with(['product_category', 'color', 'promotion']);
+
+        // Apply filters if present
+        if ($categoryId) {
+            $query->where('productcategory_id', $categoryId);
+        }
+
+        if ($colorId) {
+            $query->where('color_id', $colorId);
+        }
+
+        // Get products (no pagination as requested)
+        $products = $query->get();
+
+        // Get all filter options
+        $categories = ProductCategory::all();
+        $colors = Color::all();
+
+        return Inertia::render('Front/AllProducts', [
+            'products' => $products,
+            'categories' => $categories,
+            'colors' => $colors,
+            'filters' => [
+                'category' => $categoryId,
+                'color' => $colorId,
+            ],
+        ]);
+    }
+       
 }

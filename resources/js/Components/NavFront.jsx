@@ -40,21 +40,13 @@ export default function NavFront({ auth }) {
                 </a>
                 <ul className="dropdown-menu">
                   <li>
-                    <a className="dropdown-item" href="#">
-                      Action
+                    <a className="dropdown-item" href={route('all_products')}>
+                      All products
                     </a>
                   </li>
                   <li>
                     <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Something else here
+                      Track your order
                     </a>
                   </li>
                 </ul>

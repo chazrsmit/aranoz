@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import NavFront from '../../Components/NavFront.jsx';
 import { Head, Link, useForm } from '@inertiajs/react';
-import Footer from '@/Components/Footer.jsx';
+import Footer from '../../Components/Footer.jsx';
 
 export default function ProductShow({ auth, product }) {
 

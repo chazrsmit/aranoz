@@ -68,6 +68,7 @@
     Route::get('/admin/mailbox/reply/{id}', [MessageController::class, 'reply'])->name('reply_message');
     // Front - product
     Route::get('/product-details/{id}', [ProductController::class, 'front_product'])->name('front_product');
+    Route::get('/products/all', [ProductController::class, 'all_products'])->name('all_products');
 
     // CRUDS //
     // Categories
