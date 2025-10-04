@@ -141,4 +141,22 @@ class BlogController extends Controller
 
         return redirect()->route('blog_back')->with('success', 'Blog post successfully deleted.');
     }
+    
+    // page dans le front qui affiche les liste des blog posts
+    public function all_blogs()
+    {
+        $blogs = Blog::with(['blog_category', 'user'])
+            ->latest()
+            ->get();
+
+        $categories = BlogCategory::withCount('blogs')->get();
+
+        $recentBlogs = Blog::latest()->take(3)->get();
+
+        return Inertia::render('Front/AllBlogs', [
+            'blogs' => $blogs,
+            'categories' => $categories,
+            'recentBlogs' => $recentBlogs,
+        ]);
+    }
 }

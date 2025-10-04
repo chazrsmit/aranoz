@@ -69,6 +69,8 @@
     // Front - product
     Route::get('/product-details/{id}', [ProductController::class, 'front_product'])->name('front_product');
     Route::get('/products/all', [ProductController::class, 'all_products'])->name('all_products');
+    // Front - blog posts
+    Route::get('/blogs/all', [BlogController::class, 'all_blogs'])->name('front_blogs');
 
     // CRUDS //
     // Categories
