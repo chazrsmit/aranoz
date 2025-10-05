@@ -73,7 +73,10 @@
     Route::get('/blogs/all', [BlogController::class, 'all_blogs'])->name('front_blogs');
     // Front - contact
     Route::get('/contact', [ContactController::class, 'front_contact'])->name('front_contact');
-
+    // Front - cart page
+    Route::get('/cart', [CartController::class, 'view_cart'])
+        ->middleware(['auth'])
+        ->name('cart_view');
 
     // CRUDS //
     // Categories
@@ -109,6 +112,7 @@
     Route::post('/newsletter/store', [NewsletterController::class, 'store'])->name('store_newsletter');
     // Cart
     Route::post('/cart/add', [CartController::class, 'add_to_cart'])->name('cart_add');
+    Route::delete('/cart/remove/{item}', [CartController::class, 'remove_from_cart'])->name('cart_remove');
 
     // Route::get('/dashboard', function () {
     //     return Inertia::render('Dashboard');

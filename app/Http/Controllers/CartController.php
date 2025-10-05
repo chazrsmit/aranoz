@@ -54,7 +54,7 @@ class CartController extends Controller
     public function view_cart() {
         $cart = Cart::with('items.product')->where('user_id', auth()->id())->first();
 
-        return inertia('Cart/Index', [
+        return inertia('Front/Cart/Cart', [
             'cart' => $cart,
         ]);
     }

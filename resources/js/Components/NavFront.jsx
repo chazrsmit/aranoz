@@ -98,6 +98,9 @@ export default function NavFront({ auth }) {
                     </li>
                   </ul>
                 </div>
+                <div>
+                  <Link href={route('cart_view')}>Cart</Link>
+                </div>
               </div>
             ) : (
               <div className="auth-buttons">
