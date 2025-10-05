@@ -62,6 +62,22 @@ export default function Cart({ cart, auth }) {
         )}
       </div>
 
+                  {/* Btns */}
+            <div className="d-flex justify-content-between mt-4">
+              <Link
+                href={route('all_products')}
+                className="btn btn-secondary"
+              >
+                Continue Shopping
+              </Link>
+              <Link
+                href={route('checkout')}
+                className="btn btn-primary"
+              >
+                Proceed to Payment
+              </Link>
+            </div>
+
       <Footer />
     </>
   );

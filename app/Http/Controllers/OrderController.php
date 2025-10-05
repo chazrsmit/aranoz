@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Billing;
+use App\Models\Cart;
+use App\Models\Country;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -49,5 +52,85 @@ class OrderController extends Controller
             'order' => $order
         ]);
     }
+
+    // ===============================================
+// FRONTEND CHECKOUT & CONFIRMATION
+// ===============================================
+
+public function checkout()
+{
+    $cart = Cart::with('items.product')
+        ->where('user_id', auth()->id())
+        ->first();
+
+    $countries = Country::all();
+
+    if (!$cart || $cart->items->isEmpty()) {
+        return redirect()->route('cart_view')->with('error', 'Your cart is empty.');
+    }
+
+    return inertia('Front/Checkout/Checkout', [
+        'cart' => $cart,
+        'user' => auth()->user(),
+        'countries' => $countries
+    ]);
+}
+
+
+public function place_order(Request $request)
+{
+    $request->validate([
+        'first_name'      => 'required|string',
+        'last_name'       => 'required|string',
+        'phone'           => 'required|string',
+        'address'         => 'required|string',
+        'city'            => 'required|string',
+        'zip'             => 'required|string',
+        'country_id'      => 'required|exists:countries,id',
+        'payment_method'  => 'required|string',
+    ]);
+
+    $user = auth()->user();
+    $cart = Cart::with('items.product')->where('user_id', $user->id)->firstOrFail();
+
+    // Create order
+    $order = Order::create([
+        'user_id'      => $user->id,
+        'status'       => 'pending',
+        'order_number' => strtoupper(\Illuminate\Support\Str::random(8)),
+    ]);
+
+    // Create order items
+    foreach ($cart->items as $item) {
+        $order->items()->create([
+            'product_id' => $item->product_id,
+            'quantity'   => $item->quantity,
+            'price'      => $item->price,
+        ]);
+    }
+
+    // keep billing details
+    Billing::updateOrCreate(
+        ['user_id' => $user->id],
+        $request->only(['first_name','last_name','phone','address','city','zip','country_id'])
+    );
+
+    // Empty the cart
+    $cart->items()->delete();
+
+    return redirect()->route('order.confirmation', $order->id)
+                     ->with('success', 'Order placed successfully!');
+}
+
+
+public function confirmation(Order $order)
+{
+    $order->load('items.product', 'user');
+
+    return inertia('Front/Checkout/OrderConfirmation', [
+        'order' => $order,
+    ]);
+}
+
 
 }

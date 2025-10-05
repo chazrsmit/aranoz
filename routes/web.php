@@ -128,4 +128,12 @@
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 
+    // CHECKOUT //
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
+        Route::post('/checkout/place-order', [OrderController::class, 'place_order'])->name('checkout.place_order');
+        Route::get('/order/confirmation/{order}', [OrderController::class, 'confirmation'])->name('order.confirmation');
+    });
+
+
     require __DIR__.'/auth.php';
