@@ -1,94 +1,146 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import NavFront from '../../Components/NavFront.jsx';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import Footer from '../../Components/Footer.jsx';
 
 export default function ProductShow({ auth, product }) {
-
-    const [quantity, setQuantity] = useState(1);
-
-    const { data, setData, post, processing } = useForm({
+    const { data, setData, post, processing, reset } = useForm({
         product_id: product.id,
         quantity: 1,
     });
 
-    // Handle submit
+    const flash = usePage().props.flash;
+
+    // Handle Add to Cart submission
     const handleAddToCart = (e) => {
         e.preventDefault();
-        post(route('cart.add'), {
+        post(route('cart_add'), {
             preserveScroll: true,
+            onSuccess: () => reset('quantity'), // reset only quantity after success
         });
     };
 
-    // Calculate discounted price if promotion exists
+    // Price logic
     const originalPrice = product.price;
     const discountPercentage = product.promotion?.pourcentage || 0;
-    const discountedPrice = discountPercentage > 0 
-    ? (originalPrice * (1 - discountPercentage / 100)).toFixed(2)
-    : originalPrice;
+    const discountedPrice =
+        discountPercentage > 0
+            ? (originalPrice * (1 - discountPercentage / 100)).toFixed(2)
+            : originalPrice;
 
-    return(
-
+    return (
         <>
-        <Head title="Aranoz - Product details" />
-        
-        <NavFront auth={auth} />
+            <Head title={`Aranoz - ${product.product}`} />
+            <NavFront auth={auth} />
 
-        {/* Hero - Title: 'shop single products' */}
-        {/* use image '/storage/banner/feature_3.png' */}
+            <div className="container py-5">
+                {/* Flash success message */}
+                {flash?.success && (
+                    <div className="alert alert-success text-center">
+                        {flash.success}
+                    </div>
+                )}
 
-        <div className="card">
-            {/* Carousel with the 4 images */}
-            <img src={`/storage/${product.image_main}`} alt="" />
-            <img src={`/storage/${product.image_rear}`} alt="" />
-            <img src={`/storage/${product.image_left}`} alt="" />
-            <img src={`/storage/${product.image_right}`} alt="" />
+                <div className="row">
+                    {/* Product Images */}
+                    <div className="col-md-6 mb-4">
+                        <div className="d-flex flex-wrap gap-2">
+                            <img
+                                src={`/storage/${product.image_main}`}
+                                alt=""
+                                className="img-fluid rounded shadow-sm"
+                            />
+                            <img
+                                src={`/storage/${product.image_rear}`}
+                                alt=""
+                                className="img-thumbnail"
+                            />
+                            <img
+                                src={`/storage/${product.image_left}`}
+                                alt=""
+                                className="img-thumbnail"
+                            />
+                            <img
+                                src={`/storage/${product.image_right}`}
+                                alt=""
+                                className="img-thumbnail"
+                            />
+                        </div>
+                    </div>
 
-            <h4>{product.product}</h4>
-            <p>{product.description}</p>
-            {/* Link vers la page catégorie correspondante */}
-            <p>{product.product_category.category}</p>
-            <p>Availability:
-                {product.stock > 0 ?
-                    'In stock' : 'Sold out'
-                }
-            </p>
-            {/* afficher la couleur */}
-            <p>{product.color.color}</p>
-            {/* prix */}
-            {discountPercentage > 0 ? (
-                <>
-                <span className="current-price">${discountedPrice}</span>
-                <span className="original-price">${originalPrice}</span>
-                <span className="discount-badge">-{discountPercentage}%</span>
-                </>
-            ) : (
-                <span className="current-price">${originalPrice}</span>
-            )}
+                    {/* Product Info */}
+                    <div className="col-md-6">
+                        <h3>{product.product}</h3>
+                        <p className="text-muted">{product.description}</p>
 
-            {/* Specifications */}
-            <h6>Specifications</h6>
-            <p>{product.specifications?.width}</p>
-            <p>{product.specifications?.height}</p>
-            <p>{product.specifications?.depth}</p>
-            <p>{product.specifications?.weight}</p>
+                        <p>
+                            Category:{' '}
+                            <Link href={`/category/${product.product_category.slug}`}>
+                                {product.product_category.category}
+                            </Link>
+                        </p>
 
-            {/* Bouton add to cart */}
-            <form onSubmit={handleAddToCart}>
-                <input
-                type="number"
-                min="1"
-                value={data.quantity}
-                onChange={(e) => setData('quantity', e.target.value)}
-                />
-                <button type="submit" disabled={processing}>
-                    {processing ? 'Adding...' : 'Add to cart'}
-                </button>
-            </form>
-        </div>
+                        <p>
+                            Availability:{' '}
+                            {product.stock > 0 ? (
+                                <span className="text-success">In stock</span>
+                            ) : (
+                                <span className="text-danger">Sold out</span>
+                            )}
+                        </p>
 
-        <Footer />
+                        <p>Color: {product.color.color}</p>
 
+                        {/* Price Display */}
+                        {discountPercentage > 0 ? (
+                            <div>
+                                <span className="fs-4 fw-bold text-success me-2">
+                                    ${discountedPrice}
+                                </span>
+                                <span className="text-muted text-decoration-line-through me-2">
+                                    ${originalPrice}
+                                </span>
+                                <span className="badge bg-danger">
+                                    -{discountPercentage}%
+                                </span>
+                            </div>
+                        ) : (
+                            <p className="fs-4 fw-bold">${originalPrice}</p>
+                        )}
+
+                        {/* Add to Cart */}
+                        <form onSubmit={handleAddToCart} className="mt-4">
+                            <div className="input-group mb-3" style={{ maxWidth: '220px' }}>
+                                <input
+                                    type="number"
+                                    min="1"
+                                    value={data.quantity}
+                                    onChange={(e) => setData('quantity', e.target.value)}
+                                    className="form-control"
+                                />
+                                <button
+                                    type="submit"
+                                    className="btn btn-primary"
+                                    disabled={processing || product.stock <= 0}
+                                >
+                                    {processing ? 'Adding...' : 'Add to Cart'}
+                                </button>
+                            </div>
+                        </form>
+
+                        {/* Specs */}
+                        <h6 className="mt-4">Specifications</h6>
+                        <ul className="list-unstyled">
+                            <li>Width: {product.specifications?.width}</li>
+                            <li>Height: {product.specifications?.height}</li>
+                            <li>Depth: {product.specifications?.depth}</li>
+                            <li>Weight: {product.specifications?.weight}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <Footer />
         </>
-    )
+    );
 }

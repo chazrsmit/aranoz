@@ -16,7 +16,7 @@ class CartController extends Controller
         // a 'price' column in both the products and cartitems column so that the price at the time of purchase remains unchanged
 
         $request->validate([
-            'product_id' => 'required|exists:id, products',
+            'product_id' => 'required|exists:products,id',
             'quantity' => 'required|integer|min:1'
         ]);
 
