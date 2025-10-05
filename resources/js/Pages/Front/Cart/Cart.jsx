@@ -9,7 +9,7 @@ export default function Cart({ cart, auth }) {
   const isEmpty = !cart || !cart.items || cart.items.length === 0;
 
   const removeItem = (id) => {
-    destroy(route('cart.remove', id), {
+    destroy(route('cart_remove', id), {
       preserveScroll: true,
     });
   };
