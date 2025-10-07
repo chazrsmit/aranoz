@@ -84,6 +84,7 @@ public function place_order(Request $request)
         'last_name'       => 'required|string',
         'phone'           => 'required|string',
         'address'         => 'required|string',
+        'number'          => 'required|string', // <-- added
         'city'            => 'required|string',
         'zip'             => 'required|string',
         'country_id'      => 'required|exists:countries,id',
@@ -109,10 +110,10 @@ public function place_order(Request $request)
         ]);
     }
 
-    // keep billing details
+    // keep billing details, now including 'number'
     Billing::updateOrCreate(
         ['user_id' => $user->id],
-        $request->only(['first_name','last_name','phone','address','city','zip','country_id'])
+        $request->only(['first_name', 'last_name', 'phone', 'address', 'number', 'city', 'zip', 'country_id'])
     );
 
     // Empty the cart
@@ -123,14 +124,16 @@ public function place_order(Request $request)
 }
 
 
+
 public function confirmation(Order $order)
 {
-    $order->load('items.product', 'user');
+    $order->load('items.product', 'billing.country', 'user');
 
     return inertia('Front/Checkout/OrderConfirmation', [
         'order' => $order,
     ]);
 }
+
 
 
 }

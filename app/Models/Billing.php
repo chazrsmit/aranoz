@@ -15,4 +15,11 @@ class Billing extends Model
     public function country(){
         return $this->belongsTo(Country::class);
     }
+
+public function orders()
+{
+    // A billing record belongs to a user, a user can have multiple orders
+    return $this->hasMany(Order::class, 'user_id', 'user_id');
+}
+
 }

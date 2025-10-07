@@ -22,4 +22,12 @@ class Order extends Model
         return $this->items->sum(fn($item) => $item->quantity * $item->price);
     }
     // selon la convention d'écrire, cette fonction désigne total_price qui va devenir accessible partout avec $order->total_price
+
+public function billing()
+{
+    // Each order belongs to the user's billing info
+    return $this->hasOne(Billing::class, 'user_id', 'user_id');
+}
+
+
 }

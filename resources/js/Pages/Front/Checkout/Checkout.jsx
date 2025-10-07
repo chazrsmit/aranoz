@@ -8,21 +8,15 @@ export default function Checkout({ cart, user, auth, countries }) {
   const { data, setData, post, processing } = useForm({
     first_name: user.prenom || "",
     last_name: user.name || "",
-    phone: "",            // added
+    phone: "",            
     address: "",
     number: "",
     city: "",
     zip: "",
-    country_id: "",       // changed to country_id
+    country_id: "",     
     payment_method: "",
   });
 
-//   const [countries, setCountries] = useState([]);
-
-  // fetch countries
-  useEffect(() => {
-    axios.get("/api/countries").then((res) => setCountries(res.data));
-  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -82,6 +76,15 @@ export default function Checkout({ cart, user, auth, countries }) {
                     onChange={(e) => setData("address", e.target.value)}
                   />
                 </div>
+                <div className="col-md-6">
+  <input
+    type="number"
+    placeholder="Number"
+    className="form-control"
+    value={data.number}
+    onChange={(e) => setData("number", e.target.value)}
+  />
+</div>
                 <div className="col-md-6">
                   <input
                     type="text"
