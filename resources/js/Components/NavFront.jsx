@@ -45,7 +45,7 @@ export default function NavFront({ auth }) {
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <a className="dropdown-item" href={route('track_order_page')}>
                       Track your order
                     </a>
                   </li>

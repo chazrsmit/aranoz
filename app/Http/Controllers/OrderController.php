@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderConfirmedMail;
 use App\Models\Billing;
 use App\Models\Cart;
 use App\Models\Country;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 class OrderController extends Controller
@@ -29,19 +31,24 @@ class OrderController extends Controller
     }
 
     // logique pour faire passer une commande de pending à confirmée
-    public function update($id){
 
-        // ajouter la logique pour l'email !!
+public function update($id)
+{
+    $orderPending = Order::with('user', 'items.product', 'billing.country')->findOrFail($id);
 
-        $orderPending = Order::findOrFail($id);
+    $orderPending->update([
+       'status' => 'confirmed'
+    ]);
 
-        $orderPending->update([
-           'status' => 'confirmed'
-        ]);
+    // Ensure all relationships exist
+    $orderPending->loadMissing('user', 'items.product', 'billing.country');
 
-        return redirect()->route('orders')->with('success', 'Order confirmed!');
-        
-    }
+    Mail::to($orderPending->user->email)
+        ->send(new OrderConfirmedMail($orderPending));
+
+    return redirect()->route('orders')->with('success', 'Order confirmed and email sent!');
+}
+
 
     // montrer les détails d'une commande
     public function show($id) {
@@ -124,12 +131,48 @@ public function place_order(Request $request)
 }
 
 
+    public function confirmation(Order $order)
+    {
+        $order->load('items.product', 'billing.country', 'user');
 
-public function confirmation(Order $order)
+        return inertia('Front/Checkout/OrderConfirmation', [
+            'order' => $order,
+        ]);
+    }
+
+// Landing page
+public function trackOrder_page()
 {
-    $order->load('items.product', 'billing.country', 'user');
+    return Inertia::render('Front/TrackOrderForm', [
+        'order' => null,
+    ]);
+}
 
-    return inertia('Front/Checkout/OrderConfirmation', [
+// Dedicated order recap
+public function showTrackedOrder($order_number)
+{
+    $order = Order::with('user', 'items.product', 'billing.country')
+                  ->where('order_number', $order_number)
+                  ->firstOrFail(); // 404 if not found
+
+    return Inertia::render('Front/TrackOrderRecap', [
+        'order' => $order,
+    ]);
+}
+
+
+    // track order logic
+    public function trackOrder(Request $request)
+{
+    $request->validate([
+        'order_number' => 'required|string|exists:orders,order_number',
+    ]);
+
+    $order = Order::with('user', 'items.product', 'billing.country')
+        ->where('order_number', $request->order_number)
+        ->firstOrFail();
+
+    return inertia('Front/Checkout/TrackOrder', [
         'order' => $order,
     ]);
 }

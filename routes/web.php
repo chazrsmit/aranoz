@@ -77,6 +77,12 @@
     Route::get('/cart', [CartController::class, 'view_cart'])
         ->middleware(['auth'])
         ->name('cart_view');
+    // Landing page (enter order number)
+    Route::get('/track-order', [OrderController::class, 'trackOrder_page'])
+        ->name('track_order_page');
+    // Dedicated recap page
+    Route::get('/track-order/{order_number}', [OrderController::class, 'showTrackedOrder'])
+        ->name('show_tracked_order');
 
     // CRUDS //
     // Categories
@@ -113,6 +119,8 @@
     // Cart
     Route::post('/cart/add', [CartController::class, 'add_to_cart'])->name('cart_add');
     Route::delete('/cart/remove/{item}', [CartController::class, 'remove_from_cart'])->name('cart_remove');
+    // Track order
+    Route::post('/track-order', [OrderController::class, 'trackOrder'])->name('track_order');
 
     // Route::get('/dashboard', function () {
     //     return Inertia::render('Dashboard');
