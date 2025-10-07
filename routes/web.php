@@ -143,5 +143,8 @@
         Route::get('/order/confirmation/{order}', [OrderController::class, 'confirmation'])->name('order.confirmation');
     });
 
+    // MIDDLEWARES
+    
+
 
     require __DIR__.'/auth.php';
