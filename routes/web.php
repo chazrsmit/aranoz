@@ -28,6 +28,7 @@ Route::get('/blogs/all', [BlogController::class, 'all_blogs'])->name('front_blog
 Route::get('/blogs/{id}', [BlogController::class, 'show2'])->name('front_blog_show');
 Route::get('/blogs/category/{id}', [BlogController::class, 'blogsByCategory'])->name('front_blogs_category');
 Route::get('/contact', [ContactController::class, 'front_contact'])->name('front_contact');
+Route::post('/message/store', [MessageController::class, 'store'])->name('message.store');
 Route::get('/track-order', [OrderController::class, 'trackOrder_page'])->name('track_order_page');
 Route::get('/track-order/{order_number}', [OrderController::class, 'showTrackedOrder'])->name('show_tracked_order');
 

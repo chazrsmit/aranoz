@@ -72,7 +72,7 @@ export default function Footer() {
                         <div className="col-lg-6">
                             <h5 className="footer-title">Newsletter</h5>
                             <p className="newsletter-text">
-                                Heaven fruitful doesn't over lesser in days. Appear creeping
+                                Subscribe to our newsletter.
                             </p>
                         </div>
                         <div className="col-lg-6">
