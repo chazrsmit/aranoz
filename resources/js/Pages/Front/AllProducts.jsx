@@ -28,16 +28,35 @@ export default function AllProducts({ products, categories, colors, filters, aut
       <NavFront auth={auth} />
 
       {/* Header / Banner Section */}
-      <section className="hero-section text-center text-white d-flex align-items-center justify-content-center" style={{
-        backgroundImage: 'url("/images/shop-banner.jpg")',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        height: '40vh'
-      }}>
-        <div className="overlay"></div>
-        <div className="content">
-          <h1 className="fw-bold display-5">All Products</h1>
-          <p className="lead">Browse our complete collection</p>
+      <section
+        className="hero-section py-5"
+        style={{
+          backgroundColor: '#e8fcfc',
+          minHeight: '40vh',
+        }}
+      >
+        <div className="container">
+          <div className="row align-items-center">
+            {/* Left: Text */}
+            <div className="col-md-5 offset-md-1 text-center text-md-start mb-4 mb-md-0">
+              <h1 className="fw-bold display-5 text-dark">All Products</h1>
+              <p className="lead text-dark">Browse our complete collection</p>
+            </div>
+
+            {/* Right: Image */}
+            <div className="col-md-6 text-center">
+              <img
+                src="/storage/banner/product_8.png"
+                alt="All Products Banner"
+                className="img-fluid"
+                style={{
+                  maxHeight: '300px',
+                  objectFit: 'contain',
+                  filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))',
+                }}
+              />
+            </div>
+          </div>
         </div>
       </section>
 
