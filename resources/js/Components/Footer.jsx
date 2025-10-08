@@ -1,4 +1,21 @@
+import { useForm } from "@inertiajs/react"
+
 export default function Footer() {
+
+    const { data, setData, errors, post, reset } = useForm({
+        email: '',
+    });
+
+    const submitNewsletter = (e) => {
+        e.preventDefault();
+
+        post(route('store_newsletter'), {
+            preserveScroll: true,
+            preserveState: false,
+            onSuccess: () => reset('email'),
+        });
+    };
+
     return(
         <>
             <footer className="footer-section">
@@ -60,16 +77,27 @@ export default function Footer() {
                         </div>
                         <div className="col-lg-6">
                             <div className="newsletter-form" style={{ marginTop: '35px' }}>
+                                <form onSubmit={submitNewsletter} className="newsletter-form mt-3">
                                 <div className="input-group">
-                                    <input 
-                                        type="email" 
-                                        placeholder="Email Address" 
-                                        className="newsletter-input"
-                                    />
-                                    <button className="newsletter-btn">
-                                        SUBSCRIBE
-                                    </button>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            placeholder="Email Address"
+                                            className="newsletter-input form-control"
+                                            value={data.email}
+                                            onChange={(e) => setData('email', e.target.value)}
+                                            required
+                                        />
+                                        <button type="submit" className="newsletter-btn">
+                                            SUBSCRIBE
+                                        </button>
+                                    {errors.email && (
+                                        <div className="invalid-feedback d-block mt-2">
+                                            {errors.email}
+                                        </div>
+                                    )}
                                 </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -78,7 +106,7 @@ export default function Footer() {
                     <div className="row mt-5 pt-4 copyright-border">
                         <div className="col-12 text-center">
                             <p className="copyright">
-                                Copyright ©2025 All rights reserved | This template is made with <span className="heart">♥</span> by Cobrillo
+                                Copyright ©2025 | This template is made with <span className="heart">♥</span> by Charlotte
                             </p>
                         </div>
                     </div>
