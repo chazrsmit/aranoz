@@ -20,7 +20,7 @@ class BlogController extends Controller
         ]);
     }
 
-    // page pour afficher chaque post
+    // page pour afficher chaque post dans le backend
     public function show($id) {
         $blog = Blog::with('blog_category', 'user', 'tags')->findOrFail($id);
 
@@ -28,6 +28,30 @@ class BlogController extends Controller
             'blog' => $blog
         ]);
     }
+    // dans le front 
+public function show2($id) {
+    $blog = Blog::with(['blog_category', 'user', 'tags', 'comments.user'])->findOrFail($id);
+
+    $categories = BlogCategory::withCount('blogs')->get();
+    $recentBlogs = Blog::latest()->take(3)->get();
+
+// BlogController@show2
+return Inertia::render('Front/BlogShow', [
+    'blog' => $blog,
+    'categories' => $categories,
+    'recentBlogs' => $recentBlogs,
+    'auth' => [
+        'user' => auth()->user() ? [
+            'id' => auth()->user()->id,
+            'name' => auth()->user()->name,
+            'role' => auth()->user()->role ? ['role' => auth()->user()->role->role] : null,
+            'image' => auth()->user()->image ?? null,
+        ] : null
+    ]
+]);
+
+}
+
 
     // Page pour ajouter un article
     public function create() {
@@ -142,9 +166,11 @@ class BlogController extends Controller
     // page dans le front qui affiche les liste des blog posts
     public function all_blogs()
     {
-        $blogs = Blog::with(['blog_category', 'user'])
-            ->latest()
-            ->get();
+        // $blogs = Blog::with(['blog_category', 'user', 'comments'])
+        //     ->latest()
+        //     ->get();
+
+        $blogs = Blog::with(['blog_category', 'user', 'tags', 'comments.user'])->latest()->get();
 
         $categories = BlogCategory::withCount('blogs')->get();
 
@@ -156,4 +182,22 @@ class BlogController extends Controller
             'recentBlogs' => $recentBlogs,
         ]);
     }
+
+    public function blogsByCategory($id)
+        {
+            $blogs = Blog::with('blog_category', 'user', 'comments.user')
+                        ->where('blogcategory_id', $id)
+                        ->latest()
+                        ->get();
+
+            $categories = BlogCategory::withCount('blogs')->get();
+            $recentBlogs = Blog::latest()->take(3)->get();
+
+            return Inertia::render('Front/AllBlogs', [
+                'blogs' => $blogs,
+                'categories' => $categories,
+                'recentBlogs' => $recentBlogs,
+            ]);
+        }
+
 }

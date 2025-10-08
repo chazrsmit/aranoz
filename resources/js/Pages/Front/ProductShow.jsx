@@ -56,7 +56,7 @@ export default function ProductShow({ auth, product }) {
             {/* Left: Text */}
             <div className="col-md-5 offset-md-1 text-center text-md-start mb-4 mb-md-0">
               <h1 className="fw-bold display-5 text-dark">Product details</h1>
-              <p className="lead text-dark">Find out more about our product</p>
+              <p className="lead text-dark">Find out more about this product</p>
             </div>
 
             {/* Right: Image */}

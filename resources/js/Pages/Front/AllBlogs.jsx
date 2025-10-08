@@ -9,17 +9,36 @@ export default function AllBlogs({ blogs, categories, recentBlogs, auth }) {
       <Head title="All Blogs" />
       <NavFront auth={auth} />
 
-      {/* Banner */}
-      <section className="hero-section text-center text-white d-flex align-items-center justify-content-center" style={{
-        backgroundImage: 'url("/images/blog-banner.jpg")',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        height: '40vh'
-      }}>
-        <div className="overlay"></div>
-        <div className="content">
-          <h1 className="fw-bold display-5">Our Blog</h1>
-          <p className="lead">Latest news, stories, and insights</p>
+      {/* Header / Banner Section */}
+      <section
+        className="hero-section py-5"
+        style={{
+          backgroundColor: '#e8fcfc',
+          minHeight: '40vh',
+        }}
+      >
+        <div className="container">
+          <div className="row align-items-center">
+            {/* Left: Text */}
+            <div className="col-md-5 offset-md-1 text-center text-md-start mb-4 mb-md-0">
+              <h1 className="fw-bold display-5 text-dark">Discover our blog</h1>
+              <p className="lead text-dark">A list of articles</p>
+            </div>
+
+            {/* Right: Image */}
+            <div className="col-md-6 text-center">
+              <img
+                src="/storage/banner/product_4.png"
+                alt="All Products Banner"
+                className="img-fluid"
+                style={{
+                  maxHeight: '300px',
+                  objectFit: 'contain',
+                  filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))',
+                }}
+              />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -43,7 +62,7 @@ export default function AllBlogs({ blogs, categories, recentBlogs, auth }) {
                 </div>
                 <div className="card-body">
                   <h5 className="fw-bold mb-3">
-                    <Link href="#" className="text-dark text-decoration-none">
+                    <Link href={route('front_blog_show', blog.id)} className="text-dark text-decoration-none">
                       {blog.title}
                     </Link>
                   </h5>
@@ -55,7 +74,7 @@ export default function AllBlogs({ blogs, categories, recentBlogs, auth }) {
                     <span className="mx-2">|</span>
                     <i className="bi bi-folder me-2"></i> {blog.blog_category?.category}
                     <span className="mx-2">|</span>
-                    <i className="bi bi-chat-dots me-2"></i> 4 Comments
+                    <i className="bi bi-chat-dots me-2"></i> {blog.comments?.length || 0} Comment{blog.comments?.length === 1 ? '' : 's'}
                   </div>
                 </div>
               </div>
@@ -83,7 +102,7 @@ export default function AllBlogs({ blogs, categories, recentBlogs, auth }) {
               <ul className="list-unstyled mb-0">
                 {categories.map((cat, index) => (
                   <li key={index} className="d-flex justify-content-between align-items-center py-2 border-bottom">
-                    <Link href="#" className="text-dark text-decoration-none">
+                    <Link href={route('front_blogs_category', cat.id)}  className="text-dark text-decoration-none">
                       {cat.category}
                     </Link>
                     <span className="text-muted small">({cat.blogs_count})</span>
@@ -107,7 +126,7 @@ export default function AllBlogs({ blogs, categories, recentBlogs, auth }) {
                       style={{ objectFit: 'cover' }}
                     />
                     <div>
-                      <Link href="#" className="text-dark text-decoration-none small fw-semibold d-block">
+                      <Link href={route('front_blog_show', blog.id)} className="text-dark text-decoration-none small fw-semibold d-block">
                         {blog.title.substring(0, 40)}...
                       </Link>
                       <span className="text-muted small">

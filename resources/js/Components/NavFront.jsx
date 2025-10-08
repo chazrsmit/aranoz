@@ -21,7 +21,7 @@ export default function NavFront({ auth }) {
     }
   }
 
-  const roleLinks = auth.user ? getRoleLinks(auth.user) : [];
+  const roleLinks = auth?.user ? getRoleLinks(auth.user) : [];
 
   return(
     <nav className="navbar navbar-expand-lg aranoz-navbar">

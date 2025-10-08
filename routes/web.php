@@ -3,6 +3,7 @@
 use App\Http\Controllers\BlogCategoriesController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\MailController;
@@ -24,6 +25,8 @@ Route::get('/', [GeneralController::class, 'index'])->name('home');
 Route::get('/products/all', [ProductController::class, 'all_products'])->name('all_products');
 Route::get('/product-details/{id}', [ProductController::class, 'front_product'])->name('front_product');
 Route::get('/blogs/all', [BlogController::class, 'all_blogs'])->name('front_blogs');
+Route::get('/blogs/{id}', [BlogController::class, 'show2'])->name('front_blog_show');
+Route::get('/blogs/category/{id}', [BlogController::class, 'blogsByCategory'])->name('front_blogs_category');
 Route::get('/contact', [ContactController::class, 'front_contact'])->name('front_contact');
 Route::get('/track-order', [OrderController::class, 'trackOrder_page'])->name('track_order_page');
 Route::get('/track-order/{order_number}', [OrderController::class, 'showTrackedOrder'])->name('show_tracked_order');
@@ -58,6 +61,9 @@ Route::middleware('auth')->group(function () {
     // -----------------------------
     Route::get('/dash', [GeneralController::class, 'dash'])->name('dash');
 });
+
+// Add comments
+Route::middleware('auth')->post('/blogs/{blog}/comments', [CommentController::class, 'store'])->name('blog_comment_store');
 
 // -----------------------------
 // ADMIN ROUTES
