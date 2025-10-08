@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
 
 // -----------------------------
+// ERROR PAGES
+// -----------------------------
+Route::get('/error/403', [GeneralController::class, 'error403'])->name('error.403');
+
+// -----------------------------
 // PUBLIC ROUTES
 // -----------------------------
 Route::get('/', [GeneralController::class, 'index'])->name('home');
@@ -67,7 +72,8 @@ Route::middleware('auth')->post('/blogs/{blog}/comments', [CommentController::cl
 // -----------------------------
 // BACKEND ROUTES (Role-based)
 // -----------------------------
-// Admin has access to all backend routes
+
+// Admin-only routes
 Route::middleware(['auth', RoleMiddleware::class.':Admin'])->group(function () {
     // Dashboard
     Route::get('/admin/dashboard', [GeneralController::class, 'dash'])->name('admin.dashboard');
@@ -79,23 +85,28 @@ Route::middleware(['auth', RoleMiddleware::class.':Admin'])->group(function () {
     Route::post('/admin/users/update/{id}', [UsersController::class, 'update'])->name('update_user');
     Route::delete('/admin/users/delete/{id}', [UsersController::class, 'delete'])->name('delete_user');
 
+    // Categories page (overview)
+    Route::get('/admin/categories', [GeneralController::class, 'categories'])->name('categories');
+});
+
+// Admin + Agent routes (Orders & Mailbox)
+Route::middleware(['auth', RoleMiddleware::class.':Admin,Agent'])->group(function () {
     // Orders
     Route::get('/admin/orders', [OrderController::class, 'orders'])->name('orders');
     Route::get('/admin/orders/show/{id}', [OrderController::class, 'show'])->name('show_order');
     Route::put('/admin/orders/confirm/{id}', [OrderController::class, 'update'])->name('confirm_order');
-
-    // Contact
-    Route::get('/admin/contact', [ContactController::class, 'contact'])->name('contact');
-    Route::put('/admin/contact/update/{id}', [ContactController::class, 'update'])->name('update_contact');
-
+    
     // Mailbox
     Route::get('/admin/mailbox', [MessageController::class, 'mailbox'])->name('mailbox');
     Route::get('/admin/mailbox/show/{id}', [MessageController::class, 'show'])->name('show_message');
     Route::get('/admin/mailbox/reply/{id}', [MessageController::class, 'reply'])->name('reply_message');
     Route::put('/admin/mailbox/archive/{id}', [MessageController::class, 'archive'])->name('archive_message');
     Route::delete('/admin/mailbox/delete/{id}', [MessageController::class, 'delete'])->name('delete_message');
+});
 
-    // Blog CRUD (Admin + Community Manager)
+// Admin + Communication Manager routes (Blog & Tags)
+Route::middleware(['auth', RoleMiddleware::class.':Admin,Communication Manager'])->group(function () {
+    // Blog CRUD
     Route::get('/admin/blog', [BlogController::class, 'blog_back'])->name('blog_back');
     Route::get('/admin/blog/show/{id}', [BlogController::class, 'show'])->name('show_blog');
     Route::get('/admin/blog/create', [BlogController::class, 'create'])->name('create_blog');
@@ -104,14 +115,24 @@ Route::middleware(['auth', RoleMiddleware::class.':Admin'])->group(function () {
     Route::post('/admin/blog/update/{id}', [BlogController::class, 'update'])->name('update_blog');
     Route::delete('/admin/blog/delete/{id}', [BlogController::class, 'delete'])->name('delete_blog');
 
-    // Tags CRUD (Admin + Community Manager)
+    // Tags CRUD
     Route::get('/admin/categories/tag/create', [TagController::class, 'create'])->name('create_tag');
     Route::get('/admin/categories/tag/edit/{id}', [TagController::class, 'edit'])->name('edit_tag');
     Route::post('/admin/categories/tag/store', [TagController::class, 'store'])->name('store_tag');
     Route::put('/admin/categories/tag/update/{id}', [TagController::class, 'update'])->name('update_tag');
     Route::delete('/admin/categories/tag/delete/{id}', [TagController::class, 'delete'])->name('delete_tag');
 
-    // Products CRUD (Admin + Webmaster)
+    // Blog Categories CRUD
+    Route::get('/admin/categories/blog/create', [BlogCategoriesController::class, 'create'])->name('create_cat_blog');
+    Route::get('/admin/categories/blog/edit/{id}', [BlogCategoriesController::class, 'edit'])->name('edit_cat_blog');
+    Route::post('/admin/categories/blog/store', [BlogCategoriesController::class, 'store'])->name('store_cat_blog');
+    Route::put('/admin/categories/blog/update/{id}', [BlogCategoriesController::class, 'update'])->name('update_cat_blog');
+    Route::delete('/admin/categories/blog/delete/{id}', [BlogCategoriesController::class, 'delete'])->name('delete_cat_blog');
+});
+
+// Admin + Webmaster routes (Products & Contact)
+Route::middleware(['auth', RoleMiddleware::class.':Admin,Webmaster'])->group(function () {
+    // Products CRUD
     Route::get('/admin/products', [ProductController::class, 'products'])->name('products_back');
     Route::get('/admin/products/create', [ProductController::class, 'create'])->name('create_product');
     Route::get('/admin/products/edit/{id}', [ProductController::class, 'edit'])->name('edit_product');
@@ -123,24 +144,17 @@ Route::middleware(['auth', RoleMiddleware::class.':Admin'])->group(function () {
     // Liked Products
     Route::get('/admin/liked-products', [ProductController::class, 'liked'])->name('products_liked');
 
-    // Product Categories (Admin + Webmaster)
-    Route::get('/admin/categories', [GeneralController::class, 'categories'])->name('categories');
+    // Product Categories CRUD
     Route::get('/admin/categories/product/create', [ProductCategoriesController::class, 'create'])->name('create_cat_prod');
     Route::get('/admin/categories/product/edit/{id}', [ProductCategoriesController::class, 'edit'])->name('edit_cat_prod');
     Route::post('/admin/categories/product/store', [ProductCategoriesController::class, 'store'])->name('store_cat_prod');
     Route::put('/admin/categories/product/update/{id}', [ProductCategoriesController::class, 'update'])->name('update_cat_prod');
     Route::delete('/admin/categories/product/delete/{id}', [ProductCategoriesController::class, 'delete'])->name('delete_cat_prod');
 
-    // Blog Categories (Admin + Webmaster)
-    Route::get('/admin/categories/blog/create', [BlogCategoriesController::class, 'create'])->name('create_cat_blog');
-    Route::get('/admin/categories/blog/edit/{id}', [BlogCategoriesController::class, 'edit'])->name('edit_cat_blog');
-    Route::post('/admin/categories/blog/store', [BlogCategoriesController::class, 'store'])->name('store_cat_blog');
-    Route::put('/admin/categories/blog/update/{id}', [BlogCategoriesController::class, 'update'])->name('update_cat_blog');
-    Route::delete('/admin/categories/blog/delete/{id}', [BlogCategoriesController::class, 'delete'])->name('delete_cat_blog');
-
-    // Agent Routes (Admin + Agent)
-    Route::get('/agent/orders', [OrderController::class, 'index'])->name('agent.orders');
-    Route::post('/agent/orders/{order}/update-status', [OrderController::class, 'updateStatus'])->name('agent.update_status');
+    // Contact
+    Route::get('/admin/contact', [ContactController::class, 'contact'])->name('contact');
+    Route::put('/admin/contact/update/{id}', [ContactController::class, 'update'])->name('update_contact');
 });
+
 
 require __DIR__.'/auth.php';

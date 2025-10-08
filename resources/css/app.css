@@ -1112,3 +1112,55 @@ border-radius: 0px;
     margin-top: 15px;
   }
 }
+
+/* 403 */
+
+/* Error 403 Page */
+.error-page {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: #2a2a2a;
+  font-family: 'Arial', sans-serif;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.error-page .error-code {
+  font-size: 8rem;
+  font-weight: 700;
+  color: #ff6b81;
+  margin-bottom: 20px;
+}
+
+.error-page .error-message {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.error-page .error-description {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.error-page .btn-go-home {
+  padding: 12px 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 50px;
+  background-color: #ff6b81;
+  color: #fff;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.error-page .btn-go-home:hover {
+  background-color: #fa2d5b;
+  color: #fff;
+}

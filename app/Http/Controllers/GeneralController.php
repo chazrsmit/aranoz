@@ -57,4 +57,10 @@ class GeneralController extends Controller
             'tags' => $tags,
         ]);
     }
+
+    // error 403
+    public function error403()
+{
+    return Inertia::render('Errors/Error403');
+}
 }
