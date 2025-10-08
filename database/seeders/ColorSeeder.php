@@ -13,20 +13,41 @@ class ColorSeeder extends Seeder
      */
     public function run(): void
     {
-        Color::factory()->count(50)->create();
+        // Color::factory()->count(50)->create();
 
         Color::insert([
             [
-                'color' => '#3DED97'
+                'color' => 'Jaune'
             ],
             [
-                'color' => '#FF8000'
+                'color' => 'Rouge'
             ],
             [
-                'color' => '#FFFFFF'
+                'color' => 'Blanc'
             ],
             [
-                'color' => '#000000'
+                'color' => 'Bleu'
+            ],
+            [
+                'color' => 'Vert'
+            ],
+            [
+                'color' => 'Noir'
+            ],
+            [
+                'color' => 'Orange'
+            ],
+            [
+                'color' => 'Rose'
+            ],
+            [
+                'color' => 'Gris'
+            ],
+            [
+                'color' => 'Brun'
+            ],
+            [
+                'color' => 'Multicolore'
             ]
         ]);
     }

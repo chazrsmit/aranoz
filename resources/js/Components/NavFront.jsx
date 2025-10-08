@@ -41,12 +41,11 @@ export default function NavFront({ auth }) {
               <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Shop</a>
               <ul className="dropdown-menu">
                 <li><a className="dropdown-item" href={route('all_products')}>All products</a></li>
-{auth.user && !['Admin','Community Manager','Agent','Webmaster'].includes(auth.user.role?.role) && (
-  <li>
-    <a className="dropdown-item" href={route('track_order_page')}>Track your order</a>
-  </li>
-)}
-
+                {auth.user && !['Admin','Community Manager','Agent','Webmaster'].includes(auth.user.role?.role) && (
+                  <li>
+                    <a className="dropdown-item" href={route('track_order_page')}>Track your order</a>
+                  </li>
+                )}
               </ul>
             </li>
 

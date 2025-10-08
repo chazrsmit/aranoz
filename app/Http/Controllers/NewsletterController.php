@@ -7,17 +7,22 @@ use Illuminate\Http\Request;
 
 class NewsletterController extends Controller
 {
-    public function store(Request $request) {
-
+    public function store(Request $request)
+    {
         $request->validate([
-            'email' => 'required|email'
+            'email' => 'required|email',
         ]);
 
-        $newsletter = new Newsletter();
+        $existing = Newsletter::where('email', $request->email)->first();
 
-        $newsletter->email = $request->email;
-        $newsletter->save();
+        if ($existing) {
+            return redirect()->route('home')->with('error', 'This email is already subscribed to our newsletter.');
+        }
 
-        return redirect()->route('home')->with('success', 'Your email has been added to the database.');
+        Newsletter::create([
+            'email' => $request->email,
+        ]);
+
+        return redirect()->route('home')->with('success', 'You have successfully subscribed to our newsletter!');
     }
 }

@@ -24,7 +24,7 @@ class ProductSeeder extends Seeder
                 'image_rear' => 'banner/product_1.png',
                 'image_left' => 'banner/product_1.png',
                 'image_right' => 'banner/product_1.png',
-                'color_id' => 21,
+                'color_id' => 5,
                 'productcategory_id' => 1,
                 'promotion_id' => 1
             ],
@@ -38,7 +38,7 @@ class ProductSeeder extends Seeder
                 'image_rear' => 'banner/product_5.png',
                 'image_left' => 'banner/product_5.png',
                 'image_right' => 'banner/product_5.png',
-                'color_id' => 5,
+                'color_id' => 3,
                 'productcategory_id' => 1,
                 'promotion_id' => 2
             ],
@@ -52,7 +52,7 @@ class ProductSeeder extends Seeder
                 'image_rear' => 'banner/feature_4.png',
                 'image_left' => 'banner/feature_4.png',
                 'image_right' => 'banner/feature_4.png',
-                'color_id' => 5,
+                'color_id' => 1,
                 'productcategory_id' => 6,
                 'promotion_id' => null
             ],
@@ -66,7 +66,7 @@ class ProductSeeder extends Seeder
                 'image_rear' => 'banner/product_4.png',
                 'image_left' => 'banner/product_4.png',
                 'image_right' => 'banner/product_4.png',
-                'color_id' => 5,
+                'color_id' => 11,
                 'productcategory_id' => 1,
                 'promotion_id' => 1
             ],
@@ -80,7 +80,7 @@ class ProductSeeder extends Seeder
                 'image_rear' => 'banner/product_1.png',
                 'image_left' => 'banner/product_1.png',
                 'image_right' => 'banner/product_1.png',
-                'color_id' => 21,
+                'color_id' => 5,
                 'productcategory_id' => 1,
                 'promotion_id' => 1
             ],
@@ -94,7 +94,7 @@ class ProductSeeder extends Seeder
                 'image_rear' => 'banner/product_2.png',
                 'image_left' => 'banner/product_2.png',
                 'image_right' => 'banner/product_2.png',
-                'color_id' => 22,
+                'color_id' => 7,
                 'productcategory_id' => 1,
                 'promotion_id' => null
             ],
@@ -108,7 +108,7 @@ class ProductSeeder extends Seeder
                 'image_rear' => 'banner/product_5.png',
                 'image_left' => 'banner/product_5.png',
                 'image_right' => 'banner/product_5.png',
-                'color_id' => 5,
+                'color_id' => 3,
                 'productcategory_id' => 1,
                 'promotion_id' => 2
             ],
@@ -122,7 +122,7 @@ class ProductSeeder extends Seeder
                 'image_rear' => 'banner/product_8.png',
                 'image_left' => 'banner/product_8.png',
                 'image_right' => 'banner/product_8.png',
-                'color_id' => 5,
+                'color_id' => 2,
                 'productcategory_id' => 1,
                 'promotion_id' => 2
             ],
@@ -136,7 +136,7 @@ class ProductSeeder extends Seeder
                 'image_rear' => 'banner/banner_img.png',
                 'image_left' => 'banner/banner_img.png',
                 'image_right' => 'banner/banner_img.png',
-                'color_id' => 5,
+                'color_id' => 4,
                 'productcategory_id' => 6,
                 'promotion_id' => null
             ]

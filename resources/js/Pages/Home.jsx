@@ -12,7 +12,7 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
 
     // on utilise un useEffect
     useEffect(() => {
-        if (flash?.success) {
+        if (flash?.success || flash?.error) {
             // en mettant setShowFlash à true, on est sûr de lancer un message
             setShowFlash(true);
 
@@ -64,14 +64,18 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
     };
 
     // newsletter
-    const { data, setData, errors } = useForm({
+    const { data, setData, errors, post } = useForm({
         email : "",
     });
 
     const submitNewsletter = (e) => {
         e.preventDefault();
-        route(post('store_newsletter'));
-    }
+        post(route('store_newsletter'), {
+            preserveScroll: true,
+            preserveState: false, 
+            // on ajoute le preserveState false pour que ça se réinitialise et qu'on ait des flash messages
+        });
+    };
 
     return(
         <>
@@ -182,7 +186,12 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
                         />
                         <small className="featured-category">Premium Quality</small>
                         <h5 className="featured-title">{cat.title}</h5>
-                        <a href="#" className="explore-btn">EXPLORE NOW</a>
+                        <Link 
+                        href={route('all_products', { category: cat.id })} 
+                        className="explore-btn"
+                        >
+                        EXPLORE NOW
+                        </Link>
                         </div>
                     </div>
                     ))}
@@ -241,7 +250,7 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
 
                     return (
                     <div key={product.id} className="product-card">
-                        <Link href={route('front_product', product.id)}>
+                        <Link href={route('front_product', product.id)} className="text-decoration-none">
                         <img 
                             src={`/storage/${product.image_main}`} 
                             alt={product.product}
@@ -385,7 +394,7 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
 
                     return (
                     <div key={product.id} className="product-card">
-                        <Link href={route('front_product', product.id)}>
+                        <Link href={route('front_product', product.id)} className="text-decoration-none">
                         <img 
                             src={`/storage/${product.image_main}`} 
                             alt={product.product}
@@ -423,7 +432,10 @@ export default function Home({ auth, prod_car, prod_awe, prod_discount, prod_bes
                 {/* Flash message */}
                 {flash?.success && showFlash && (
                     <div className="alert alert-success">{flash.success}</div>
-                )}  
+                )}
+                {flash?.error && showFlash && (
+                    <div className="alert alert-danger">{flash.error}</div>
+                )}
 
                 <h1 className="newsletter-title">
                     Subscribe to get Updated with new offers
