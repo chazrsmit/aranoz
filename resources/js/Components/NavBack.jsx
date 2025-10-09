@@ -100,9 +100,9 @@ export default function NavBack({ auth }) {
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item rounded py-2" href={route("products_liked")}>
+                  {/* <a className="dropdown-item rounded py-2" href={route("products_liked")}>
                     Liked Products
-                  </a>
+                  </a> */}
                 </li>
               </ul>
             </li>
@@ -174,7 +174,7 @@ export default function NavBack({ auth }) {
                     href={route("logout")}
                     method="post"
                     as="button"
-                    className="dropdown-item text-danger rounded py-2"
+                    className="dropdown-item  rounded py-2"
                     style={{ transition: "background 0.2s" }}
                   >
                     Log out

@@ -1,86 +1,119 @@
 import { useEffect, useState } from 'react';
 import NavBack from '../../../Components/NavBack.jsx';
+import Footer from '../../../Components/Footer.jsx';
 import { Head, Link, usePage } from '@inertiajs/react';
 
 export default function Products({ auth, products }) {
 
-    // Logique messages flash
+    // Flash logic
     const page = usePage();
     const flash = page.props?.flash;
     const [showFlash, setShowFlash] = useState(true);
 
-    // on utilise un useEffect
     useEffect(() => {
         if (flash?.success) {
-            // en mettant setShowFlash à true, on est sûr de lancer un message
             setShowFlash(true);
-
-            const timer = setTimeout(() => {
-                setShowFlash(false);
-            }, 5000);
-
-            // grâce au clearTimeOut, on fait en sorte que le timer est reset à chaque fois pour qu'il n'y ait pas d'overlap entre les messages.
-            return () => clearTimeout(timer); 
+            const timer = setTimeout(() => setShowFlash(false), 5000);
+            return () => clearTimeout(timer);
         }
     }, [flash?.success]);
 
-    return(
+    return (
         <>
-        
-        <Head title="Aranoz Dashboard - Products" />
+            <Head title="Aranoz Dashboard - Products" />
+            <NavBack auth={auth} />
 
-        <NavBack auth={auth} />
+            {/* Hero */}
+            <section
+                className="hero-section back py-5"
+                style={{ backgroundColor: '#e8fcfc', minHeight: '40vh' }}
+            >
+                <div className="container">
+                    <div className="row align-items-center">
+                        <div className="col-md-5 offset-md-1 text-center text-md-start mb-4 mb-md-0">
+                            <h1 className="fw-bold display-5 text-dark">Products</h1>
+                            <p className="lead text-dark">Edit and manage products.</p>
+                        </div>
+                        <div className="col-md-6 text-center">
+                            <img
+                                src="/storage/banner/product_8.png"
+                                alt="All Products Banner"
+                                className="img-fluid"
+                                style={{ maxHeight: '300px', objectFit: 'contain', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))' }}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        {/* Flash message */}
-        {flash?.success && showFlash && (
-            <div className="alert alert-success">{flash.success}</div>
-        )}  
+            {/* Flash message */}
+            {flash?.success && showFlash && (
+                <div className="alert alert-success text-center m-0 rounded-0">
+                    {flash.success}
+                </div>
+            )}
 
-        <Link href={route('create_product')} className="btn btn-secondary">Add a new product</Link>
+            <div className="container py-5">
+                {/* Back / Add button */}
+                <div className="mb-4">
+                    <Link href={route('create_product')} className="btn btn-secondary">
+                        Add a new product
+                    </Link>
+                </div>
 
-        {/* Products */}
-        <h2>All products</h2>
+                {/* Products Table Card */}
+                <div className="card shadow-sm border-0 p-4">
+                    <h2 className="mb-4">All Products</h2>
+                    <table className="table table-hover align-middle">
+                        <thead className="table-light">
+                            <tr>
+                                <th scope="col">Picture</th>
+                                <th scope="col">Product</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col">Details</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {products.length > 0 ? (
+                                products.map(p => (
+                                    <tr key={p.id}>
+                                        <th scope="row">
+                                            <img
+                                                src={`/storage/${p.image_main}`}
+                                                alt={p.product}
+                                                style={{ borderRadius: "50%", objectFit: "cover" }}
+                                                width="50"
+                                                height="50"
+                                            />
+                                        </th>
+                                        <td>{p.product}</td>
+                                        <td className="text-capitalize">{p.product_category?.category}</td>
+                                        <td>{p.stock}</td>
+                                        <td>
+                                            <Link href={route('show_product', p.id)} className="btn btn-info btn-sm">Show</Link>
+                                        </td>
+                                        <td>
+                                            <Link href={route('edit_product', p.id)} className="btn btn-warning btn-sm">Edit</Link>
+                                        </td>
+                                        <td>
+                                            <Link href={route('delete_product', p.id)} method='DELETE' className="btn btn-danger btn-sm">Delete</Link>
+                                        </td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="7" className="text-center">No products available.</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
-        <table className="table">
-            <thead>
-                <tr>
-                <th scope="col">Picture</th>
-                <th scope="col">Product</th>
-                <th scope="col">Category</th>
-                <th scope="col">Stock</th>
-                <th scope="col">Details</th>
-                <th scope="col">Edit</th>
-                <th scope="col">Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                {
-                    products.map(p => (
-                        <tr key={p.id}>
-                            <th scope="row">
-                                <img src={`/storage/${p.image_main}`} alt="" style={{borderRadius:"50%", objectFit:"cover"}} width="50px" />
-                            </th>
-                            <th scope="row">{p.product}</th>
-                            <td className="text-capitalize">{p.product_category?.category}</td>
-                            <td>
-                                {p.stock}
-                            </td>
-                            <td>
-                                <Link href={route('show_product', p.id)}>Show</Link>
-                            </td>
-                            <td>
-                                <Link href={route('edit_product', p.id)}>Edit</Link>
-                            </td>
-                            <td>
-                                <Link href={route('delete_product', p.id)} method='DELETE'>Delete</Link>
-                            </td>
-                        </tr>
-                    ))
-
-                }
-            </tbody>
-            </table>
-        
+            <Footer />
         </>
-    )
+    );
 }
