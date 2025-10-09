@@ -60,7 +60,13 @@ class GeneralController extends Controller
 
     // error 403
     public function error403()
-{
-    return Inertia::render('Errors/Error403');
-}
+    {
+        return Inertia::render('Errors/Error403');
+    }
+
+    // error 404
+    public function error404()
+    {
+        return Inertia::render('Errors/Error404');
+    }
 }

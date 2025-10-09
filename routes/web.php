@@ -22,6 +22,7 @@ use App\Http\Middleware\RoleMiddleware;
 // ERROR PAGES
 // -----------------------------
 Route::get('/error/403', [GeneralController::class, 'error403'])->name('error.403');
+Route::get('/error/404', [GeneralController::class, 'error404'])->name('error.404');
 
 // -----------------------------
 // PUBLIC ROUTES

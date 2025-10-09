@@ -18,8 +18,13 @@ return Application::configure(basePath: dirname(__DIR__))
     })
 ->withExceptions(function (Exceptions $exceptions) {
     $exceptions->respond(function ($response, $exception, $request) {
+        // error 403
         if ($response->getStatusCode() === 403) {
             return redirect()->route('error.403');
+        }
+        // error 404
+        if ($response->getStatusCode() === 404) {
+                return redirect()->route('error.404');
         }
 
         return $response;
