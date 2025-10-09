@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('order_number')->unique();
             $table->enum('status', ['pending', 'confirmed', 'archived']);
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

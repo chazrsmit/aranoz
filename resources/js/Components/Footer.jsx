@@ -106,7 +106,7 @@ export default function Footer() {
                     <div className="row mt-5 pt-4 copyright-border">
                         <div className="col-12 text-center">
                             <p className="copyright">
-                                Copyright ©2025 | This template is made with <span className="heart">♥</span> by Charlotte
+                                Copyright ©2025 Aranoz
                             </p>
                         </div>
                     </div>
