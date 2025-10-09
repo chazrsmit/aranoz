@@ -1,12 +1,12 @@
 import NavBack from '../../../Components/NavBack.jsx';
+import Footer from '../../../Components/Footer.jsx';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Edit({ auth, product, prod_cats, colors, promotions }) {
 
-    // infos à modifier et à envoyer au back
-    const {data, setData, post, errors} = useForm({
-        product : product.product,
-        description : product.description,
+    const { data, setData, post, errors } = useForm({
+        product: product.product,
+        description: product.description,
         price: product.price,
         stock: product.stock,
         isPinned: product.isPinned,
@@ -24,253 +24,220 @@ export default function Edit({ auth, product, prod_cats, colors, promotions }) {
         quality_checking: product.specifications?.quality_checking
     });
 
-    // fonction submit
     const handleSubmit = (e) => {
         e.preventDefault();
-        // mettre le post ici:
         post(route('update_product', product.id), {
             forceFormData: true,
             _method: 'PUT'
         });
     };
 
-    // variable 'field' qui réunit les 4 images
-    const handleFileChange = (e, field) => {
-        setData(field, e.target.files[0]);
-    };
+    const handleFileChange = (e, field) => setData(field, e.target.files[0]);
 
-    return(
+    return (
         <>
+            <Head title="Aranoz Dashboard - Edit Product" />
+            <NavBack auth={auth} />
 
-        <Head title="Aranoz Dashboard - edit product" />
+            {/* Hero Section */}
+            <section
+                className="hero-section back py-5"
+                style={{ backgroundColor: '#e8fcfc', minHeight: '40vh' }}
+            >
+                <div className="container">
+                    <div className="row align-items-center">
+                        <div className="col-md-5 offset-md-1 text-center text-md-start mb-4 mb-md-0">
+                            <h1 className="fw-bold display-5 text-dark">Products</h1>
+                            <p className="lead text-dark">Edit and manage product details.</p>
+                        </div>
+                        <div className="col-md-6 text-center">
+                            <img
+                                src="/storage/banner/product_8.png"
+                                alt="Products Banner"
+                                className="img-fluid"
+                                style={{ maxHeight: '300px', objectFit: 'contain', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))' }}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        <NavBack auth={auth} />
+            <div className="container py-5">
+                {/* Back Button */}
+                <div className="mb-4">
+                    <Link href={route('products_back')} className="btn btn-secondary">
+                        &larr; Back to all products
+                    </Link>
+                </div>
 
-        <Link href={route('products_back')}>back to all products</Link>
+                {/* Product Edit Form Card */}
+                <div className="card shadow-sm border-0 p-4">
+                    <h2 className="mb-4">Edit Product</h2>
 
-        <h2>Create a new product</h2>
+                    {/* Current Images */}
+                    <div className="mb-4 d-flex flex-wrap gap-2 justify-content-center">
+                        {product.image_main && <img src={`/storage/${product.image_main}`} alt="Main" className="img-fluid rounded" style={{ maxHeight: '150px', objectFit: 'cover' }} />}
+                        {product.image_rear && <img src={`/storage/${product.image_rear}`} alt="Rear" className="img-fluid rounded" style={{ maxHeight: '150px', objectFit: 'cover' }} />}
+                        {product.image_left && <img src={`/storage/${product.image_left}`} alt="Left" className="img-fluid rounded" style={{ maxHeight: '150px', objectFit: 'cover' }} />}
+                        {product.image_right && <img src={`/storage/${product.image_right}`} alt="Right" className="img-fluid rounded" style={{ maxHeight: '150px', objectFit: 'cover' }} />}
+                    </div>
 
-        <img src={`/storage/${product.image_main}`} alt="" width="300px" />
-        <img src={`/storage/${product.image_rear}`} alt="" width="300px" />
-        <img src={`/storage/${product.image_left}`} alt="" width="300px" />
-        <img src={`/storage/${product.image_right}`} alt="" width="300px" />
+                    <form onSubmit={handleSubmit}>
+                        {/* Product Name */}
+                        <div className="mb-3">
+                            <label className="form-label">Product Name</label>
+                            <input
+                                type="text"
+                                value={data.product}
+                                onChange={e => setData('product', e.target.value)}
+                                className={`form-control ${errors.product ? 'is-invalid' : ''}`}
+                            />
+                            {errors.product && <div className="invalid-feedback">{errors.product}</div>}
+                        </div>
 
-        <form onSubmit={handleSubmit}>
-            {/* Name */}
-            <label htmlFor="product" className="form-label">Name</label>
-            <input type="text" name="product" id="" value={data.product} onChange={(e) => setData('product', e.target.value,)}
-            className={`form-control w-25 ${errors.product ? 'is-invalid' : ''}`} />
-                {/* message d'erreur */}
-                { errors.product &&
-                    <div className="invalid-feedback">{errors.product}</div>
-                }
+                        {/* Description */}
+                        <div className="mb-3">
+                            <label className="form-label">Description</label>
+                            <textarea
+                                value={data.description}
+                                onChange={e => setData('description', e.target.value)}
+                                className={`form-control ${errors.description ? 'is-invalid' : ''}`}
+                                rows="4"
+                            />
+                            {errors.description && <div className="invalid-feedback">{errors.description}</div>}
+                        </div>
 
-            {/* Description */}
-            <label htmlFor="description" className="form-label">Description</label>
-            <textarea name="description" id="" value={data.description} onChange={(e) => setData('description', e.target.value,)}
-            className={`form-control w-25 ${errors.description ? 'is-invalid' : ''}`} />
-                {/* message d'erreur */}
-                { errors.description &&
-                    <div className="invalid-feedback">{errors.description}</div>
-                }
+                        {/* Price & Stock */}
+                        <div className="row mb-3">
+                            <div className="col-md-6">
+                                <label className="form-label">Price (€)</label>
+                                <input
+                                    type="number"
+                                    value={data.price}
+                                    onChange={e => setData('price', e.target.value)}
+                                    className={`form-control ${errors.price ? 'is-invalid' : ''}`}
+                                />
+                                {errors.price && <div className="invalid-feedback">{errors.price}</div>}
+                            </div>
+                            <div className="col-md-6">
+                                <label className="form-label">Stock</label>
+                                <input
+                                    type="number"
+                                    value={data.stock}
+                                    onChange={e => setData('stock', e.target.value)}
+                                    className={`form-control ${errors.stock ? 'is-invalid' : ''}`}
+                                />
+                                {errors.stock && <div className="invalid-feedback">{errors.stock}</div>}
+                            </div>
+                        </div>
 
-            {/* Price */}
-            <label htmlFor="price" className="form-label">Price</label>
-            <input type="number" name="price" id="" value={data.price} onChange={(e) => setData('price', e.target.value,)}
-            className={`form-control w-25 ${errors.price ? 'is-invalid' : ''}`} />
-                {/* message d'erreur */}
-                { errors.price &&
-                    <div className="invalid-feedback">{errors.price}</div>
-                }
+                        {/* Homepage feature */}
+                        <div className="mb-3">
+                            <label className="form-label me-3">Feature on homepage?</label>
+                            <div className="form-check form-check-inline">
+                                <input
+                                    className="form-check-input"
+                                    type="radio"
+                                    value={1}
+                                    checked={data.isPinned == 1}
+                                    onChange={() => setData('isPinned', 1)}
+                                />
+                                <label className="form-check-label">Yes</label>
+                            </div>
+                            <div className="form-check form-check-inline">
+                                <input
+                                    className="form-check-input"
+                                    type="radio"
+                                    value={0}
+                                    checked={data.isPinned == 0}
+                                    onChange={() => setData('isPinned', 0)}
+                                />
+                                <label className="form-check-label">No</label>
+                            </div>
+                            {errors.isPinned && <div className="text-danger small">{errors.isPinned}</div>}
+                        </div>
 
-            {/* stock */}
+                        {/* Dimensions & Weight */}
+                        <div className="row mb-3">
+                            <div className="col-md-3">
+                                <label className="form-label">Width</label>
+                                <input type="number" value={data.width} onChange={e => setData('width', e.target.value)} className={`form-control ${errors.width ? 'is-invalid' : ''}`} />
+                                {errors.width && <div className="invalid-feedback">{errors.width}</div>}
+                            </div>
+                            <div className="col-md-3">
+                                <label className="form-label">Height</label>
+                                <input type="number" value={data.height} onChange={e => setData('height', e.target.value)} className={`form-control ${errors.height ? 'is-invalid' : ''}`} />
+                                {errors.height && <div className="invalid-feedback">{errors.height}</div>}
+                            </div>
+                            <div className="col-md-3">
+                                <label className="form-label">Depth</label>
+                                <input type="number" value={data.depth} onChange={e => setData('depth', e.target.value)} className={`form-control ${errors.depth ? 'is-invalid' : ''}`} />
+                                {errors.depth && <div className="invalid-feedback">{errors.depth}</div>}
+                            </div>
+                            <div className="col-md-3">
+                                <label className="form-label">Weight</label>
+                                <input type="number" value={data.weight} onChange={e => setData('weight', e.target.value)} className={`form-control ${errors.weight ? 'is-invalid' : ''}`} />
+                                {errors.weight && <div className="invalid-feedback">{errors.weight}</div>}
+                            </div>
+                        </div>
 
-            <label htmlFor="stock" className="form-label">Stock</label>
-            <input type="number" name="stock" id="" value={data.stock} onChange={(e) => setData('stock', e.target.value,)}
-            className={`form-control w-25 ${errors.stock ? 'is-invalid' : ''}`} />
-                {/* message d'erreur */}
-                { errors.stock &&
-                    <div className="invalid-feedback">{errors.stock}</div>
-                }
+                        {/* Color, Promotion, Category */}
+                        <div className="row mb-3">
+                            <div className="col-md-4">
+                                <label className="form-label">Color</label>
+                                <select className={`form-select ${errors.color_id ? 'is-invalid' : ''}`} value={data.color_id} onChange={e => setData('color_id', Number(e.target.value))}>
+                                    <option value="">Select color</option>
+                                    {colors.map(c => (
+                                        <option key={c.id} value={c.id} style={{ backgroundColor: c.color, color: '#fff' }}>{c.color}</option>
+                                    ))}
+                                </select>
+                                {errors.color_id && <div className="invalid-feedback">{errors.color_id}</div>}
+                            </div>
+                            <div className="col-md-4">
+                                <label className="form-label">Promotion</label>
+                                <select className={`form-select ${errors.promo_id ? 'is-invalid' : ''}`} value={data.promo_id} onChange={e => setData('promo_id', Number(e.target.value))}>
+                                    <option value="">Select promotion</option>
+                                    {promotions.map(p => <option key={p.id} value={p.id}>{p.promo}</option>)}
+                                </select>
+                                {errors.promo_id && <div className="invalid-feedback">{errors.promo_id}</div>}
+                            </div>
+                            <div className="col-md-4">
+                                <label className="form-label">Category</label>
+                                <select className={`form-select ${errors.productcategory_id ? 'is-invalid' : ''}`} value={data.productcategory_id} onChange={e => setData('productcategory_id', Number(e.target.value))}>
+                                    <option value="">Select category</option>
+                                    {prod_cats.map(cat => <option key={cat.id} value={cat.id}>{cat.category}</option>)}
+                                </select>
+                                {errors.productcategory_id && <div className="invalid-feedback">{errors.productcategory_id}</div>}
+                            </div>
+                        </div>
 
-            {/* isPinned */}
-            <div className="mb-3">
-                <fieldset>
-                    {/* fieldset permet de regoruper plusieurs attributs d'un même gorupe au sein d'un form */}
-                    <label htmlFor="isPinned">Feature on the homepage?</label>
-                    <input
-                        type="radio"
-                        name="isPinned"
-                        value={1}
-                        checked={data.isPinned == 1}
-                        onChange={() => setData('isPinned', 1)}
-                        className="me-1"
-                    /> Oui
-                    <input
-                        type="radio"
-                        name="isPinned"
-                        value={0}
-                        checked={data.isPinned == 0}
-                        onChange={() => setData('isPinned', 0)}
-                        className="ms-3 me-1"
-                    /> Non
-                </fieldset>
-                {errors.isPinned && <div className="text-danger small">{errors.isPinned}</div>}
+                        {/* Quality checking */}
+                        <div className="mb-3">
+                            <label className="form-label me-3">Quality checking required?</label>
+                            <div className="form-check form-check-inline">
+                                <input type="radio" className="form-check-input" value={1} checked={data.quality_checking == 1} onChange={() => setData('quality_checking', 1)} />
+                                <label className="form-check-label">Yes</label>
+                            </div>
+                            <div className="form-check form-check-inline">
+                                <input type="radio" className="form-check-input" value={0} checked={data.quality_checking == 0} onChange={() => setData('quality_checking', 0)} />
+                                <label className="form-check-label">No</label>
+                            </div>
+                            {errors.quality_checking && <div className="text-danger small">{errors.quality_checking}</div>}
+                        </div>
+
+                        {/* Images Upload */}
+                        <div className="mb-3">
+                            {['image_main','image_rear','image_left','image_right'].map((field) => (
+                                <input key={field} type="file" className={`form-control mb-2 ${errors[field] ? 'is-invalid' : ''}`} onChange={e => handleFileChange(e, field)} />
+                            ))}
+                        </div>
+
+                        <button type="submit" className="btn btn-outline-secondary">Update Product</button>
+                    </form>
+                </div>
             </div>
 
-            {/* width */}
-            <label htmlFor="width" className="form-label">Width</label>
-            <input type="number" name="width" id="" value={data.width} onChange={(e) => setData('width', e.target.value,)}
-            className={`form-control w-25 ${errors.width ? 'is-invalid' : ''}`} />
-                {/* message d'erreur */}
-                { errors.width &&
-                    <div className="invalid-feedback">{errors.width}</div>
-                }
-
-            {/* height */}
-
-            <label htmlFor="height" className="form-label">Height</label>
-            <input type="number" name="height" id="" value={data.height} onChange={(e) => setData('height', e.target.value,)}
-            className={`form-control w-25 ${errors.height ? 'is-invalid' : ''}`} />
-                {/* message d'erreur */}
-                { errors.height &&
-                    <div className="invalid-feedback">{errors.height}</div>
-                }
-
-            {/* depth */}
-            <label htmlFor="depth" className="form-label">depth</label>
-            <input type="number" name="depth" id="" value={data.depth} onChange={(e) => setData('depth', e.target.value,)}
-            className={`form-control w-25 ${errors.depth ? 'is-invalid' : ''}`} />
-                {/* message d'erreur */}
-                { errors.depth &&
-                    <div className="invalid-feedback">{errors.depth}</div>
-                }
-
-            {/* weight */}
-            <label htmlFor="weight" className="form-label">weight</label>
-            <input type="number" name="weight" id="" value={data.weight} onChange={(e) => setData('weight', e.target.value,)}
-            className={`form-control w-25 ${errors.weight ? 'is-invalid' : ''}`} />
-                {/* message d'erreur */}
-                { errors.weight &&
-                    <div className="invalid-feedback">{errors.weight}</div>
-                }
-
-            {/* color_id */}
-            <select
-            name="color_id"
-            id=""
-            className={`form-select ${errors.color_id ? 'is-invalid' : ''}`}
-            // on utilise Number() pour être sûr d'envoyer un nombre et pas un string pour l'id
-            onChange={(e)=> setData('color_id', Number(e.target.value))}
-            value={data.color_id}
-        >
-            <option value="">Choose a color</option>
-            {colors.map(c => (
-                <option key={c.id} value={c.id} style={{ backgroundColor: c.color, color: '#fff' }}>
-                    {c.color}
-                </option>
-            ))}
-            </select>
-            {errors.color_id && <div className="invalid-feedback">{errors.color_id}</div>}
-
-            {/* promo_id */}
-            <select
-            name="promo_id"
-            id=""
-            className={`form-select ${errors.promo_id ? 'is-invalid' : ''}`}
-            // on utilise Number() pour être sûr d'envoyer un nombre et pas un string pour l'id
-            onChange={(e)=> setData('promo_id', Number(e.target.value))}
-            value={data.promo_id}
-        >
-            <option value="">Select a promotion if applicable</option>
-            {promotions.map(prom => (
-                <option key={prom.id} value={prom.id}>
-                    {prom.promo}
-                </option>
-            ))}
-            </select>
-            {errors.promo_id && <div className="invalid-feedback">{errors.promo_id}</div>}
-
-            {/* Product category */}
-            <select
-            name="productcategory_id"
-            id=""
-            className={`form-select ${errors.productcategory_id ? 'is-invalid' : ''}`}
-            // on utilise Number() pour être sûr d'envoyer un nombre et pas un string pour l'id
-            onChange={(e)=> setData('productcategory_id', Number(e.target.value))}
-            value={data.productcategory_id}
-        >
-            <option value="">Choose a product category</option>
-            {prod_cats.map(cat => (
-                <option key={cat.id} value={cat.id}>
-                    {cat.category}
-                </option>
-            ))}
-            </select>
-            {errors.productcategory_id && <div className="invalid-feedback">{errors.productcategory_id}</div>}
-
-            {/* Quality checking */}
-            <div className="mb-3">
-                <fieldset>
-                    <label htmlFor="quality_checking">Quality checking required?</label>
-                    <input
-                        type="radio"
-                        name="quality_checking"
-                        value={1}
-                        checked={data.quality_checking == 1}
-                        onChange={() => setData('quality_checking', 1)}
-                        className="me-1"
-                    /> Oui
-                    <input
-                        type="radio"
-                        name="quality_checking"
-                        value={0}
-                        checked={data.quality_checking == 0}
-                        onChange={() => setData('quality_checking', 0)}
-                        className="ms-3 me-1"
-                    /> Non
-                </fieldset>
-                {errors.quality_checking && <div className="text-danger small">{errors.quality_checking}</div>}
-            </div>
-
-            {/* images */}
-            <div className="mb-3">
-                <input
-                    type="file"
-                    name="image_main"
-                    className={`form-control mb-1 ${errors.image_main ? 'is-invalid' : ''}`}
-                    onChange={e => handleFileChange(e, 'image_main')}
-                />
-                {errors.image_main && <div className="invalid-feedback">{errors.image_main}</div>}
-
-                <input
-                    type="file"
-                    name="image_rear"
-                    className={`form-control mb-1 ${errors.image_rear ? 'is-invalid' : ''}`}
-                    onChange={e => handleFileChange(e, 'image_rear')}
-                />
-                {errors.image_rear && <div className="invalid-feedback">{errors.image_rear}</div>}
-
-                <input
-                    type="file"
-                    name="image_left"
-                    className={`form-control mb-1 ${errors.image_left ? 'is-invalid' : ''}`}
-                    onChange={e => handleFileChange(e, 'image_left')}
-                />
-                {errors.image_left && <div className="invalid-feedback">{errors.image_left}</div>}
-
-                <input
-                    type="file"
-                    name="image_right"
-                    className={`form-control mb-1 ${errors.image_right ? 'is-invalid' : ''}`}
-                    onChange={e => handleFileChange(e, 'image_right')}
-                />
-                {errors.image_right && <div className="invalid-feedback">{errors.image_right}</div>}
-            </div>
-
-            <button className="btn btn-outline-secondary" type="submit">Ajouter</button>
-        </form>
-
+            <Footer />
         </>
-    )
+    );
 }
