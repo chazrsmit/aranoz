@@ -26,7 +26,7 @@ class TagController extends Controller
         $tag->tag = $request->tag;
         $tag->save();
 
-        return redirect()->route(route: 'categories')->with('success', 'Nouveau tag ajouté avec succès !');
+        return redirect()->route(route: 'categories')->with('success', 'New tag successfully added!');
     }
 
     // Page pour modifier
@@ -51,7 +51,7 @@ class TagController extends Controller
             'tag' => $request->tag
         ]);
 
-        return redirect()->route(route: 'categories')->with('success', 'Tag modifié avec succès !');
+        return redirect()->route(route: 'categories')->with('success', 'Tag successfully modified!');
 
     }
 
@@ -59,6 +59,6 @@ class TagController extends Controller
     public function delete ($id) {
         Tag::findOrFail($id)->delete();
 
-        return redirect()->route('categories')->with('success', 'Tag supprimé avec succès !');
+        return redirect()->route('categories')->with('success', 'Tag successfully deleted!');
     }
 }

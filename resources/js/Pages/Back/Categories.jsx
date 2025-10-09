@@ -1,149 +1,186 @@
-
 import { useEffect, useState } from 'react';
 import NavBack from '../../Components/NavBack.jsx';
+import Footer from '../../Components/Footer.jsx';
 import { Head, Link, usePage } from '@inertiajs/react';
 
 export default function Categories({ auth, blog_cats, prod_cats, tags }) {
+  const page = usePage();
+  const flash = page.props?.flash;
+  const [showFlash, setShowFlash] = useState(true);
 
-    // Logique messages flash
-    const page = usePage();
-    const flash = page.props?.flash;
-    const [showFlash, setShowFlash] = useState(true);
+  useEffect(() => {
+    if (flash?.success) {
+      setShowFlash(true);
+      const timer = setTimeout(() => setShowFlash(false), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [flash?.success]);
 
-    // on utilise un useEffect
-    useEffect(() => {
-        if (flash?.success) {
-            // en mettant setShowFlash à true, on est sûr de lancer un message
-            setShowFlash(true);
+  return (
+    <>
+      <Head title="Aranoz Dashboard - Categories" />
+      <NavBack auth={auth} />
 
-            const timer = setTimeout(() => {
-                setShowFlash(false);
-            }, 5000);
 
-            // grâce au clearTimeOut, on fait en sorte que le timer est reset à chaque fois pour qu'il n'y ait pas d'overlap entre les messages.
-            return () => clearTimeout(timer); 
-        }
-    }, [flash?.success]);
-    // Etape 1: Un nouveau flash.success arrive //
-    //// setShowFlash(true) -> le message s’affiche
-    //// setTimeout démarre un compte à rebours de 5s
-    // Etape 2: SI un nouveau flash message arrive avant la fin du précécent : //
-    //// le useEffect se relance,
-    //// clearTimeOut supprime l'ancien compte à rebours
-    //// le compte à rebours est remis à zéro, le setTimeOut est relancé
+      {/* Hero */}
+      <section
+        className="hero-section back py-5"
+        style={{
+          backgroundColor: '#e8fcfc',
+          minHeight: '40vh',
+        }}
+      >
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-md-5 offset-md-1 text-center text-md-start mb-4 mb-md-0">
+              <h1 className="fw-bold display-5 text-dark">Categories</h1>
+              <p className="lead text-dark">Aranoz shop system</p>
+            </div>
+            <div className="col-md-6 text-center">
+              <img
+                src="/storage/banner/product_5.png"
+                alt="All Products Banner"
+                className="img-fluid"
+                style={{
+                  maxHeight: '300px',
+                  objectFit: 'contain',
+                  filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.1))',
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
-    return (
-        <>
+            {/* Flash message */}
+      {flash?.success && showFlash && (
+        <div className="alert alert-success text-center m-0 rounded-0">
+          {flash.success}
+        </div>
+      )}
 
-        <Head title="Aranoz Dashboard - Categories" />
-
-        <NavBack auth={auth} />
-
-        {/* Flash message */}
-        {flash?.success && showFlash && (
-            <div className="alert alert-success">{flash.success}</div>
-        )}  
-
-        <Link href={route('create_cat_prod')} className="btn btn-secondary">+ Add a product category</Link>
+      {/* Main content */}
+      <div className="container pb-5 mt-5">
 
         {/* Product categories */}
-        <h2>All product categories</h2>
+        <div className="d-flex justify-content-between align-items-center mb-3">
+          <h2 className="fw-semibold">Product Categories</h2>
+          <Link href={route('create_cat_prod')} className="btn btn-primary">
+            + Add Product Category
+          </Link>
+        </div>
 
-        <table className="table">
-            <thead>
-                <tr>
-                <th scope="col">id</th>
-                <th scope="col">Category</th>
-                <th scope="col">Modification</th>
-                <th scope="col">Delete</th>
-                </tr>
+        <div className="table-responsive mb-5">
+          <table className="table table-striped table-hover align-middle shadow-sm">
+            <thead className="table-light">
+              <tr>
+                <th scope="col" style={{ width: '10%' }}>ID</th>
+                <th scope="col" style={{ width: '40%' }}>Category</th>
+                <th scope="col" style={{ width: '25%' }}>Modification</th>
+                <th scope="col" style={{ width: '25%' }}>Delete</th>
+              </tr>
             </thead>
             <tbody>
-                {
-                    prod_cats.map(p => (
-                        <tr key={p.id}>
-                            <th scope="row">{p.id}</th>
-                            <td className="text-capitalize">{p.category}</td>
-                            <td>
-                                <Link href={route('edit_cat_prod', p.id)} className="btn btn-info">Edit</Link>
-                            </td>
-                            <td>
-                                <Link href={route('delete_cat_prod', p.id)} method='delete' className="btn btn-danger">Delete</Link>
-                            </td>
-                        </tr>
-                    ))
-
-                }
+              {prod_cats.map(p => (
+                <tr key={p.id}>
+                  <th scope="row">{p.id}</th>
+                  <td className="text-capitalize">{p.category}</td>
+                  <td>
+                    <Link href={route('edit_cat_prod', p.id)} className="btn btn-outline-info btn-sm">
+                      Edit
+                    </Link>
+                  </td>
+                  <td>
+                    <Link href={route('delete_cat_prod', p.id)} method="delete" className="btn btn-outline-danger btn-sm">
+                      Delete
+                    </Link>
+                  </td>
+                </tr>
+              ))}
             </tbody>
-            </table>
-
-        <Link href={route('create_cat_blog')} className="btn btn-secondary">+ Add a blog category</Link>
+          </table>
+        </div>
 
         {/* Blog categories */}
-        <h2>All blog categories</h2>
+        <div className="d-flex justify-content-between align-items-center mb-3">
+          <h2 className="fw-semibold">Blog Categories</h2>
+          <Link href={route('create_cat_blog')} className="btn btn-primary">
+            + Add Blog Category
+          </Link>
+        </div>
 
-        <table className="table">
-            <thead>
-                <tr>
-                <th scope="col">id</th>
-                <th scope="col">Category</th>
-                <th scope="col">Modification</th>
-                <th scope="col">Delete</th>
-                </tr>
+        <div className="table-responsive mb-5">
+          <table className="table table-striped table-hover align-middle shadow-sm">
+            <thead className="table-light">
+              <tr>
+                <th scope="col" style={{ width: '10%' }}>ID</th>
+                <th scope="col" style={{ width: '40%' }}>Category</th>
+                <th scope="col" style={{ width: '25%' }}>Modification</th>
+                <th scope="col" style={{ width: '25%' }}>Delete</th>
+              </tr>
             </thead>
             <tbody>
-                {
-                    blog_cats.map(b => (
-                        <tr key={b.id}>
-                            <th scope="row">{b.id}</th>
-                            <td className="text-capitalize">{b.category}</td>
-                            <td>
-                                <Link href={route('edit_cat_blog', b.id)} className="btn btn-info">Edit</Link>
-                            </td>
-                            <td>
-                                <Link href={route('delete_cat_blog', b.id)} method='delete' className="btn btn-danger">Delete</Link>
-                            </td>
-                        </tr>
-                    ))
-
-                }
-            </tbody>
-            </table>
-
-            {/* Tags */}
-            <Link href={route('create_tag')} className="btn btn-secondary">+ Add a new tag</Link>
-            <h2>All tags</h2>
-
-            <table className="table">
-            <thead>
-                <tr>
-                <th scope="col">id</th>
-                <th scope="col">Tag</th>
-                <th scope="col">Modification</th>
-                <th scope="col">Delete</th>
+              {blog_cats.map(b => (
+                <tr key={b.id}>
+                  <th scope="row">{b.id}</th>
+                  <td className="text-capitalize">{b.category}</td>
+                  <td>
+                    <Link href={route('edit_cat_blog', b.id)} className="btn btn-outline-info btn-sm">
+                      Edit
+                    </Link>
+                  </td>
+                  <td>
+                    <Link href={route('delete_cat_blog', b.id)} method="delete" className="btn btn-outline-danger btn-sm">
+                      Delete
+                    </Link>
+                  </td>
                 </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Tags */}
+        <div className="d-flex justify-content-between align-items-center mb-3">
+          <h2 className="fw-semibold">Tags</h2>
+          <Link href={route('create_tag')} className="btn btn-primary">
+            + Add Tag
+          </Link>
+        </div>
+
+        <div className="table-responsive">
+          <table className="table table-striped table-hover align-middle shadow-sm">
+            <thead className="table-light">
+              <tr>
+                <th scope="col" style={{ width: '10%' }}>ID</th>
+                <th scope="col" style={{ width: '40%' }}>Tag</th>
+                <th scope="col" style={{ width: '25%' }}>Modification</th>
+                <th scope="col" style={{ width: '25%' }}>Delete</th>
+              </tr>
             </thead>
             <tbody>
-                {
-                     tags.map(t => (
-                        <tr key={t.id}>
-                            <th scope="row">{t.id}</th>
-                            <td className="text-capitalize">{t.tag}</td>
-                            <td>
-                                <Link href={route('edit_tag', t.id)} className="btn btn-info">Edit</Link>
-                            </td>
-                            <td>
-                                <Link href={route('delete_tag', t.id)} method='delete' className="btn btn-danger">Delete</Link>
-                            </td>
-                        </tr>
-                    ))
-
-                }
+              {tags.map(t => (
+                <tr key={t.id}>
+                  <th scope="row">{t.id}</th>
+                  <td className="text-capitalize">{t.tag}</td>
+                  <td>
+                    <Link href={route('edit_tag', t.id)} className="btn btn-outline-info btn-sm">
+                      Edit
+                    </Link>
+                  </td>
+                  <td>
+                    <Link href={route('delete_tag', t.id)} method="delete" className="btn btn-outline-danger btn-sm">
+                      Delete
+                    </Link>
+                  </td>
+                </tr>
+              ))}
             </tbody>
-            </table>
+          </table>
+        </div>
 
-
-        
-        </>
-    )
+      </div>
+      <Footer />
+    </>
+  );
 }
