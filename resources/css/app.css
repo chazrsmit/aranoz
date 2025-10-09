@@ -7,6 +7,10 @@
     align-items: center;
 }
 
+.hero-section.back {
+  background: #FDD4D4 !important;
+}
+
 .btn-shop-now {
     background-color: #ff6b6b; 
     border: none;
