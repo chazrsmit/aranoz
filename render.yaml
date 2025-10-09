@@ -10,7 +10,7 @@ services:
       - key: APP_KEY
         value: base64:iAyr1itCkKQXwyDXZnATT9ElJgQAzaT+DQR+Dvyir4A=
       - key: APP_DEBUG
-        value: false
+        value: true
       - key: DB_CONNECTION
         value: pgsql
       - key: SESSION_DRIVER
